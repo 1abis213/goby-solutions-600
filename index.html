@@ -197,7 +197,7 @@
           <span style="display:inline-flex;width:2.5rem;height:2.5rem;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#0a0a0a;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700">G</span>
           <span style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;letter-spacing:.02em">GOBY</span>
         </a>
-        <button class="hamburger" id="hamburger" aria-label="Menu" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:.5rem;line-height:1">☰</button>
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:.5rem;line-height:1;transition:transform .35s ease">☰</button>
       </div>
     </header>
 
@@ -864,25 +864,22 @@
       renderCatalog();
       document.getElementById('brandTrack').addEventListener('mouseenter',function(){this.classList.add('slow')});
       document.getElementById('brandTrack').addEventListener('mouseleave',function(){this.classList.remove('slow')});
-      var navPanel = document.getElementById('navPanel'), navBackdrop = document.getElementById('navBackdrop'), prelayers = document.querySelectorAll('.nav-prelayer'), panelContent = document.getElementById('navPanelContent'), panelItems = panelContent.querySelectorAll('.nav-label, .nav-panel-wa, .nav-panel-langs'), hasGSAP = typeof gsap !== 'undefined', navOpen = false;
+      var navPanel=document.getElementById('navPanel'),navBackdrop=document.getElementById('navBackdrop'),prelayers=document.querySelectorAll('.nav-prelayer'),panelContent=document.getElementById('navPanelContent'),panelItems=panelContent.querySelectorAll('.nav-label,.nav-panel-wa,.nav-panel-langs'),hamburger=document.getElementById('hamburger'),hasGSAP=typeof gsap!=='undefined',navOpen=false;
       function openNavPanel(){
-        if(navOpen) return; navOpen = true; navPanel.classList.add('open'); navBackdrop.classList.add('open');
+        if(navOpen) return; navOpen=true; navPanel.classList.add('open'); navBackdrop.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); hamburger.textContent='✕';
         if(!hasGSAP){document.addEventListener('keydown',navEsc);return}
-        gsap.set([prelayers, panelContent], {xPercent:110});
-        gsap.set(panelItems, {y:40,opacity:0});
-        var tl = gsap.timeline({onComplete:function(){document.addEventListener('keydown',navEsc)}});
-        tl.to(prelayers,{xPercent:0,duration:.5,ease:'power4.out',stagger:.1},0);
-        tl.to(panelContent,{xPercent:0,duration:.55,ease:'power4.out'},.15);
-        tl.to(panelItems,{y:0,opacity:1,duration:.7,ease:'power4.out',stagger:.08},.35);
+        gsap.set([prelayers,panelContent],{xPercent:110}); gsap.set(panelItems,{y:40,opacity:0});
+        var tl=gsap.timeline({onComplete:function(){document.addEventListener('keydown',navEsc)}});
+        tl.to(prelayers,{xPercent:0,duration:.5,ease:'power4.out',stagger:.1},0); tl.to(panelContent,{xPercent:0,duration:.55,ease:'power4.out'},.15); tl.to(panelItems,{y:0,opacity:1,duration:.7,ease:'power4.out',stagger:.08},.35);
       }
       function closeNavPanel(){
-        if(!navOpen) return; navOpen = false; navBackdrop.classList.remove('open');
+        if(!navOpen) return; navOpen=false; navBackdrop.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); hamburger.textContent='☰';
         document.removeEventListener('keydown',navEsc);
         if(!hasGSAP){navPanel.classList.remove('open');return}
-        gsap.to([panelContent, prelayers],{xPercent:110,duration:.35,ease:'power3.in',overwrite:'auto',onComplete:function(){navPanel.classList.remove('open');gsap.set(panelItems,{y:40,opacity:0})}});
+        gsap.to([panelContent,prelayers],{xPercent:110,duration:.35,ease:'power3.in',overwrite:'auto',onComplete:function(){navPanel.classList.remove('open');gsap.set(panelItems,{y:40,opacity:0})}});
       }
-      function navEsc(e){if(e.key==='Escape') closeNavPanel()}
-      document.getElementById('hamburger').addEventListener('click',function(){navOpen?closeNavPanel():openNavPanel()});
+      function navEsc(e){if(e.key==='Escape')closeNavPanel()}
+      hamburger.addEventListener('click',function(){navOpen?closeNavPanel():openNavPanel()});
 
       document.querySelector('form').addEventListener('submit', function(e){
         const raw = document.getElementById('contactInput').value.replace(/[\s\-\+\(\)\.]/g, '');
