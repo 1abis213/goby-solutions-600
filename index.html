@@ -66,8 +66,6 @@
       .lang-btn.active{background:var(--gold);color:#0a0a0a;border-color:var(--gold)}
       .lang-btn:hover{color:var(--gold);border-color:var(--gold)}
 
-      @media(max-width:768px){.section{padding:4rem 0}.container{padding:0 1.25rem}}
-
       @media(prefers-reduced-motion:reduce){
         html{scroll-behavior:auto}
         *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -151,11 +149,39 @@
       #legalContent p{color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:.75rem}
 
       @media(max-width:768px){
+        .section{padding:4rem 0}.container{padding:0 1.25rem}
         .catalog-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
         .modal{grid-template-columns:1fr}
         .modal .modal-img-wrap{min-height:200px;border-radius:20px 20px 0 0}
         .modal .modal-body{padding:1.5rem}
         .modal .modal-actions .btn{min-width:100%}
+        .nav-links{display:none;position:fixed;top:4.5rem;left:0;right:0;background:rgba(10,10,10,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);flex-direction:column;padding:1.5rem;gap:1rem;z-index:99;max-height:calc(100vh - 4.5rem);overflow-y:auto}.nav-links.open{display:flex}.nav-links a,.nav-links div{margin:0!important}.nav-links .btn-gold{text-align:center;padding:.7rem 1.25rem!important}.nav-links .lang-wrap{gap:4px;margin-top:.5rem}
+        .hamburger{display:flex}
+        .hero-stats{gap:1.5rem!important;flex-wrap:wrap;justify-content:center}.hero-stat{text-align:center}
+        .about-grid{grid-template-columns:1fr!important;gap:2.5rem!important}
+        .about-features{grid-template-columns:1fr!important;gap:.5rem!important}
+        .about-hours{grid-template-columns:1fr 1fr!important}
+        .glow-card{padding:1.5rem!important}
+        .form-wrap{padding:1.5rem!important}
+        .guide-overlay{padding:1.25rem!important}
+        .footer-links{gap:.5rem;justify-content:center}
+        #waPopup{bottom:1rem;right:1rem}
+        .btn,.btn-gold,.btn-outline,.wa-icon-link,.hamburger,.lang-btn,.faq-q,.guide-nav a,.guide-back,input,textarea,button{padding:.7rem 1rem;min-height:44px;min-width:44px}
+        .hero-title{font-size:clamp(2rem,10vw,3.5rem)!important}
+        .section-title{font-size:clamp(1.5rem,6vw,2rem)!important}
+        .hero-desc{font-size:.9rem!important}
+        body{font-size:15px}
+      }
+      @media(max-width:480px){
+        .hero-cta-wrap{flex-direction:column!important;align-items:stretch!important}.hero-cta-wrap .btn{justify-content:center}
+        .glow-card{padding:1.5rem!important}
+        .product-card .info{padding:1rem 1.25rem}
+        .stat-number{font-size:1.5rem!important}
+        .stat-label{font-size:.6rem!important}
+      }
+      .nav-links{display:flex}
+      @media(min-width:769px){
+        .hamburger{display:none}
       }
     </style>
   </head>
@@ -168,14 +194,15 @@
           <span style="display:inline-flex;width:2.5rem;height:2.5rem;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#0a0a0a;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700">G</span>
           <span style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;letter-spacing:.02em">GOBY</span>
         </a>
-        <nav style="display:flex;align-items:center;gap:2.5rem;font-size:.8rem;font-weight:400;text-transform:uppercase;letter-spacing:.12em">
+        <button class="hamburger" id="hamburger" aria-label="Menu" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:.5rem;line-height:1">☰</button>
+        <nav class="nav-links" id="navLinks" style="align-items:center;gap:2.5rem;font-size:.8rem;font-weight:400;text-transform:uppercase;letter-spacing:.12em">
           <a href="#catalog" style="color:var(--text2);transition:color .3s" data-i18n="navCatalog" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Catalogue</a>
           <a href="#" onclick="return showGuide('overview')" style="color:var(--text2);transition:color .3s" data-i18n="navGuide" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Guide</a>
           <a href="#faq" style="color:var(--text2);transition:color .3s" data-i18n="navFAQ" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">FAQ</a>
           <a href="#about" style="color:var(--text2);transition:color .3s" data-i18n="navAbout" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Maison</a>
           <a href="#contact" style="color:var(--text2);transition:color .3s" data-i18n="navContact" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Contact</a>
           <a href="https://wa.me/15147991291" target="_blank" rel="noopener" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.7rem;text-transform:none;letter-spacing:normal" data-i18n="headerWA">WhatsApp</a>
-          <div style="display:flex;gap:4px">
+          <div class="lang-wrap" style="display:flex;gap:4px">
             <button class="lang-btn active" data-lang="fr" onclick="switchLang('fr')">FR</button>
             <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
           </div>
@@ -195,15 +222,15 @@
               <span style="background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="heroLine2">bien équiper</span><br />
               <span data-i18n="heroLine3">votre maison.</span>
             </h1>
-            <p style="color:var(--text2);font-size:1.05rem;max-width:520px;margin:1.5rem auto 0;line-height:1.7;font-weight:300" data-i18n="heroDesc">Appareils neufs et certifiés pré-appartenance des meilleures marques mondiales. Livraison soignée partout à Montréal.</p>
-            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-top:2.5rem">
+            <p class="hero-desc" style="color:var(--text2);font-size:1.05rem;max-width:520px;margin:1.5rem auto 0;line-height:1.7;font-weight:300" data-i18n="heroDesc">Appareils neufs et certifiés pré-appartenance des meilleures marques mondiales. Livraison soignée partout à Montréal.</p>
+            <div class="hero-cta-wrap" style="display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-top:2.5rem">
               <a href="#catalog" class="btn btn-gold" style="padding:.9rem 2.2rem;font-size:.9rem" data-i18n="heroCta">Explorer la Collection →</a>
               <a href="https://wa.me/15147991291" target="_blank" rel="noopener" class="btn btn-outline" style="padding:.9rem 2.2rem;font-size:.9rem" data-i18n="heroWA">💬 WhatsApp</a>
             </div>
-            <div style="display:flex;justify-content:center;gap:3rem;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--border)">
-              <div><span class="count-up" style="font-family:'Playfair Display',serif;font-size:2.25rem;color:var(--gold);font-weight:700" data-target="200">0</span><span style="display:block;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.15em;margin-top:.35rem" data-i18n="heroStat1">Appareils vendus</span></div>
-              <div><span style="font-family:'Playfair Display',serif;font-size:2.25rem;color:var(--gold);font-weight:700">5.0</span><span style="display:block;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.15em;margin-top:.35rem" data-i18n="heroStat2">Note moyenne</span></div>
-              <div><span style="font-family:'Playfair Display',serif;font-size:2.25rem;color:var(--gold);font-weight:700">★</span><span style="display:block;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.15em;margin-top:.35rem" data-i18n="heroStat3">Service Premium</span></div>
+            <div class="hero-stats" style="display:flex;justify-content:center;gap:3rem;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--border)">
+              <div class="hero-stat"><span class="count-up stat-number" style="font-family:'Playfair Display',serif;font-size:2.25rem;color:var(--gold);font-weight:700" data-target="200">0</span><span class="stat-label" style="display:block;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.15em;margin-top:.35rem" data-i18n="heroStat1">Appareils vendus</span></div>
+              <div class="hero-stat"><span class="stat-number" style="font-family:'Playfair Display',serif;font-size:2.25rem;color:var(--gold);font-weight:700">5.0</span><span class="stat-label" style="display:block;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.15em;margin-top:.35rem" data-i18n="heroStat2">Note moyenne</span></div>
+              <div class="hero-stat"><span class="stat-number" style="font-family:'Playfair Display',serif;font-size:2.25rem;color:var(--gold);font-weight:700">★</span><span class="stat-label" style="display:block;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.15em;margin-top:.35rem" data-i18n="heroStat3">Service Premium</span></div>
             </div>
           </div>
         </div>
@@ -256,13 +283,13 @@
       <section id="about" class="section" style="background:var(--bg2);position:relative;overflow:hidden">
         <div style="position:absolute;top:0;right:0;width:40%;height:100%;background:linear-gradient(135deg,rgba(201,149,42,.03),transparent);pointer-events:none"></div>
         <div class="container">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
+          <div class="about-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
             <div class="reveal">
               <span class="section-label" data-i18n="aboutLabel">Notre Maison</span>
               <h2 class="section-title" style="font-size:clamp(1.75rem,3.5vw,2.75rem)" data-i18n="aboutTitle">Où la qualité rencontre la confiance.</h2>
               <div class="gold-line"></div>
               <p style="color:var(--text2);font-size:.95rem;line-height:1.8;margin-bottom:2rem" data-i18n="aboutDesc">Fondé à Montréal, GOBY repose sur une conviction simple : chaque maison mérite des appareils exceptionnels et un service à la hauteur. Nous inspectons personnellement chaque unité - neuve ou pré-appartenance - parce que votre cuisine ne devrait jamais faire de compromis.</p>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+              <div class="about-features" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
                 <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">🚚</span> <span data-i18n="aboutFeat1">Livraison offerte</span></div>
                 <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">🔧</span> <span data-i18n="aboutFeat2">Installation pro</span></div>
                 <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">✓</span> <span data-i18n="aboutFeat3">Inspecté & certifié</span></div>
@@ -271,7 +298,7 @@
             </div>
             <div class="reveal" style="background:var(--bg);border-radius:20px;padding:2.5rem;border:1px solid var(--border)">
               <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;font-weight:600;margin-bottom:1.25rem" data-i18n="hoursTitle">Heures d'ouverture</h3>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;font-size:.85rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+              <div class="about-hours" style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;font-size:.85rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
                 <span style="color:var(--text2)" data-i18n="hoursMonFri">Lun–Ven</span><span style="color:#fff">9h – 21h</span>
                 <span style="color:var(--text2)" data-i18n="hoursSat">Samedi</span><span style="color:#fff">10h – 19h</span>
                 <span style="color:var(--text2)" data-i18n="hoursSun">Dimanche</span><span style="color:#fff">9h – 19h</span>
@@ -305,7 +332,7 @@
               <div><span style="display:block;font-size:1.1rem;color:#fff;font-weight:500">business.ab.bis@gmail.com</span><span style="font-size:.75rem;color:var(--text2)" data-i18n="contactEmailSub">Réponse sous 24h</span></div>
             </button>
           </div>
-          <div class="reveal" style="max-width:480px;margin:2.5rem auto 0;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:2.5rem">
+          <div class="reveal form-wrap" style="max-width:480px;margin:2.5rem auto 0;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:2.5rem">
             <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:600;margin-bottom:.5rem" data-i18n="formTitle">Envoyez-nous un message</h3>
             <p style="font-size:.8rem;color:var(--text2);margin-bottom:1.5rem" data-i18n="formSub">On vous répond sous 24h.</p>
             <form action="https://formspree.io/f/mdaqojjl" method="POST" style="display:flex;flex-direction:column;gap:1rem">
@@ -441,7 +468,7 @@
           <span style="font-family:'Playfair Display',serif;font-size:.95rem;color:#fff">GOBY</span>
         </div>
         <p style="font-size:.75rem;color:var(--text2);letter-spacing:.05em" data-i18n="footerCopy">© MMXXVI - GOBY Montréal</p>
-        <div style="display:flex;gap:1rem;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;flex-wrap:wrap;justify-content:center">
+        <div class="footer-links" style="display:flex;gap:1rem;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;flex-wrap:wrap;justify-content:center">
           <a href="#" onclick="return openLegal('terms')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerTerms">Conditions</a>
           <a href="#" onclick="return openLegal('privacy')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerPrivacy">Confidentialite</a>
           <a href="#" onclick="return openLegal('returns')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerReturns">Retours & Garantie</a>
@@ -822,6 +849,8 @@
       renderCatalog();
       document.getElementById('brandTrack').addEventListener('mouseenter',function(){this.classList.add('slow')});
       document.getElementById('brandTrack').addEventListener('mouseleave',function(){this.classList.remove('slow')});
+      document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('open')});
+      document.getElementById('navLinks').addEventListener('click',function(e){if(e.target.tagName==='A'||e.target.tagName==='BUTTON'){this.classList.remove('open')}});
 
       document.querySelector('form').addEventListener('submit', function(e){
         const raw = document.getElementById('contactInput').value.replace(/[\s\-\+\(\)\.]/g, '');
