@@ -114,6 +114,9 @@
       .modal .modal-img-wrap{position:relative;min-height:300px;background:var(--bg3);overflow:hidden;border-radius:20px 0 0 20px;display:flex;align-items:center;justify-content:center}
       .modal .modal-img-wrap img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
       .modal .modal-body{padding:2.5rem;display:flex;flex-direction:column}
+      .catalog-section{margin-bottom:3rem}.sub-header{margin-top:1.5rem!important;padding-top:1rem!important}.sub-header span{font-size:.9rem!important}.sub-header h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;font-weight:600}
+.sku{font-size:.7rem;color:var(--text2);letter-spacing:.05em;margin:.25rem 0 .5rem}.ai-badge{position:absolute;bottom:6px;right:6px;width:2rem;height:2rem;border-radius:50%;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.12);color:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;z-index:2}.ai-badge:hover{background:rgba(0,0,0,.8);border-color:var(--gold);transform:scale(1.1)}
+.ai-popup{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:2rem}.ai-popup.active{display:flex}.ai-popup-content{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem;max-width:480px;width:100%;position:relative}.ai-popup-content h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin-bottom:.75rem}.ai-popup-content p{color:var(--text2);font-size:.9rem;line-height:1.7}.ai-popup-close{position:absolute;top:.75rem;right:.75rem;width:2rem;height:2rem;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}.ai-popup-close:hover{background:rgba(255,255,255,.15)}
       .modal .modal-body .close-btn{position:absolute;top:1rem;right:1rem;width:2rem;height:2rem;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
       .modal .modal-body .close-btn:hover{background:rgba(255,255,255,.15)}
       .modal .modal-cat-tag{font-size:.6rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:500;margin-bottom:.5rem}
@@ -292,6 +295,14 @@
           <div id="catalogGrid"></div>
         </div>
       </section>
+
+      <div class="ai-popup" id="aiPopup">
+        <div class="ai-popup-content">
+          <button class="ai-popup-close" onclick="closeAIPopup()">✕</button>
+          <h3>🖼️ Photos avec fond AI</h3>
+          <p data-i18n="aiPopupDesc">Les produits présentés sont réels et disponibles. Les arrière-plans ont été générés par intelligence artificielle à des fins esthétiques. Les photos sont fournies à titre de référence uniquement. Contactez-nous pour voir le produit en personne.</p>
+        </div>
+      </div>
 
       <section id="about" class="section" style="background:var(--bg2);position:relative;overflow:hidden">
         <div style="position:absolute;top:0;right:0;width:40%;height:100%;background:linear-gradient(135deg,rgba(201,149,42,.03),transparent);pointer-events:none"></div>
@@ -513,20 +524,16 @@
     </div>
 
     <script>
-      const products = [
-        {id:'wd1',cat:'washerDryer',name:'Samsung WF53BB8900AT + DVE53BB8900TA',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Samsung+Washer+%26+Dryer',descFR:'Ensemble laveuse-sécheuse Samsung haut de gamme. Capacité de 5.3 pi³, vapeur, Wi-Fi intégré, design premium noir mat.',descEN:'Premium Samsung washer-dryer set. 5.3 cu.ft capacity, steam, built-in Wi-Fi, premium matte black design.'},
-        {id:'wd2',cat:'washerDryer',name:'LG WM4000HBA + DLEX4000B',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=LG+Washer+%26+Dryer',descFR:'Ensemble LG avec TurboWash, séchage intelligent et commandes intuitives. Efficacité énergétique certifiée.',descEN:'LG set with TurboWash, smart drying, and intuitive controls. Certified energy efficiency.'},
-        {id:'wd3',cat:'washerDryer',name:'Bosch 800 Series Washer & Dryer',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Bosch+800+Series',descFR:'Ensemble Bosch 800 Series - fabrication allemande, ultra silencieux, technologie anti-vibration, parfait pour espaces restreints.',descEN:'Bosch 800 Series set - German engineering, ultra-quiet, anti-vibration technology, perfect for tight spaces.'},
-        {id:'wd4',cat:'washerDryer',name:'Whirlpool WET4027HW + WGD4027HW',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Whirlpool+Washer+%26+Dryer',descFR:'Ensemble Whirlpool fiable avec capteurs automatiques, cycles rapides et garantie prolongée.',descEN:'Reliable Whirlpool set with automatic sensors, quick cycles, and extended warranty.'},
-        {id:'wd5',cat:'washerDryer',name:'GE GFW550SPSS + GFD550SPSS',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=GE+Washer+%26+Dryer',descFR:'Ensemble GE avec vapeur, démarrage différé et capacité familiale. Design élégant acier inoxydable.',descEN:'GE set with steam, delayed start and family capacity. Sleek stainless steel design.'},
-        {id:'wd6',cat:'washerDryer',name:'Maytag MHW6630HW + MED6630HW',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Maytag+Washer+%26+Dryer',descFR:'Ensemble Maytag commercial-grade - moteur robuste, cuve extra-large, cycle de nettoyage vapeur.',descEN:'Maytag commercial-grade set - robust motor, extra-large drum, steam cleaning cycle.'},
-        {id:'fr1',cat:'fridge',name:'Samsung RT18M6215SR',price:600,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Samsung+Refrigerator',descFR:'Réfrigérateur Samsung compact 18 pi³ - idéal pour cuisine de taille moyenne. Distributeur d\'eau et éclairage LED.',descEN:'Samsung compact 18 cu.ft refrigerator - ideal for mid-size kitchens. Water dispenser and LED lighting.'},
-        {id:'fr2',cat:'fridge',name:'LG LTCS20020S',price:750,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=LG+Refrigerator',descFR:'Réfrigérateur LG 20 pi³ - Smart Cooling, bac à légumes fraîcheur, étagères ajustables et finition acier.',descEN:'LG 20 cu.ft refrigerator - Smart Cooling, fresh vegetable crisper, adjustable shelves, steel finish.'},
-        {id:'fr3',cat:'fridge',name:'Bosch B36CL80SNS',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Bosch+Refrigerator',descFR:'Réfrigérateur Bosch encastrable 36 po - design minimaliste, refroidissement parfait, fabrication allemande.',descEN:'Bosch built-in 36" refrigerator - minimalist design, perfect cooling, German craftsmanship.'},
-        {id:'fu1',cat:'furnace',name:'Goodman GMEC96',price:750,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Goodman+Furnace',descFR:'Fournaise Goodman GMEC96 - 96% d\'efficacité, moteur à vitesse variable, silencieuse et fiable pour l\'hiver québécois.',descEN:'Goodman GMEC96 furnace - 96% efficiency, variable-speed motor, quiet and reliable for Quebec winters.'},
-        {id:'fu2',cat:'furnace',name:'Carrier 59TP6',price:800,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Carrier+Furnace',descFR:'Fournaise Carrier 59TP6 - technologie WeatherMaker, 96% AFUE, chauffage constant et confort supérieur.',descEN:'Carrier 59TP6 furnace - WeatherMaker technology, 96% AFUE, consistent heating and superior comfort.'},
-        {id:'fu3',cat:'furnace',name:'Lennox EL296E',price:900,img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Lennox+Furnace',descFR:'Fournaise Lennox EL296E - 96% d\'efficacité, fonctionnement ultra silencieux, garantie 10 ans.',descEN:'Lennox EL296E furnace - 96% efficiency, ultra-quiet operation, 10-year warranty.'}
-      ];
+      const products = {openBox:{combos:[],washerDryer:[],fridges:[],furnaces:[]},used:{combos:[
+        {id:'co1',name:'Combo 1 — Pack 4 Appareils',price:1499,sku:'001',img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Combo+1',descFR:'Pack de 4 appareils : réfrigérateur, cuisinière, laveuse et sécheuse. Marques variées, état certifié.',descEN:'4-appliance bundle: refrigerator, stove, washer and dryer. Mixed brands, certified condition.'},
+        {id:'co2',name:'Combo 2 — Pack 4 Appareils',price:1699,sku:'002',img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Combo+2',descFR:'Pack complet de 4 appareils premium : réfrigérateur, cuisinière, laveuse et sécheuse haut de gamme.',descEN:'Premium 4-appliance bundle: refrigerator, stove, washer and dryer, all high-end.'},
+        {id:'co3',name:'Combo 3 — Pack 4 Appareils',price:1899,sku:'003',img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Combo+3',descFR:'Pack ultime 4 appareils - sélection de nos meilleures marques pour équiper toute votre maison.',descEN:'Ultimate 4-appliance bundle - our best brands to equip your entire home.'}
+      ],washerDryer:[
+        {id:'duo1',name:'Duo 1 — Laveuse & Sécheuse',price:799,sku:'004',img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Duo+1',descFR:'Ensemble laveuse-sécheuse certifié. Marque reconnue, capacité familiale.',descEN:'Certified washer-dryer set. Trusted brand, family capacity.'},
+        {id:'duo2',name:'Duo 2 — Laveuse & Sécheuse',price:899,sku:'005',img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Duo+2',descFR:'Ensemble laveuse-sécheuse premium. Efficacité énergétique, cycles variés.',descEN:'Premium washer-dryer set. Energy efficient, multiple cycles.'},
+        {id:'duo3',name:'Duo 3 — Laveuse & Sécheuse',price:699,sku:'006',img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Duo+3',descFR:'Ensemble laveuse-sécheuse économique. Parfait pour premier équipement ou location.',descEN:'Budget-friendly washer-dryer set. Perfect for first setup or rental.'},
+        {id:'duo4',name:'Duo 4 — Laveuse & Sécheuse',price:1099,sku:'007',img:'https://placehold.co/600x400/1a1a1a/c9952a?text=Duo+4',descFR:'Ensemble laveuse-sécheuse haut de gamme. Technologie vapeur, Wi-Fi, design moderne.',descEN:'High-end washer-dryer set. Steam technology, Wi-Fi, modern design.'}
+      ],fridges:[],furnaces:[]}};
 
       const lang = {
         fr: {
@@ -542,7 +549,8 @@
           catalogLabel: 'Notre Catalogue',
           catalogTitle1: 'Des appareils', catalogTitle2: 'pour toute la maison.',
           catalogDesc: 'Cliquez sur un produit pour voir les détails, le prix, et nous contacter directement.',
-          catWasherDryer: 'Laveuses-sécheuses', catFridge: 'Réfrigérateurs', catFurnace: 'Fournaises',
+          sectionOpenBox: 'Boîte Ouverte', sectionUsed: 'Usagé',
+          subCombos: 'Combos', subWasherDryer: 'Laveuses-sécheuses', subFridges: 'Réfrigérateurs', subFurnaces: 'Fournaises',
           viewDetails: 'Voir les détails →',
           modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Appeler',
           aboutLabel: 'Notre Maison', aboutTitle: 'Où la qualité rencontre la confiance.',
@@ -550,6 +558,7 @@
           aboutFeat1: 'Livraison offerte', aboutFeat2: 'Installation pro', aboutFeat3: 'Inspecté & certifié', aboutFeat4: 'Support après-vente',
           hoursTitle: 'Heures d\'ouverture',
           hoursMonFri: 'Lun–Ven', hoursSat: 'Samedi', hoursSun: 'Dimanche',
+          aiPopupDesc: 'Les produits présentés sont réels et disponibles. Les arrière-plans ont été générés par intelligence artificielle à des fins esthétiques. Les photos sont fournies à titre de référence uniquement. Contactez-nous pour voir le produit en personne.',
           contactLabel: 'Contact', contactTitle: 'Parlons de votre projet.',
           contactDesc: 'Que vous équipiez une nouvelle cuisine ou remplaciez un seul appareil - nous sommes là pour conseiller, livrer et assurer le suivi.',
           contactWhatsAppSub: 'WhatsApp - réponse rapide',
@@ -593,6 +602,7 @@
           gFurnaceH3: '3. Compatibilite', gFurnaceP3: 'Verifiez le type de combustible (gaz, electrique, propane), la taille de votre conduite et les normes d\'evacuation.',
           gFurnaceH4: '4. Budget', gFurnaceP4: '750-1000 $ pour un modele standard 80% AFUE. 1000-1500 $ pour un modele 96% AFUE. 1500-2500 $ pour le haut de gamme.',
           waPopupText: '💬 Une question ? Envoyez-nous un message sur WhatsApp !',
+          noProducts: 'Aucun produit dans cette section pour le moment.',
           footerTerms: 'Conditions', footerPrivacy: 'Confidentialite', footerReturns: 'Retours & Garantie',
           footerCopy: '© MMXXVI - GOBY Montréal'
         },
@@ -609,7 +619,8 @@
           catalogLabel: 'Our Catalog',
           catalogTitle1: 'Appliances', catalogTitle2: 'for every room.',
           catalogDesc: 'Click a product to view details, pricing, and contact options.',
-          catWasherDryer: 'Washer & Dryer Sets', catFridge: 'Refrigerators', catFurnace: 'Furnaces',
+          sectionOpenBox: 'Open Box', sectionUsed: 'Used',
+          subCombos: 'Combos', subWasherDryer: 'Washer & Dryer', subFridges: 'Refrigerators', subFurnaces: 'Furnaces',
           viewDetails: 'View Details →',
           modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Call',
           aboutLabel: 'Our House', aboutTitle: 'Where quality meets trust.',
@@ -617,6 +628,7 @@
           aboutFeat1: 'Free Delivery', aboutFeat2: 'Pro Installation', aboutFeat3: 'Inspected & Certified', aboutFeat4: 'After-Sales Support',
           hoursTitle: 'Business Hours',
           hoursMonFri: 'Mon–Fri', hoursSat: 'Saturday', hoursSun: 'Sunday',
+          aiPopupDesc: 'The products shown are real and available. The backgrounds were generated by artificial intelligence for aesthetic purposes. Photos are provided for reference only. Contact us to see the product in person.',
           contactLabel: 'Contact', contactTitle: 'Let\'s talk about your project.',
           contactDesc: 'Whether you\'re outfitting a new kitchen or replacing a single appliance - we\'re here to advise, deliver, and support.',
           contactWhatsAppSub: 'WhatsApp - quick reply',
@@ -660,6 +672,7 @@
           gFurnaceH3: '3. Compatibility', gFurnaceP3: 'Check fuel type (gas, electric, propane), duct size, and venting requirements. Have a professional inspect before buying.',
           gFurnaceH4: '4. Budget', gFurnaceP4: '$750-1000 for a standard 80% AFUE model. $1000-1500 for a 96% AFUE model. $1500-2500 for premium variable-speed.',
           waPopupText: '💬 Got a question? Send us a message on WhatsApp!',
+          noProducts: 'No products in this section yet.',
           footerTerms: 'Terms', footerPrivacy: 'Privacy', footerReturns: 'Returns & Warranty',
           footerCopy: '© MMXXVI - GOBY Montreal'
         }
@@ -707,54 +720,65 @@
       }, { threshold: .5 });
       counters.forEach(el => counterObserver.observe(el));
 
-      const categoryMeta = {
-        washerDryer: {icon:'🧺', key:'catWasherDryer'},
-        fridge: {icon:'❄️', key:'catFridge'},
-        furnace: {icon:'🔥', key:'catFurnace'}
-      };
+      function findProduct(id){
+        for(var s in products) for(var g in products[s]) for(var i=0;i<products[s][g].length;i++) if(products[s][g][i].id===id) return products[s][g][i];
+        return null;
+      }
 
-      function waMsg(p, lang){
-        const msgs = {
-          washerDryer: {fr:"Bonjour, j'aimerais en savoir plus sur cet ensemble laveuse-sécheuse", en:"Hello, I'd like to know more about this washer-dryer set"},
-          fridge: {fr:"Bonjour, j'aimerais en savoir plus sur ce réfrigérateur", en:"Hello, I'd like to know more about this refrigerator"},
-          furnace: {fr:"Bonjour, j'aimerais en savoir plus sur cette fournaise", en:"Hello, I'd like to know more about this furnace"}
-        };
-        const base = msgs[p.cat]?.[lang] || msgs[p.cat]?.fr;
-        return encodeURIComponent(base + ' : ' + p.name);
+      function subIcon(sub){
+        return {combos:'📦',washerDryer:'🧺',fridges:'❄️',furnaces:'🔥'}[sub]||'';
+      }
+
+      function waMsg(p, l){
+        var msgs={combos:{fr:"Bonjour, j'aimerais en savoir plus sur ce combo",en:"Hello, I'd like to know more about this combo"},washerDryer:{fr:"Bonjour, j'aimerais en savoir plus sur cet ensemble laveuse-sécheuse",en:"Hello, I'd like to know more about this washer-dryer set"},fridges:{fr:"Bonjour, j'aimerais en savoir plus sur ce réfrigérateur",en:"Hello, I'd like to know more about this refrigerator"},furnaces:{fr:"Bonjour, j'aimerais en savoir plus sur cette fournaise",en:"Hello, I'd like to know more about this furnace"}};
+        var sub=null;for(var s in products)for(var g in products[s])for(var i=0;i<products[s][g].length;i++)if(products[s][g][i].id===p.id)sub=g;
+        var base=msgs[sub]?.[l]||msgs[sub]?.fr||"Bonjour, j'aimerais en savoir plus sur ce produit";
+        return encodeURIComponent(base+' : '+p.name);
       }
 
       function renderCatalog(){
-        const grid = document.getElementById('catalogGrid');
-        const cats = ['washerDryer','fridge','furnace'];
-        let html = '';
-        cats.forEach(cat => {
-          const items = products.filter(p => p.cat === cat);
-          const meta = categoryMeta[cat];
-          html += '<div class="cat-header reveal"><span>' + meta.icon + '</span><h3 data-i18n="' + meta.key + '">' + meta.key + '</h3><div class="line"></div></div>';
-          html += '<div class="catalog-grid">';
-          items.forEach(p => {
-            html += '<div class="product-card reveal" onclick="openModal(\'' + p.id + '\')">' +
-              '<div class="img-wrap"><img src="' + p.img + '" alt="' + p.name + '" loading="lazy" /></div>' +
-              '<div class="info"><span class="cat-tag" data-i18n="' + meta.key + '">' + meta.key + '</span>' +
-              '<h4>' + p.name + '</h4>' +
-              '<div class="price">$' + p.price + ' <small>CAD</small></div>' +
-              '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">Voir les détails →</button></div></div>';
+        var grid=document.getElementById('catalogGrid'),l=document.documentElement.lang,html='',subKeys=['combos','washerDryer','fridges','furnaces'],subI18n={combos:'subCombos',washerDryer:'subWasherDryer',fridges:'subFridges',furnaces:'subFurnaces'};
+        ['openBox','used'].forEach(function(sec){
+          var secKey='section'+(sec==='openBox'?'OpenBox':'Used'),secLabel=lang[l]?.[secKey]||lang.fr[secKey]||sec;
+          html+='<div class="catalog-section"><div class="cat-header reveal"><span>'+(sec==='openBox'?'📦':'✅')+'</span><h3>'+secLabel+'</h3><div class="line"></div></div>';
+          var hasAny=false;
+          subKeys.forEach(function(sub){
+            var items=products[sec][sub];
+            if(!items||!items.length) return;
+            hasAny=true;
+            var subLabel=lang[l]?.[subI18n[sub]]||lang.fr[subI18n[sub]]||sub;
+            html+='<div class="cat-header sub-header reveal"><span>'+subIcon(sub)+'</span><h4>'+subLabel+'</h4><div class="line"></div></div>';
+            html+='<div class="catalog-grid">';
+            items.forEach(function(p){
+              html+='<div class="product-card reveal" onclick="openModal(\''+p.id+'\')">'+
+                '<div class="img-wrap"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy" />'+
+                '<button class="ai-badge" onclick="event.stopPropagation();openAIPopup()" title="AI Generated Background">🤖</button></div>'+
+                '<div class="info"><h4>'+p.name+'</h4>'+
+                '<div class="price">$'+p.price+' <small>CAD</small></div>'+
+                '<div class="sku">#'+p.sku+'</div>'+
+                '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">Voir les détails →</button></div></div>';
+            });
+            html+='</div>';
           });
-          html += '</div>';
+          if(!hasAny){
+            html+='<p style="color:var(--text2);font-size:.85rem;padding:2rem 0;text-align:center" data-i18n="noProducts">Aucun produit dans cette section pour le moment.</p>';
+          }
+          html+='</div>';
         });
-        grid.innerHTML = html;
-        setTimeout(() => {
-          grid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        }, 100);
+        grid.innerHTML=html;
+        setTimeout(function(){grid.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)})},100);
       }
 
+      function openAIPopup(){document.getElementById('aiPopup').classList.add('active')}
+      function closeAIPopup(){document.getElementById('aiPopup').classList.remove('active')}
+
       function openModal(id){
-        const p = products.find(x => x.id === id);
+        const p = findProduct(id);
         if(!p) return;
         const l = document.documentElement.lang;
         document.getElementById('modalImg').src = p.img;
         document.getElementById('modalImg').alt = p.name;
-        document.getElementById('modalCat').textContent = categoryMeta[p.cat].icon + ' ' + (lang[l]?.[categoryMeta[p.cat].key] || lang.fr[categoryMeta[p.cat].key]);
+        document.getElementById('modalCat').textContent = '';
         document.getElementById('modalTitle').textContent = p.name;
         document.getElementById('modalDesc').textContent = l === 'en' ? p.descEN : p.descFR;
         document.getElementById('modalPrice').textContent = '$' + p.price + ' CAD';
