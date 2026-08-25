@@ -117,6 +117,7 @@
       .catalog-section{margin-bottom:3rem}.sub-header{margin-top:1.5rem!important;padding-top:1rem!important}.sub-header span{font-size:.9rem!important}.sub-header h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;font-weight:600}
 .sku{font-size:.7rem;color:var(--text2);letter-spacing:.05em;margin:.25rem 0 .5rem}.ai-badge{position:absolute;bottom:6px;right:6px;width:2rem;height:2rem;border-radius:50%;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.12);color:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;z-index:2}.ai-badge:hover{background:rgba(0,0,0,.8);border-color:var(--gold);transform:scale(1.1)}
 .ai-popup{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:2rem}.ai-popup.active{display:flex}.ai-popup-content{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem;max-width:480px;width:100%;position:relative}.ai-popup-content h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin-bottom:.75rem}.ai-popup-content p{color:var(--text2);font-size:.9rem;line-height:1.7}.ai-popup-close{position:absolute;top:.75rem;right:.75rem;width:2rem;height:2rem;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}.ai-popup-close:hover{background:rgba(255,255,255,.15)}
+      .call-popup{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:2rem}.call-popup.active{display:flex}.call-popup-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:2.5rem 2rem;max-width:420px;width:100%;text-align:center;position:relative;animation:callPopIn .4s cubic-bezier(.22,1,.36,1)}@keyframes callPopIn{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}.call-popup-box h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;margin-bottom:.5rem}.call-popup-box p{color:var(--text2);font-size:.9rem;line-height:1.7;margin-bottom:1.5rem}.call-popup-btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 2rem;border-radius:12px;font-size:1rem;font-weight:600;text-decoration:none;transition:transform .2s,box-shadow .2s}.call-popup-btn:hover{transform:scale(1.03)}.call-popup-btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#0a0a0a;box-shadow:0 4px 20px rgba(201,149,42,.3)}.call-popup-btn-secondary{background:transparent;border:1px solid var(--border);color:var(--text2);font-size:.85rem;margin-top:.75rem}.call-popup-btn-secondary:hover{border-color:var(--gold);color:#fff}.call-popup-close{position:absolute;top:.75rem;right:.75rem;width:2rem;height:2rem;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}.call-popup-close:hover{background:rgba(255,255,255,.15)}
       .modal .modal-body .close-btn{position:absolute;top:1rem;right:1rem;width:2rem;height:2rem;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
       .modal .modal-body .close-btn:hover{background:rgba(255,255,255,.15)}
       .modal .modal-cat-tag{font-size:.6rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:500;margin-bottom:.5rem}
@@ -314,7 +315,7 @@
               <div class="gold-line"></div>
               <p style="color:var(--text2);font-size:.95rem;line-height:1.8;margin-bottom:2rem" data-i18n="aboutDesc">Fondé à Montréal, GobySolutions repose sur une conviction simple : chaque maison mérite des appareils exceptionnels et un service à la hauteur. Nous inspectons personnellement chaque unité - neuve ou pré-appartenance - parce que votre cuisine ne devrait jamais faire de compromis.</p>
               <div class="about-features" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-                <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">🚚</span> <span data-i18n="aboutFeat1">Livraison offerte</span></div>
+                <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">🚚</span> <span data-i18n="aboutFeat1">Livraison gratuite 2000$+</span></div>
                 <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">🔧</span> <span data-i18n="aboutFeat2">Installation pro</span></div>
                 <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">✓</span> <span data-i18n="aboutFeat3">Inspecté & certifié</span></div>
                 <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem"><span style="display:inline-flex;width:2rem;height:2rem;border-radius:50%;background:rgba(201,149,42,.12);align-items:center;justify-content:center;font-size:.85rem">💬</span> <span data-i18n="aboutFeat4">Support après-vente</span></div>
@@ -561,7 +562,7 @@
           modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Appeler',
           aboutLabel: 'Notre Maison', aboutTitle: 'Où la qualité rencontre la confiance.',
           aboutDesc: 'Fondé à Montréal, GobySolutions repose sur une conviction simple : chaque maison mérite des appareils exceptionnels et un service à la hauteur. Nous inspectons personnellement chaque unité - neuve ou pré-appartenance - parce que votre cuisine ne devrait jamais faire de compromis.',
-          aboutFeat1: 'Livraison offerte', aboutFeat2: 'Installation pro', aboutFeat3: 'Inspecté & certifié', aboutFeat4: 'Support après-vente',
+          aboutFeat1: 'Livraison gratuite 2000$+', aboutFeat2: 'Installation pro', aboutFeat3: 'Inspecté & certifié', aboutFeat4: 'Support après-vente',
           hoursTitle: 'Heures d\'ouverture',
           hoursMonFri: 'Lun–Ven', hoursSat: 'Samedi', hoursSun: 'Dimanche',
           aiPopupDesc: 'Les produits présentés sont réels et disponibles. Les arrière-plans ont été générés par intelligence artificielle à des fins esthétiques. Les photos sont fournies à titre de référence uniquement. Contactez-nous pour voir le produit en personne.',
@@ -610,7 +611,9 @@
           waPopupText: '💬 Comment pouvons-nous vous aider ?',
           noProducts: 'Aucun produit dans cette section pour le moment.',
           footerTerms: 'Conditions', footerPrivacy: 'Confidentialite', footerReturns: 'Retours & Garantie',
-          footerCopy: '© MMXXVI - GobySolutions Montréal'
+          footerCopy: '© MMXXVI - GobySolutions Montréal',
+          callPopupTitle: 'Besoin d\'aide ?',
+          callPopupDesc: 'Parlez à un de nos spécialistes dès maintenant. Nous sommes là pour répondre à toutes vos questions !'
         },
         en: {
           pageTitle: 'GobySolutions - Premium Appliances | Montreal',
@@ -631,7 +634,7 @@
           modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Call',
           aboutLabel: 'Our House', aboutTitle: 'Where quality meets trust.',
           aboutDesc: 'Founded in Montreal, GobySolutions is built on a simple belief: every home deserves exceptional appliances and every customer deserves exceptional care. We personally inspect every unit - new or pre-owned - because your kitchen shouldn\'t settle for less.',
-          aboutFeat1: 'Free Delivery', aboutFeat2: 'Pro Installation', aboutFeat3: 'Inspected & Certified', aboutFeat4: 'After-Sales Support',
+          aboutFeat1: 'Free Delivery 2000$+', aboutFeat2: 'Pro Installation', aboutFeat3: 'Inspected & Certified', aboutFeat4: 'After-Sales Support',
           hoursTitle: 'Business Hours',
           hoursMonFri: 'Mon–Fri', hoursSat: 'Saturday', hoursSun: 'Sunday',
           aiPopupDesc: 'The products shown are real and available. The backgrounds were generated by artificial intelligence for aesthetic purposes. Photos are provided for reference only. Contact us to see the product in person.',
@@ -680,7 +683,9 @@
           waPopupText: '💬 How can we help you?',
           noProducts: 'No products in this section yet.',
           footerTerms: 'Terms', footerPrivacy: 'Privacy', footerReturns: 'Returns & Warranty',
-          footerCopy: '© MMXXVI - GobySolutions Montreal'
+          footerCopy: '© MMXXVI - GobySolutions Montreal',
+          callPopupTitle: 'Need help?',
+          callPopupDesc: 'Talk to one of our specialists right now. We\'re here to answer all your questions!'
         }
       };
 
@@ -924,6 +929,22 @@
           setTimeout(() => { input.style.borderColor = ''; input.style.boxShadow = ''; }, 2500);
         }
       });
+    </script>
+    <div class="call-popup" id="callPopup">
+      <div class="call-popup-box">
+        <button class="call-popup-close" onclick="document.getElementById('callPopup').classList.remove('active')">✕</button>
+        <div style="font-size:2.5rem;margin-bottom:.75rem">📞</div>
+        <h3 data-i18n="callPopupTitle">Besoin d'aide ?</h3>
+        <p data-i18n="callPopupDesc">Parlez à un de nos spécialistes dès maintenant. Nous sommes là pour répondre à toutes vos questions !</p>
+        <a href="tel:+15147991291" class="call-popup-btn call-popup-btn-primary">📞 (514) 799-1291</a>
+        <br>
+        <a href="https://wa.me/15144312367" target="_blank" rel="noopener" class="call-popup-btn call-popup-btn-secondary">💬 Ou envoyez un WhatsApp</a>
+      </div>
+    </div>
+
+    <script>
+      setTimeout(function(){document.getElementById('callPopup').classList.add('active')},5000);
+      document.getElementById('callPopup').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active')});
     </script>
   </body>
 </html>
