@@ -94,15 +94,29 @@
       .cat-header h3{font-family:'Playfair Display',serif;font-size:1.35rem;color:#fff;font-weight:600}
       .cat-header span{font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.12em}
       .cat-header .line{flex:1;height:1px;background:var(--border)}
-      .set-block{margin-bottom:2.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(201,149,42,.08)}
-      .set-block:last-child{border-bottom:none}
-      .set-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:var(--bg3);border:1px solid var(--border);border-radius:14px;margin-bottom:.5rem;gap:1rem;flex-wrap:wrap}
-      .set-header-left{display:flex;align-items:center;gap:.75rem}
-      .set-icon{font-size:1.5rem}
-      .set-header h4{font-family:'Playfair Display',serif;font-size:1.2rem;color:#fff;font-weight:600;margin:0}
-      .set-total-price{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--gold-light);white-space:nowrap}
-      .set-total-price small{font-size:.7rem;color:var(--text2);font-weight:300}
-      .set-savings{text-align:center;font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-bottom:.75rem}
+      .set-card .img-wrap{position:relative}
+      .set-badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);border:1px solid rgba(201,149,42,.3);padding:.35rem .75rem;border-radius:8px;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);z-index:2}
+      .set-price{font-size:1.6rem!important}
+      .set-includes{font-size:.75rem;color:var(--text2);margin-bottom:.75rem}
+
+      .modal-carousel-wrap{position:relative;min-height:350px;background:var(--bg3);overflow:hidden;border-radius:20px 0 0 20px;display:flex;align-items:center;justify-content:center}
+      .modal-carousel-wrap img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+      .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;z-index:3}
+      .carousel-btn:hover{background:rgba(0,0,0,.8);border-color:var(--gold)}
+      .carousel-prev{left:12px}
+      .carousel-next{right:12px}
+      .carousel-counter{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);padding:.3rem .7rem;border-radius:6px;font-size:.7rem;color:#fff;z-index:3}
+
+      .modal-appliances{margin-bottom:1.25rem;flex:1}
+      .modal-appliance{padding:.85rem 0;border-bottom:1px solid var(--border)}
+      .modal-appliance:last-child{border-bottom:none}
+      .modal-appliance-name{font-family:'Playfair Display',serif;font-size:.95rem;color:#fff;font-weight:600;margin-bottom:.25rem}
+      .modal-appliance-desc{font-size:.78rem;color:var(--text2);line-height:1.6;margin-bottom:.35rem}
+      .modal-appliance-price{font-size:1.1rem;font-weight:600;color:var(--gold-light);font-family:'Playfair Display',serif}
+
+      .modal-set-total{text-align:center;padding:1rem 0;border-top:1px solid var(--border);margin-bottom:1rem}
+      .modal-set-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);display:block;margin-bottom:.35rem}
+      .set-modal .modal-price{font-size:2rem!important;margin:0!important}
 
       .product-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .4s cubic-bezier(.22,1,.36,1);cursor:pointer}
       .product-card:hover{transform:translateY(-6px);border-color:rgba(201,149,42,.3);box-shadow:0 20px 60px rgba(0,0,0,.5)}
@@ -169,10 +183,10 @@
       @media(max-width:768px){
         .section{padding:4rem 0}.container{padding:0 1.25rem}
         .catalog-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-        .set-header{flex-direction:column;align-items:flex-start;gap:.75rem}
-        .set-total-price{text-align:left}
+        .modal-carousel-wrap{min-height:250px;border-radius:20px 20px 0 0}
         .modal{grid-template-columns:1fr}
         .modal .modal-img-wrap{min-height:200px;border-radius:20px 20px 0 0}
+        .modal-carousel-wrap{min-height:200px;border-radius:20px 20px 0 0}
         .modal .modal-body{padding:1.5rem}
         .modal .modal-actions .btn{min-width:100%}
         .hamburger{display:flex}
@@ -521,21 +535,27 @@
       </div>
     </footer>
 
-    <div class="modal-overlay" id="productModal" onclick="if(event.target===this)closeModal()">
-      <div class="modal" role="dialog" aria-modal="true">
-        <div class="modal-img-wrap">
-          <img id="modalImg" src="" alt="" />
+    <div class="modal-overlay" id="setModal" onclick="if(event.target===this)closeSetModal()">
+      <div class="modal set-modal" role="dialog" aria-modal="true">
+        <div class="modal-carousel-wrap">
+          <button class="carousel-btn carousel-prev" onclick="event.stopPropagation();carouselPrev()">‹</button>
+          <img id="carouselImg" src="" alt="" />
+          <button class="carousel-btn carousel-next" onclick="event.stopPropagation();carouselNext()">›</button>
+          <div class="carousel-counter" id="carouselCounter"></div>
         </div>
         <div class="modal-body">
-          <button class="close-btn" onclick="closeModal()" aria-label="Close">✕</button>
-          <span class="modal-cat-tag" id="modalCat"></span>
-          <h3 class="modal-title" id="modalTitle"></h3>
-          <p class="modal-desc" id="modalDesc"></p>
-          <div class="modal-price" id="modalPrice"></div>
+          <button class="close-btn" onclick="closeSetModal()" aria-label="Close">✕</button>
+          <span class="modal-cat-tag" id="setModalCat"></span>
+          <h3 class="modal-title" id="setModalTitle"></h3>
+          <div class="modal-appliances" id="setModalAppliances"></div>
+          <div class="modal-set-total">
+            <span class="modal-set-label">Prix Ensemble Complet</span>
+            <div class="modal-price" id="setModalPrice"></div>
+          </div>
           <div class="modal-actions">
-            <a class="btn btn-gold" id="modalWA" target="_blank" rel="noopener" data-i18n="modalWA">💬 WhatsApp</a>
-            <a class="btn btn-outline" id="modalEmail" data-i18n="modalEmail">✉️ Email</a>
-            <a class="btn btn-outline" id="modalCall" data-i18n="modalCall">📞 Appeler</a>
+            <a class="btn btn-gold" id="setModalWA" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a class="btn btn-outline" id="setModalEmail">✉️ Email</a>
+            <a class="btn btn-outline" id="setModalCall">📞 Appeler</a>
           </div>
         </div>
       </div>
@@ -545,42 +565,77 @@
       const sets = [
         {
           num: 1, setPrice: 1499,
+          mainImg: 'assets/5%20Combos/SET%20NUMERO%201/fridge-lg-33-watermarked.jpg',
+          photos: [
+            'assets/5%20Combos/SET%20NUMERO%201/fridge-lg-33-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%201/stove-frigidaire-30-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%201/washer-dryer-midea-27-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%201/photo-4-watermarked.jpg'
+          ],
           appliances: [
-            {id:'s1-fridge', type:'Réfrigérateur', typeEN:'Refrigerator', brand:'LG', size:'33"', price:579, sku:'S1-001', img:'assets/5 Combos/SET%20NUMERO%201/fridge-lg-33-watermarked.jpg', descFR:'Réfrigérateur LG 33 pouces. Grande capacité, éclairage LED, technology de conservation avancée.', descEN:'LG 33" Refrigerator. Large capacity, LED lighting, advanced preservation technology.'},
-            {id:'s1-stove', type:'Cuisinière', typeEN:'Stove', brand:'FRIGIDAIRE', size:'30"', price:449, sku:'S1-002', img:'assets/5%20Combos/SET%20NUMERO%201/stove-frigidaire-30-watermarked.jpg', descFR:'Cuisinière FRIGIDAIRE 30 pouces. Brûleurs performants, four convecteur, fini élégant.', descEN:'FRIGIDAIRE 30" Stove. High-performance burners, convection oven, elegant finish.'},
-            {id:'s1-washer', type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'MIDEA', size:'27"', price:649, sku:'S1-003', img:'assets/5%20Combos/SET%20NUMERO%201/washer-dryer-midea-27-watermarked.jpg', descFR:'Laveuse-sécheuse MIDEA 27 pouces. Efficacité énergétique, cycles variés, capacité familiale.', descEN:'MIDEA 27" Washer-Dryer. Energy efficient, multiple cycles, family capacity.'}
+            {type:'Réfrigérateur', typeEN:'Refrigerator', brand:'LG', size:'33"', price:579, descFR:'Réfrigérateur LG 33 pouces. Grande capacité, éclairage LED, technologie de conservation avancée.', descEN:'LG 33" Refrigerator. Large capacity, LED lighting, advanced preservation technology.'},
+            {type:'Cuisinière', typeEN:'Stove', brand:'FRIGIDAIRE', size:'30"', price:449, descFR:'Cuisinière FRIGIDAIRE 30 pouces. Brûleurs performants, four convecteur, fini élégant.', descEN:'FRIGIDAIRE 30" Stove. High-performance burners, convection oven, elegant finish.'},
+            {type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'MIDEA', size:'27"', price:649, descFR:'Laveuse-sécheuse MIDEA 27 pouces. Efficacité énergétique, cycles variés, capacité familiale.', descEN:'MIDEA 27" Washer-Dryer. Energy efficient, multiple cycles, family capacity.'}
           ]
         },
         {
           num: 2, setPrice: 1389,
+          mainImg: 'assets/5%20Combos/SET%20NUMERO%202/fridge-whirlpool-33-watermarked.jpg',
+          photos: [
+            'assets/5%20Combos/SET%20NUMERO%202/fridge-whirlpool-33-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%202/stove-whirlpool-30-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%202/washer-dryer-samsung-27-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%202/photo-4-watermarked.jpg'
+          ],
           appliances: [
-            {id:'s2-fridge', type:'Réfrigérateur', typeEN:'Refrigerator', brand:'WHIRLPOOL', size:'33"', price:550, sku:'S2-001', img:'assets/5%20Combos/SET%20NUMERO%202/fridge-whirlpool-33-watermarked.jpg', descFR:'Réfrigérateur WHIRLPOOL 33 pouces. Design classique, conservation optimale, fiabilité éprouvée.', descEN:'WHIRLPOOL 33" Refrigerator. Classic design, optimal preservation, proven reliability.'},
-            {id:'s2-stove', type:'Cuisinière', typeEN:'Stove', brand:'WHIRLPOOL', size:'30"', price:399, sku:'S2-002', img:'assets/5%20Combos/SET%20NUMERO%202/stove-whirlpool-30-watermarked.jpg', descFR:'Cuisinière WHIRLPOOL 30 pouces. Performance constante, cuisson uniforme, facile à nettoyer.', descEN:'WHIRLPOOL 30" Stove. Consistent performance, even cooking, easy to clean.'},
-            {id:'s2-washer', type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'SAMSUNG', size:'27"', price:649, sku:'S2-003', img:'assets/5%20Combos/SET%20NUMERO%202/washer-dryer-samsung-27-watermarked.jpg', descFR:'Laveuse-sécheuse SAMSUNG 27 pouces. Technologie avancée, cycles rapides, design moderne.', descEN:'SAMSUNG 27" Washer-Dryer. Advanced technology, fast cycles, modern design.'}
+            {type:'Réfrigérateur', typeEN:'Refrigerator', brand:'WHIRLPOOL', size:'33"', price:550, descFR:'Réfrigérateur WHIRLPOOL 33 pouces. Design classique, conservation optimale, fiabilité éprouvée.', descEN:'WHIRLPOOL 33" Refrigerator. Classic design, optimal preservation, proven reliability.'},
+            {type:'Cuisinière', typeEN:'Stove', brand:'WHIRLPOOL', size:'30"', price:399, descFR:'Cuisinière WHIRLPOOL 30 pouces. Performance constante, cuisson uniforme, facile à nettoyer.', descEN:'WHIRLPOOL 30" Stove. Consistent performance, even cooking, easy to clean.'},
+            {type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'SAMSUNG', size:'27"', price:649, descFR:'Laveuse-sécheuse SAMSUNG 27 pouces. Technologie avancée, cycles rapides, design moderne.', descEN:'SAMSUNG 27" Washer-Dryer. Advanced technology, fast cycles, modern design.'}
           ]
         },
         {
           num: 3, setPrice: 1489,
+          mainImg: 'assets/5%20Combos/SET%20NUMERO%203/fridge-ge-30-watermarked.jpg',
+          photos: [
+            'assets/5%20Combos/SET%20NUMERO%203/fridge-ge-30-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%203/stove-maytag-30-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%203/washer-dryer-maytag-27-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%203/photo-4-watermarked.jpg'
+          ],
           appliances: [
-            {id:'s3-fridge', type:'Réfrigérateur', typeEN:'Refrigerator', brand:'GE', size:'30"', price:550, sku:'S3-001', img:'assets/5%20Combos/SET%20NUMERO%203/fridge-ge-30-watermarked.jpg', descFR:'Réfrigérateur GE 30 pouces. Compact etspacieux, technologie de refroidissement avancée.', descEN:'GE 30" Refrigerator. Compact yet spacious, advanced cooling technology.'},
-            {id:'s3-stove', type:'Cuisinière', typeEN:'Stove', brand:'MAYTAG', size:'30"', price:469, sku:'S3-002', img:'assets/5%20Combos/SET%20NUMERO%203/stove-maytag-30-watermarked.jpg', descFR:'Cuisinière MAYTAG 30 pouces. Construction robuste, puissance de cuisson, durabilité exceptionnelle.', descEN:'MAYTAG 30" Stove. Robust construction, cooking power, exceptional durability.'},
-            {id:'s3-washer', type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'MAYTAG', size:'27"', price:649, sku:'S3-003', img:'assets/5%20Combos/SET%20NUMERO%203/washer-dryer-maytag-27-watermarked.jpg', descFR:'Laveuse-sécheuse MAYTAG 27 pouces. Fiabilité professionnelle, grande capacité, cycles efficaces.', descEN:'MAYTAG 27" Washer-Dryer. Professional reliability, large capacity, efficient cycles.'}
+            {type:'Réfrigérateur', typeEN:'Refrigerator', brand:'GE', size:'30"', price:550, descFR:'Réfrigérateur GE 30 pouces. Compact et spacieux, technologie de refroidissement avancée.', descEN:'GE 30" Refrigerator. Compact yet spacious, advanced cooling technology.'},
+            {type:'Cuisinière', typeEN:'Stove', brand:'MAYTAG', size:'30"', price:469, descFR:'Cuisinière MAYTAG 30 pouces. Construction robuste, puissance de cuisson, durabilité exceptionnelle.', descEN:'MAYTAG 30" Stove. Robust construction, cooking power, exceptional durability.'},
+            {type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'MAYTAG', size:'27"', price:649, descFR:'Laveuse-sécheuse MAYTAG 27 pouces. Fiabilité professionnelle, grande capacité, cycles efficaces.', descEN:'MAYTAG 27" Washer-Dryer. Professional reliability, large capacity, efficient cycles.'}
           ]
         },
         {
           num: 4, setPrice: 1689,
+          mainImg: 'assets/5%20Combos/SET%20NUMERO%204/fridge-frigidaire-33-watermarked.jpg',
+          photos: [
+            'assets/5%20Combos/SET%20NUMERO%204/fridge-frigidaire-33-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%204/stove-samsung-30-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%204/washer-dryer-samsung-27-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%204/photo-4-watermarked.jpg'
+          ],
           appliances: [
-            {id:'s4-fridge', type:'Réfrigérateur', typeEN:'Refrigerator', brand:'FRIGIDAIRE', size:'33"', price:659, sku:'S4-001', img:'assets/5%20Combos/SET%20NUMERO%204/fridge-frigidaire-33-watermarked.jpg', descFR:'Réfrigérateur FRIGIDAIRE 33 pouces. Grande capacité, distribution d\'eau, fini premium.', descEN:'FRIGIDAIRE 33" Refrigerator. Large capacity, water dispenser, premium finish.'},
-            {id:'s4-stove', type:'Cuisinière', typeEN:'Stove', brand:'SAMSUNG', size:'30"', price:449, sku:'S4-002', img:'assets/5%20Combos/SET%20NUMERO%204/stove-samsung-30-watermarked.jpg', descFR:'Cuisinière SAMSUNG 30 pouces. Technologie innovante, cuisson précise, design élégant.', descEN:'SAMSUNG 30" Stove. Innovative technology, precise cooking, elegant design.'},
-            {id:'s4-washer', type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'SAMSUNG', size:'27"', price:689, sku:'S4-003', img:'assets/5%20Combos/SET%20NUMERO%204/washer-dryer-samsung-27-watermarked.jpg', descFR:'Laveuse-sécheuse SAMSUNG 27 pouces. Wi-Fi, vapeur, efficacité énergétique maximale.', descEN:'SAMSUNG 27" Washer-Dryer. Wi-Fi, steam, maximum energy efficiency.'}
+            {type:'Réfrigérateur', typeEN:'Refrigerator', brand:'FRIGIDAIRE', size:'33"', price:659, descFR:'Réfrigérateur FRIGIDAIRE 33 pouces. Grande capacité, distribution d\'eau, fini premium.', descEN:'FRIGIDAIRE 33" Refrigerator. Large capacity, water dispenser, premium finish.'},
+            {type:'Cuisinière', typeEN:'Stove', brand:'SAMSUNG', size:'30"', price:449, descFR:'Cuisinière SAMSUNG 30 pouces. Technologie innovante, cuisson précise, design élégant.', descEN:'SAMSUNG 30" Stove. Innovative technology, precise cooking, elegant design.'},
+            {type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'SAMSUNG', size:'27"', price:689, descFR:'Laveuse-sécheuse SAMSUNG 27 pouces. Wi-Fi, vapeur, efficacité énergétique maximale.', descEN:'SAMSUNG 27" Washer-Dryer. Wi-Fi, steam, maximum energy efficiency.'}
           ]
         },
         {
           num: 5, setPrice: 1885,
+          mainImg: 'assets/5%20Combos/SET%20NUMERO%205/fridge-lg-33-watermarked.jpg',
+          photos: [
+            'assets/5%20Combos/SET%20NUMERO%205/fridge-lg-33-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%205/stove-samsung-30-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%205/washer-dryer-maytag-27-watermarked.jpg',
+            'assets/5%20Combos/SET%20NUMERO%205/photo-4-watermarked.jpg'
+          ],
           appliances: [
-            {id:'s5-fridge', type:'Réfrigérateur', typeEN:'Refrigerator', brand:'LG', size:'33"', price:780, sku:'S5-001', img:'assets/5%20Combos/SET%20NUMERO%205/fridge-lg-33-watermarked.jpg', descFR:'Réfrigérateur LG 33 pouces. Technologie de pointe, intelligent Inverter, design premium.', descEN:'LG 33" Refrigerator. Cutting-edge technology, Smart Inverter, premium design.'},
-            {id:'s5-stove', type:'Cuisinière', typeEN:'Stove', brand:'SAMSUNG', size:'30"', price:469, sku:'S5-002', img:'assets/5%20Combos/SET%20NUMERO%205/stove-samsung-30-watermarked.jpg', descFR:'Cuisinière SAMSUNG 30 pouces. Convecteur, brûleurs à haute performance, interface intuitive.', descEN:'SAMSUNG 30" Stove. Convection, high-performance burners, intuitive interface.'},
-            {id:'s5-washer', type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'MAYTAG', size:'27"', price:789, sku:'S5-003', img:'assets/5%20Combos/SET%20NUMERO%205/washer-dryer-maytag-27-watermarked.jpg', descFR:'Laveuse-sécheuse MAYTAG 27 pouces. Cap. XL, système de nettoyage avancé, garantie longue durée.', descEN:'MAYTAG 27" Washer-Dryer. XL capacity, advanced cleaning system, long warranty.'}
+            {type:'Réfrigérateur', typeEN:'Refrigerator', brand:'LG', size:'33"', price:780, descFR:'Réfrigérateur LG 33 pouces. Technologie de pointe, Smart Inverter, design premium.', descEN:'LG 33" Refrigerator. Cutting-edge technology, Smart Inverter, premium design.'},
+            {type:'Cuisinière', typeEN:'Stove', brand:'SAMSUNG', size:'30"', price:469, descFR:'Cuisinière SAMSUNG 30 pouces. Convecteur, brûleurs à haute performance, interface intuitive.', descEN:'SAMSUNG 30" Stove. Convection, high-performance burners, intuitive interface.'},
+            {type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'MAYTAG', size:'27"', price:789, descFR:'Laveuse-sécheuse MAYTAG 27 pouces. Capacité XL, système de nettoyage avancé, garantie longue durée.', descEN:'MAYTAG 27" Washer-Dryer. XL capacity, advanced cleaning system, long warranty.'}
           ]
         }
       ];
@@ -602,7 +657,6 @@
           sectionOpenBox: 'Boîte Ouverte', sectionUsed: 'Usagé',
           subCombos: 'Combos', subWasherDryer: 'Laveuses-sécheuses', subFridges: 'Réfrigérateurs', subFurnaces: 'Fournaises',
           viewDetails: 'Voir les détails →',
-          modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Appeler',
           aboutLabel: 'Notre Maison', aboutTitle: 'Où la qualité rencontre la confiance.',
           aboutDesc: 'Fondé à Montréal, GobySolutions repose sur une conviction simple : chaque maison mérite des appareils exceptionnels et un service à la hauteur. Nous inspectons personnellement chaque unité - neuve ou pré-appartenance - parce que votre cuisine ne devrait jamais faire de compromis.',
           aboutFeat1: 'Livraison gratuite 2000$+', aboutFeat2: 'Installation pro', aboutFeat3: 'Inspecté & certifié', aboutFeat4: 'Support après-vente',
@@ -674,7 +728,6 @@
           sectionOpenBox: 'Open Box', sectionUsed: 'Used',
           subCombos: 'Combos', subWasherDryer: 'Washer & Dryer', subFridges: 'Refrigerators', subFurnaces: 'Furnaces',
           viewDetails: 'View Details →',
-          modalWA: '💬 WhatsApp', modalEmail: '✉️ Email', modalCall: '📞 Call',
           aboutLabel: 'Our House', aboutTitle: 'Where quality meets trust.',
           aboutDesc: 'Founded in Montreal, GobySolutions is built on a simple belief: every home deserves exceptional appliances and every customer deserves exceptional care. We personally inspect every unit - new or pre-owned - because your kitchen shouldn\'t settle for less.',
           aboutFeat1: 'Free Delivery 2000$+', aboutFeat2: 'Pro Installation', aboutFeat3: 'Inspected & Certified', aboutFeat4: 'After-Sales Support',
@@ -774,49 +827,22 @@
       }, { threshold: .5 });
       counters.forEach(el => counterObserver.observe(el));
 
-      function findAppliance(id){
-        for(var i=0;i<sets.length;i++){
-          for(var j=0;j<sets[i].appliances.length;j++){
-            if(sets[i].appliances[j].id===id) return {set:sets[i], appliance:sets[i].appliances[j]};
-          }
-        }
-        return null;
-      }
-
-      function waMsg(appliance, setNum, l){
-        var base = l==='en'
-          ? "Hello, I'm interested in the "+appliance.brand+" "+appliance.size+" "+appliance.typeEN+" from Set #"+setNum
-          : "Bonjour, je suis intéressé(e) par le "+appliance.type+" "+appliance.brand+" "+appliance.size+" du Ensemble #"+setNum;
-        return encodeURIComponent(base+' - SKU #'+appliance.sku);
-      }
-
       function renderCatalog(){
         var grid=document.getElementById('catalogGrid'),l=document.documentElement.lang,html='';
         html+='<div class="catalog-section">';
         html+='<div class="cat-header reveal"><span>✅</span><h3>'+(l==='en'?'Appliance Sets':'Ensembles d\'Appareils')+'</h3><div class="line"></div></div>';
+        html+='<div class="catalog-grid">';
         sets.forEach(function(set){
           var setLabel = (l==='en'?'SET':'ENSEMBLE')+' NUMERO '+set.num;
-          html+='<div class="set-block">';
-          html+='<div class="set-header reveal">';
-          html+='<div class="set-header-left"><span class="set-icon">📦</span><h4>'+setLabel+'</h4></div>';
-          html+='<div class="set-total-price">$'+set.setPrice+' <small>CAD</small></div>';
-          html+='</div>';
-          html+='<div class="set-savings reveal">' + (l==='en'?'Complete Set Price':'Prix Ensemble Complet') + '</div>';
-          html+='<div class="catalog-grid">';
-          set.appliances.forEach(function(a){
-            var name = a.brand+' '+a.size+' '+a.type;
-            var nameEN = a.brand+' '+a.size+' '+a.typeEN;
-            html+='<div class="product-card reveal" onclick="openModal(\''+a.id+'\')">'+
-              '<div class="img-wrap"><img src="'+a.img+'" alt="'+(l==='en'?nameEN:name)+'" loading="lazy" /></div>'+
-              '<div class="info"><h4>'+(l==='en'?nameEN:name)+'</h4>'+
-              '<div class="cat-tag">'+a.brand+' • '+a.size+'</div>'+
-              '<div class="price">$'+a.price+' <small>CAD</small></div>'+
-              '<div class="sku">#'+a.sku+'</div>'+
-              '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">'+(l==='en'?'View Details →':'Voir les détails →')+'</button></div></div>';
-          });
-          html+='</div></div>';
+          html+='<div class="product-card set-card reveal" onclick="openSetModal('+(set.num-1)+')">'+
+            '<div class="img-wrap"><img src="'+set.mainImg+'" alt="'+setLabel+'" loading="lazy" />'+
+            '<div class="set-badge">'+setLabel+'</div></div>'+
+            '<div class="info"><h4>'+setLabel+'</h4>'+
+            '<div class="price set-price">$'+set.setPrice+' <small>CAD</small></div>'+
+            '<div class="set-includes">'+(l==='en'?'Includes 3 appliances':'Inclut 3 appareils')+'</div>'+
+            '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">'+(l==='en'?'View Details →':'Voir les détails →')+'</button></div></div>';
         });
-        html+='</div>';
+        html+='</div></div>';
         grid.innerHTML=html;
         setTimeout(function(){grid.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)})},100);
       }
@@ -824,35 +850,75 @@
       function openAIPopup(){document.getElementById('aiPopup').classList.add('active')}
       function closeAIPopup(){document.getElementById('aiPopup').classList.remove('active')}
 
-      function openModal(id){
-        var result = findAppliance(id);
-        if(!result) return;
-        var a = result.appliance, setNum = result.set.num, setPrice = result.set.setPrice;
-        var l = document.documentElement.lang;
-        var name = l==='en' ? a.brand+' '+a.size+' '+a.typeEN : a.brand+' '+a.size+' '+a.type;
-        document.getElementById('modalImg').src = a.img;
-        document.getElementById('modalImg').alt = name;
-        document.getElementById('modalCat').textContent = (l==='en'?'SET':'ENSEMBLE')+' NUMERO '+setNum;
-        document.getElementById('modalTitle').textContent = name;
-        var desc = l==='en' ? a.descEN : a.descFR;
-        desc += '\n\n'+(l==='en'?'Complete Set Price':'Prix Ensemble')+' (NUMERO '+setNum+'): $'+setPrice+' CAD';
-        document.getElementById('modalDesc').textContent = desc;
-        document.getElementById('modalPrice').textContent = '$'+a.price+' CAD';
-        document.getElementById('modalWA').href = 'https://wa.me/15144312367?text=' + waMsg(a, setNum, l);
-        document.getElementById('modalEmail').href = 'mailto:optimum61@hotmail.com?subject=' + encodeURIComponent('Question about ' + name);
-        document.getElementById('modalCall').href = 'tel:+15147991291';
-        var overlay = document.getElementById('productModal');
+      var currentSetIdx = 0;
+      var currentPhotoIdx = 0;
+
+      function openSetModal(setIdx){
+        currentSetIdx = setIdx;
+        currentPhotoIdx = 0;
+        renderSetModal();
+        var overlay = document.getElementById('setModal');
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
       }
 
-      function closeModal(){
-        document.getElementById('productModal').classList.remove('active');
+      function closeSetModal(){
+        document.getElementById('setModal').classList.remove('active');
         document.body.style.overflow = '';
       }
 
+      function renderSetModal(){
+        var set = sets[currentSetIdx];
+        var l = document.documentElement.lang;
+        var setLabel = (l==='en'?'SET':'ENSEMBLE')+' NUMERO '+set.num;
+
+        document.getElementById('setModalCat').textContent = setLabel;
+        document.getElementById('setModalTitle').textContent = setLabel;
+        document.getElementById('setModalPrice').textContent = '$'+set.setPrice+' CAD';
+
+        document.getElementById('carouselImg').src = set.photos[currentPhotoIdx];
+        document.getElementById('carouselImg').alt = setLabel;
+        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+set.photos.length;
+
+        var listHtml = '';
+        set.appliances.forEach(function(a){
+          var name = l==='en' ? a.typeEN+' '+a.brand+' '+a.size : a.type+' '+a.brand+' '+a.size;
+          listHtml+='<div class="modal-appliance">'+
+            '<div class="modal-appliance-name">'+name+'</div>'+
+            '<div class="modal-appliance-desc">'+(l==='en'?a.descEN:a.descFR)+'</div>'+
+            '<div class="modal-appliance-price">$'+a.price+' CAD</div>'+
+          '</div>';
+        });
+        document.getElementById('setModalAppliances').innerHTML = listHtml;
+
+        var waText = l==='en'
+          ? "Hello, I'm interested in Set NUMERO "+set.num+" ($"+set.setPrice+" CAD). I'd like more details."
+          : "Bonjour, je suis intéressé(e) par l'Ensemble NUMERO "+set.num+" ($"+set.setPrice+" CAD). J'aimerais plus de détails.";
+        document.getElementById('setModalWA').href = 'https://wa.me/15144312367?text=' + encodeURIComponent(waText);
+        document.getElementById('setModalEmail').href = 'mailto:optimum61@hotmail.com?subject=' + encodeURIComponent('Question about Set NUMERO '+set.num);
+        document.getElementById('setModalCall').href = 'tel:+15147991291';
+      }
+
+      function carouselPrev(){
+        var set = sets[currentSetIdx];
+        currentPhotoIdx = (currentPhotoIdx - 1 + set.photos.length) % set.photos.length;
+        document.getElementById('carouselImg').src = set.photos[currentPhotoIdx];
+        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+set.photos.length;
+      }
+
+      function carouselNext(){
+        var set = sets[currentSetIdx];
+        currentPhotoIdx = (currentPhotoIdx + 1) % set.photos.length;
+        document.getElementById('carouselImg').src = set.photos[currentPhotoIdx];
+        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+set.photos.length;
+      }
+
       document.addEventListener('keydown', e => {
-        if(e.key === 'Escape'){ closeModal(); closeGuide(); closeLegal(); }
+        if(e.key === 'Escape'){ closeSetModal(); closeGuide(); closeLegal(); }
+        if(document.getElementById('setModal').classList.contains('active')){
+          if(e.key === 'ArrowLeft') carouselPrev();
+          if(e.key === 'ArrowRight') carouselNext();
+        }
       });
 
       function toggleFAQ(btn){
