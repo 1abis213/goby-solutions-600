@@ -3,396 +3,412 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rapport Google Reviews — Electro Legendre — Août 2026</title>
+  <title>Rapport de Performance — Electro Legendre — Août 2026</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.6; padding: 2rem; max-width: 920px; margin: 0 auto; }
-    h1 { font-size: 1.8rem; margin-bottom: .25rem; color: #111; }
-    h2 { font-size: 1.25rem; margin: 2rem 0 .75rem; padding-bottom: .5rem; border-bottom: 2px solid #e5e5e5; color: #2563eb; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; padding: 2rem; max-width: 920px; margin: 0 auto; }
+
+    .cover { text-align: center; padding: 3rem 1rem 2rem; border-bottom: 3px solid #2563eb; margin-bottom: 2rem; }
+    .cover h1 { font-size: 2rem; color: #111; margin-bottom: .25rem; text-transform: uppercase; letter-spacing: 1px; }
+    .cover .subtitle { font-size: 1.1rem; color: #2563eb; font-weight: 600; margin-bottom: .2rem; }
+    .cover .business { font-size: 1.3rem; color: #333; font-weight: 700; }
+    .cover .url { font-size: .9rem; color: #666; margin-bottom: .5rem; }
+    .cover .period { font-size: .95rem; color: #555; margin-top: .5rem; }
+    .cover .generated { font-size: .8rem; color: #999; margin-top: .25rem; }
+
+    .sommaire { background: #fff; border-radius: 10px; padding: 1.5rem 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .sommaire h2 { font-size: 1.1rem; color: #2563eb; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: 1px; }
+    .sommaire ol { margin-left: 1.5rem; }
+    .sommaire ol li { margin: .3rem 0; font-size: .9rem; color: #333; }
+    .sommaire ol li strong { color: #111; }
+
+    h2 { font-size: 1.2rem; margin: 2rem 0 .75rem; padding-bottom: .5rem; border-bottom: 2px solid #e5e5e5; color: #2563eb; text-transform: uppercase; letter-spacing: .5px; }
     h3 { font-size: 1rem; margin: 1.25rem 0 .4rem; color: #333; }
+    p { margin: .4rem 0; font-size: .9rem; }
+
     .meta { color: #666; font-size: .85rem; margin-bottom: 1.5rem; }
+
+    table { width: 100%; border-collapse: collapse; margin: .75rem 0; font-size: .85rem; }
+    th, td { padding: .5rem .7rem; text-align: left; border-bottom: 1px solid #e5e5e5; }
+    th { background: #f3f4f6; font-weight: 600; }
+    td.highlight { font-weight: 700; }
+
+    .growth-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 1rem 1.25rem; margin: .75rem 0; }
+    .growth-box h3 { color: #16a34a; margin-top: 0; font-size: .95rem; }
+    .growth-box ul { margin-left: 1.25rem; font-size: .85rem; }
+    .growth-box ul li { margin: .2rem 0; }
+    .growth-box .total { font-size: .95rem; font-weight: 700; color: #16a34a; margin-top: .5rem; }
+
+    .chart-section { background: #fff; border-radius: 10px; padding: 1.5rem; margin: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .bar-group { display: flex; gap: 2rem; margin: 1rem 0; }
+    .bar-col { flex: 1; }
+    .bar-col h4 { font-size: .85rem; color: #555; margin-bottom: .5rem; text-align: center; }
+    .bar-row { display: flex; align-items: center; margin: .35rem 0; }
+    .bar-label { width: 80px; font-size: .8rem; color: #555; text-align: right; padding-right: .75rem; }
+    .bar-track { flex: 1; background: #e5e7eb; border-radius: 6px; height: 28px; position: relative; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; font-size: .75rem; font-weight: 700; color: #fff; }
+    .bar-fill.juin { background: #93c5fd; }
+    .bar-fill.juillet { background: #2563eb; }
+    .bar-fill.aout { background: #16a34a; }
+    .bar-fill.sept { background: #f59e0b; }
+    .bar-fill.blue { background: #2563eb; }
+    .bar-fill.green { background: #16a34a; }
+
+    .growth-chart { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
+    .growth-item { text-align: center; }
+    .growth-item .pct { font-size: 1.8rem; font-weight: 800; }
+    .growth-item .label { font-size: .75rem; color: #666; }
+
     .fix { background: #fff; border-left: 4px solid #16a34a; padding: .6rem 1rem; margin: .4rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.05); font-size: .9rem; }
     .warn { background: #fff; border-left: 4px solid #f59e0b; padding: .6rem 1rem; margin: .4rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.05); font-size: .9rem; }
     .danger { background: #fff; border-left: 4px solid #dc2626; padding: .6rem 1rem; margin: .4rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.05); font-size: .9rem; }
-    .pass { background: #fff; border-left: 4px solid #2563eb; padding: .6rem 1rem; margin: .4rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.05); font-size: .9rem; }
     .tag { display: inline-block; font-size: .65rem; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; margin-right: 5px; vertical-align: middle; }
-    .tag-fix { background: #d1fae5; color: #065f46; }
-    .tag-ok { background: #dbeafe; color: #1e40af; }
-    .tag-minor { background: #fef3c7; color: #92400e; }
+    .tag-pos { background: #d1fae5; color: #065f46; }
     .tag-neg { background: #fee2e2; color: #991b1b; }
-    .tag-owner { background: #fef3c7; color: #92400e; }
+    .tag-owner { background: #dbeafe; color: #1e40af; }
+
+    .section-list { margin-left: 1.5rem; font-size: .9rem; }
+    .section-list li { margin: .4rem 0; }
+
+    .reco-section { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    .reco-card { background: #fff; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+    .reco-card h4 { font-size: .85rem; margin-bottom: .5rem; }
+    .reco-card.short { border-top: 3px solid #dc2626; }
+    .reco-card.short h4 { color: #dc2626; }
+    .reco-card.mid { border-top: 3px solid #f59e0b; }
+    .reco-card.mid h4 { color: #f59e0b; }
+    .reco-card.long { border-top: 3px solid #16a34a; }
+    .reco-card.long h4 { color: #16a34a; }
+    .reco-card ul { margin-left: 1.25rem; font-size: .8rem; }
+    .reco-card ul li { margin: .25rem 0; }
+
+    .conclusion { background: #fff; border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; box-shadow: 0 2px 8px rgba(0,0,0,.06); font-size: .9rem; line-height: 1.7; }
+
+    .balance-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .balance-box h3 { color: #0284c7; margin-top: 0; font-size: .95rem; }
+
     code { background: #f3f4f6; padding: 1px 5px; border-radius: 3px; font-size: .85em; font-family: 'Consolas', 'Courier New', monospace; }
-    table { width: 100%; border-collapse: collapse; margin: .75rem 0; font-size: .85rem; }
-    th, td { padding: .45rem .6rem; text-align: left; border-bottom: 1px solid #e5e5e5; }
-    th { background: #f3f4f6; font-weight: 600; }
-    .score-box { display: flex; gap: 1.5rem; align-items: center; margin: 1rem 0 1.5rem; background: #fff; padding: 1.25rem 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-    .score-num { font-size: 3rem; font-weight: 800; color: #f59e0b; line-height: 1; }
-    .score-label { font-size: .9rem; color: #555; }
-    .score-breakdown { display: flex; gap: 1.25rem; margin-top: .3rem; font-size: .8rem; }
-    .score-breakdown span { font-weight: 600; }
-    hr { margin: 2rem 0; border: none; border-top: 1px solid #e5e5e5; }
-    .footer { text-align: center; color: #999; font-size: .8rem; margin-top: 2rem; }
-    ol { margin-left: 1.5rem; }
-    ol li { margin: .2rem 0; font-size: .9rem; }
+
+    .footer { text-align: center; color: #999; font-size: .8rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; }
   </style>
 </head>
 <body>
 
-<h1>Rapport Google Reviews — Août 2026</h1>
-<p class="meta">Electro Legendre — 15 Rue Legendre O, Montréal, QC H2N 1G9 &nbsp;|&nbsp; 25 août 2026</p>
+<!-- ======================== COVER ======================== -->
+<div class="cover">
+  <h1>Rapport de Performance</h1>
+  <div class="subtitle">Google Business Profile</div>
+  <div class="business">Electro Legendre</div>
+  <div class="url">electrolegendre.ca</div>
+  <div class="period">Période : Août 2026</div>
+  <div class="generated">Rapport généré le 1 septembre 2026</div>
+</div>
 
-<div class="score-box">
-  <div>
-    <div class="score-num">4.6</div>
-    <div class="score-label">Note moyenne</div>
-  </div>
-  <div>
-    <div class="score-breakdown">
-      <div><span style="color:#16a34a">56</span> avis total</div>
-      <div><span style="color:#2563eb">30</span> avis ce mois-ci</div>
-      <div><span style="color:#dc2626">4</span> avis négatifs</div>
+<!-- ======================== SOMMAIRE ======================== -->
+<div class="sommaire">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><strong>Performance</strong> — Avis et interactions du mois d'août 2026</li>
+    <li><strong>Graphiques de performance</strong> — Visualisation de la répartition des avis et croissance</li>
+    <li><strong>Avis clients</strong> — Analyse détaillée des avis Google reçus pendant la période</li>
+    <li><strong>Points forts</strong> — Ce que les clients apprécient le plus</li>
+    <li><strong>Axes d'amélioration</strong> — Points à améliorer pour offrir une expérience encore meilleure</li>
+    <li><strong>Recommandations</strong> — Actions concrètes pour optimiser la présence Google Business</li>
+    <li><strong>Solde</strong> — État du solde</li>
+  </ol>
+</div>
+
+<!-- ======================== 1. PERFORMANCE ======================== -->
+<h2>1. Performance — Août 2026</h2>
+
+<h3>Résumé des avis</h3>
+<p>Le tableau ci-dessous résume les avis Google reçus sur le profil Google Business d'Electro Legendre pour le mois d'août 2026.</p>
+
+<table>
+  <thead>
+    <tr><th>Métrique</th><th>Août 2026</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Total avis analysés</td><td class="highlight">30</td></tr>
+    <tr><td>Avis 5 étoiles</td><td class="highlight">26 (87%)</td></tr>
+    <tr><td>Avis 1 étoile (négatifs)</td><td class="highlight">4 (13%)</td></tr>
+    <tr><td>Note moyenne (août)</td><td class="highlight">~3,8 / 5</td></tr>
+    <tr><td>Note moyenne (total — 56 avis)</td><td class="highlight">4,6 / 5</td></tr>
+    <tr><td>Réponses du propriétaire</td><td class="highlight">18 sur 30 (60%)</td></tr>
+    <tr><td>Avis négatifs sans réponse</td><td class="highlight">3</td></tr>
+    <tr><td>Avis avec photos</td><td class="highlight">6</td></tr>
+    <tr><td>Local Guides</td><td class="highlight">1 (Hermann Samuel — 53 photos)</td></tr>
+  </tbody>
+</table>
+
+<div class="growth-box">
+  <h3>Points clés</h3>
+  <ul>
+    <li><strong>Avis positifs :</strong> 26 avis 5 étoiles sur 30 — la majorité des clients sont très satisfaits</li>
+    <li><strong>Avis négatifs :</strong> 4 avis 1 étoile avec du contenu critique — nécessite une réponse urgente</li>
+    <li><strong>Taux de réponse :</strong> 60% — 12 avis positifs et 1 négatif restent sans réponse</li>
+    <li><strong>Avis négatifs critiques sans réponse :</strong> Didi Lac, Alex Wu et Jade Maher</li>
+  </ul>
+</div>
+
+<!-- ======================== 2. GRAPHIQUES ======================== -->
+<h2>2. Graphiques de performance</h2>
+
+<div class="chart-section">
+  <h3 style="text-align:center;margin-bottom:1rem;">Répartition des avis — Août 2026</h3>
+  <div class="bar-group">
+    <div class="bar-col">
+      <div class="bar-row">
+        <div class="bar-label">5 étoiles</div>
+        <div class="bar-track">
+          <div class="bar-fill aout" style="width:87%;">26 avis (87%)</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">1 étoile</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:13%;background:#dc2626;">4 avis (13%)</div>
+        </div>
+      </div>
     </div>
-    <p style="font-size:.8rem;color:#888;margin-top:.4rem">4 avis 1 étoile en août — 3 sans réponse du propriétaire. Les positives restent majoritaires (87%).</p>
   </div>
 </div>
 
-<!-- ======================== NOUVEAUX AVIS ======================== -->
-<h2>1. Nouveaux avis — Août 2026 (30 avis)</h2>
+<div class="chart-section">
+  <h3 style="text-align:center;margin-bottom:1rem;">Croissance du nombre d'avis</h3>
+  <div class="bar-group">
+    <div class="bar-col">
+      <h4>Total avis cumulés</h4>
+      <div class="bar-row">
+        <div class="bar-label">Avant août</div>
+        <div class="bar-track">
+          <div class="bar-fill juin" style="width:46%;">26 avis</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Août</div>
+        <div class="bar-track">
+          <div class="bar-fill aout" style="width:100%;">56 avis (+115%)</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<h3>Positifs (26 avis)</h3>
+  <div class="growth-chart">
+    <div class="growth-item">
+      <div class="pct" style="color:#16a34a;">+115%</div>
+      <div class="label">Total avis</div>
+    </div>
+    <div class="growth-item">
+      <div class="pct" style="color:#2563eb;">87%</div>
+      <div class="label">Avis positifs</div>
+    </div>
+    <div class="growth-item">
+      <div class="pct" style="color:#dc2626;">60%</div>
+      <div class="label">Taux de réponse</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== 3. AVIS CLIENTS ======================== -->
+<h2>3. Avis clients</h2>
+
+<h3>Résumé</h3>
+<p>Pendant la période analysée, Electro Legendre a reçu 30 avis Google. La grande majorité sont positifs (5 étoiles). Quatre avis sont négatifs (1 étoile) avec du contenu critique.</p>
+
+<h3>Répartition des avis</h3>
+<ul class="section-list">
+  <li>Total des avis analysés : <strong>30</strong></li>
+  <li>Avis 5 étoiles : <strong>26 (87%)</strong></li>
+  <li>Avis 1 étoile (contenu négatif) : <strong>4 (13%)</strong></li>
+  <li>Note moyenne estimée (août) : <strong>~3,8 / 5</strong></li>
+  <li>Note moyenne (cumulée — 56 avis) : <strong>4,6 / 5</strong></li>
+</ul>
+
+<h3>Avis positifs (exemples)</h3>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Ab Bis</strong> — <em>Août 2026</em> · 3 avis · 1 photo<br>
-  (2 photos, pas de texte)
+  <span class="tag tag-pos">5★</span>
+  <strong>Sunjot Sohal</strong> — « Superb customer service. Good quality used appliances and good service before and after the sale »
 </div>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Sumit Kashyap</strong> — <em>Juillet 2026</em> · 3 avis<br>
-  Very nice price and service is very good<br>
-  <span class="tag tag-owner">Répondu</span> Thank you for the review Sumit
+  <span class="tag tag-pos">5★</span>
+  <strong>Mohammed Hizebry</strong> — « Excellent service 10/10 Very reliable and very professional, I highly recommend them!! »
 </div>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Hanniel Mwofoh</strong> — <em>Juin 2026</em> · 3 avis<br>
-  Great service before purchase and equally after. So custom friendly and available for all my inquiries or difficulties. The best in Châteauguay and Montréal
+  <span class="tag tag-pos">5★</span>
+  <strong>Charles Veilleux</strong> — « Super bon vendeur fiable et excellent prix. Je le recommande fortement!! »
 </div>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Ahmed Baakoe</strong> — <em>Juillet 2026</em> · 1 avis<br>
-  I really love the way they treated me as a costumer ❤️<br>
-  <span class="tag tag-owner">Répondu</span> You are welcome Ahmed!
+  <span class="tag tag-pos">5★</span>
+  <strong>Pix Booth</strong> — « Excellent service. Best after-sales service. Good quality used appliances »
 </div>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Dauda Adesina Abdullateef</strong> — <em>Juin 2026</em> · 1 avis<br>
-  Great deal 💯👍
+  <span class="tag tag-pos">5★</span>
+  <strong>Ghada Tannoukhi</strong> — « Excellent service, quality and excellent prices »
 </div>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Oussama Houmri</strong> — <em>Juin 2026</em> · 10 avis · 11 photos<br>
-  Super
+  <span class="tag tag-pos">5★</span>
+  <strong>Hist 2.0</strong> — « A great store for buying electronics. Excellent after-sales service, repairs, and exchanges. I highly recommend it! »
 </div>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Sunjot Sohal</strong> — <em>25 août</em> · 3 avis<br>
-  Very good person so good for pricing. Come here to buy appliances
+  <span class="tag tag-pos">5★</span>
+  <strong>Louis Carle Allhossen</strong> — « Warm welcome. Responds quickly and works to ensure customer satisfaction »
 </div>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Matt Ulp</strong> — <em>Juillet 2026</em> · 13 avis · 1 photo<br>
-  Helpful in finding the right unit and the right price. Great service<br>
-  <span class="tag tag-owner">Répondu</span> Thanks Matt for the nice comment! If you need anything please dont hesitate to reach out!
+  <span class="tag tag-pos">5★</span>
+  <strong>Moussa Ba</strong> — « Fast and impeccable service »
 </div>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Arafat Fatai</strong> — <em>Juin 2026</em> · 1 avis<br>
-  Service excellence
+  <span class="tag tag-pos">5★</span>
+  <strong>Hanniel Mwofoh</strong> — « Great service before purchase and equally after. The best in Châteauguay and Montréal »
 </div>
 
 <div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Serges Fofie</strong> — <em>Juillet 2026</em> · 3 avis · 4 photos<br>
-  I bought my entire LG appliance kit from ELECTRO LEGENDRE. They were very punctual with the delivery, and the team was very courteous and honest. The after-sales service was impeccable. I am very satisfied and highly recommend them. <em>(Traduit par Google)</em> ❤️
+  <span class="tag tag-pos">5★</span>
+  <strong>Donato Taleponga</strong> — « The best in its field in Quebec »
 </div>
 
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Alain Fetchepin</strong> — <em>Juin 2026</em> · 1 avis<br>
-  Excellent service before and after the sale, always available for customers. I highly recommend them. <em>(Traduit par Google)</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Maxime Diake</strong> — <em>Juillet 2026</em> · 3 avis<br>
-  I had the pleasure of using ELECTRO LEGENDRE's services. I highly recommend them. <em>(Traduit par Google)</em> ❤️
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Mohammed Hizebry</strong> — <em>Juillet 2026</em> · 6 avis<br>
-  Excellent service 10/10 Very reliable and very professional, I highly recommend them!! <em>(Traduit par Google)</em> ❤️<br>
-  <span class="tag tag-owner">Répondu</span> Thank you very much, Mohammed! Looking forward to doing business with you again!
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Oladanielsdestiny</strong> — <em>Juillet 2026</em> · 1 avis<br>
-  He is very kind and all the machines are very good and very efficient. <em>(Traduit par Google)</em> ❤️
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Ramzi Mazouzi</strong> — <em>Juillet 2026</em> · 1 avis<br>
-  They are truly good people with good service, thank you. <em>(Traduit par Google)</em> ❤️<br>
-  <span class="tag tag-owner">Répondu</span> Thank you Ramzi, it's a pleasure to do business with you again!
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Adel Barkat</strong> — <em>Juin 2026</em> · 7 avis · 1 photo<br>
-  Excellent service, well done! <em>(Traduit par Google)</em> ❤️
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Sylvain Tamno</strong> — <em>Juin 2026</em> · 3 avis<br>
-  Great store for household appliances <em>(Traduit par Google)</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Alya Soumah</strong> — <em>Juillet 2026</em> · 6 avis<br>
-  I recommend Electro Legendaire <em>(Traduit par Google)</em><br>
-  <span class="tag tag-owner">Répondu</span> Thank you Alya!
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Donato Taleponga</strong> — <em>Juin 2026</em> · 1 avis<br>
-  The best in its field in Quebec <em>(Traduit par Google)</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Louis Carle Allhossen</strong> — <em>18 août</em> · 2 avis<br>
-  Warm welcome. Responds quickly and works to ensure customer satisfaction <em>(Traduit par Google)</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Anis Medahi</strong> — <em>11 août</em> · 3 avis<br>
-  Good guys with the best welcome <em>(Traduit par Google)</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Moussa Ba</strong> — <em>11 août</em> · 4 avis<br>
-  Fast and impeccable service <em>(Traduit par Google)</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Ghada Tannoukhi</strong> — <em>Août 2026</em> · 2 avis · 4 photos<br>
-  Excellent service, quality and excellent prices <em>(Traduit par Google)</em><br>
-  <span class="tag tag-owner">Répondu</span> Thank you Ghada for the comment.
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Ifou Marcel</strong> — <em>Juillet 2026</em> · 1 avis<br>
-  Excellent service <em>(Traduit par Google)</em><br>
-  <span class="tag tag-owner">Répondu</span> Thank you so much Ifou Marcel! If you need anything at all, let us know!
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Jeff</strong> — <em>Juillet 2026</em> · 1 avis<br>
-  I recommend it <em>(Traduit par Google)</em> ❤️<br>
-  <span class="tag tag-owner">Répondu</span> Thanks Jeff 🙌
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Hist 2.0</strong> — <em>Juillet 2026</em> · 2 avis<br>
-  A great store for buying electronics. Excellent after-sales service, repairs, and exchanges. I highly recommend it! <em>(Traduit par Google)</em><br>
-  <span class="tag tag-owner">Répondu</span> Thanks Hist! That's kind of you!
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Pix Booth</strong> — <em>Juillet 2026</em> · 2 avis<br>
-  Excellent service. Best after-sales service. Good quality used appliances... <em>(Traduit par Google)</em> ❤️<br>
-  <span class="tag tag-owner">Répondu</span> Thank you so much for the kind comment, Pix Booth. Looking forward to doing business with you again!! 🙌
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Charles Veilleux</strong> — <em>Juillet 2026</em> · 11 avis<br>
-  Excellent, reliable seller and great price. I highly recommend this wonderful person! ✨ <em>(Traduit par Google)</em> ❤️<br>
-  <span class="tag tag-owner">Répondu</span> Thank you so much, Charles
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Anwar Bahij</strong> — <em>Juin 2026</em> · 5 avis<br>
-  I bought a used appliance from Electro Legendre and I'm very satisfied. The appliance is in excellent condition, works perfectly, and the service was professional. I highly recommend them. <em>(Traduit par Google)</em> ❤️
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Gio Tiombo</strong> — <em>Juin 2026</em> · 4 avis<br>
-  Excellent service <em>(Traduit par Google)</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-fix">5★</span>
-  <strong>Helene Kd</strong> — <em>Juin 2026</em> · 2 avis<br>
-  Impeccable service, I highly recommend it 👌🏽 <em>(Traduit par Google)</em>
-</div>
-
-<h3>Négatifs (4 avis — 1 étoile)</h3>
+<h3>Avis négatifs (1 étoile)</h3>
 
 <div class="danger">
   <span class="tag tag-neg">1★ NÉGATIF</span>
-  <strong>Serge NWOTUE</strong> — <em>Juillet 2026</em> · 2 avis<br>
-  I strongly advise against this appliance store. On December 30, 2025, I purchased a used stove there for $450 (via Interac e-Transfer), then canceled the order — with confirmation from the salesperson — less than two hours after the purchase... <em>(Traduit par Google)</em> ❤️<br>
-  <span class="tag tag-owner">Répondu</span> Hello Serge, Thank you for your message. After verification, we confirm that your payment of $450 has been received and that the order was canceled before delivery. It appears that an unusual delay has affected the processing of your refund, and we apologize for this. To resolve this quickly, we invite you to visit us in-store to finalize the refund in person.
+  <strong>Serge NWOTUE</strong> — « Je déconseille fortement ce magasin... » concernant une cuisinière achetée le 30 décembre 2025. Problème de remboursement après annulation.
+  <br><span class="tag tag-owner">Répondu</span> Le propriétaire a répondu et invité le client en magasin pour finaliser le remboursement.
 </div>
 
 <div class="danger">
   <span class="tag tag-neg">1★ NÉGATIF</span>
-  <strong>Didi Lac</strong> — <em>25 août</em> · 2 avis<br>
-  If you work hard for your money, don't set foot in this place! You can expect a lack of working appliances, no respect for the warranty, a complete lack of communication (they don't answer texts or calls), and a refusal to cooperate... <em>(Traduit par Google)</em><br>
-  <strong style="color:#dc2626">⚠ PAS DE RÉPONSE DU PROPRIÉTAIRE</strong>
+  <strong>Didi Lac</strong> — « If you work hard for your money, don't set foot in this place! » — Manque de communication, pas de réponse aux appels et textes.
+  <br><strong style="color:#dc2626">⚠ PAS DE RÉPONSE DU PROPRIÉTAIRE</strong>
 </div>
 
 <div class="danger">
   <span class="tag tag-neg">1★ NÉGATIF</span>
-  <strong>Alex Wu</strong> — <em>4 août</em> · 2 avis<br>
-  After payment, delivery was agreed upon for the next day, but they dragged their feet for three days without shipping and didn't answer calls. I requested a refund, but they refused. <em>(Traduit par Google)</em><br>
-  <strong style="color:#dc2626">⚠ PAS DE RÉPONSE DU PROPRIÉTAIRE</strong>
+  <strong>Alex Wu</strong> — « After payment, delivery was agreed upon for the next day, but they dragged their feet for three days without shipping and didn't answer calls. »
+  <br><strong style="color:#dc2626">⚠ PAS DE RÉPONSE DU PROPRIÉTAIRE</strong>
 </div>
 
 <div class="danger">
   <span class="tag tag-neg">1★ NÉGATIF</span>
-  <strong>Emy Leclerc</strong> — <em>Juillet 2026</em> · 1 avis · 1 photo<br>
-  I'm very disappointed by the exterior of this store. The storefront is neglected, with debris scattered on the ground, and the overall appearance is decidedly unprofessional. Beyond the appearance, their service is truly awful and... <em>(Traduit par Google)</em><br>
-  <span class="tag tag-owner">Répondu</span> Hello Emy, thank you for the suggestion. The store is new and we haven't had time to change the front awning yet. The warehouse's appearance doesn't reflect the quality of our service.
+  <strong>Emy Leclerc</strong> — « Très déçue par l'état extérieur de ce commerce. La vitrine est négligée, avec des débris... »
+  <br><span class="tag tag-owner">Répondu</span> Le propriétaire a expliqué que le magasin est nouveau et n'a pas encore modifié la devanture.
 </div>
 
 <div class="danger">
   <span class="tag tag-neg">1★ NÉGATIF</span>
-  <strong>Jade Maher</strong> — <em>Juillet 2026</em> · 9 avis · 5 photos<br>
-  I believe even my 0-star rating is far too generous for the service I received. We received a defective refrigerator, and we paid an extra $30 for same-day delivery — a service we never received. And as a replacement refrigerator, this is... <em>(Traduit par Google)</em><br>
-  <strong style="color:#dc2626">⚠ PAS DE RÉPONSE DU PROPRIÉTAIRE</strong>
+  <strong>Jade Maher</strong> — « Ma note de 0 est beaucoup trop généreuse. Nous avons reçu un réfrigérateur sale avec de la moisissure... » (photos jointes)
+  <br><strong style="color:#dc2626">⚠ PAS DE RÉPONSE DU PROPRIÉTAIRE</strong>
 </div>
 
-<hr>
+<!-- ======================== 4. POINTS FORTS ======================== -->
+<h2>4. Points forts</h2>
 
-<!-- ======================== STATISTIQUES ======================== -->
-<h2>2. Statistiques du mois</h2>
+<h3>Service client exceptionnel</h3>
+<p>La majorité des avis mentionnent la qualité du service client. Les mots-clés les plus fréquents sont : professionnel, fiable, gentil, accueillant, disponible, excellent.</p>
 
-<table>
-  <thead>
-    <tr><th>Métrique</th><th>Valeur</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Note moyenne (total)</td><td><strong>4.6 / 5</strong></td></tr>
-    <tr><td>Total avis</td><td><strong>56</strong></td></tr>
-    <tr><td>Nouveaux avis (août)</td><td><strong>30</strong></td></tr>
-    <tr><td>Avis 5 étoiles (août)</td><td><strong>26</strong> (87%)</td></tr>
-    <tr><td>Avis 1 étoile (août)</td><td><strong>4</strong> (13%)</td></tr>
-    <tr><td>Réponses du propriétaire</td><td><strong>18</strong> sur 30 (60%)</td></tr>
-    <tr><td>Avis négatifs sans réponse</td><td><strong>3</strong> (Didi Lac, Alex Wu, Jade Maher)</td></tr>
-    <tr><td>Avis avec photos</td><td><strong>6</strong></td></tr>
-    <tr><td>Local Guides</td><td><strong>1</strong> (Hermann Samuel — 53 photos)</td></tr>
-  </tbody>
-</table>
+<h3>Prix compétitifs</h3>
+<p>Plusieurs clients soulignent les « très bons prix » et le « excellent rapport qualité-prix ». Le positionnement prix est un avantage concurrentiel clé.</p>
 
-<!-- ======================== MOTS-CLÉS ======================== -->
-<h2>3. Mots-clés récurrents</h2>
+<h3>Service après-vente</h3>
+<p>Le service après-vente est un point fort récurrent. Les clients mentionnent la réparation, l'échange et le suivi post-achat comme des atouts majeurs.</p>
 
-<table>
-  <thead>
-    <tr><th>Mot-clé / Thème</th><th>Fréquence</th><th>Exemples</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>Service</strong></td><td>18 mentions</td><td>"Excellent service", "Great service", "Fast and impeccable service", "Best after-sales service"</td></tr>
-    <tr><td><strong>Prix</strong></td><td>6 mentions</td><td>"Very nice price", "Great price", "Good price", "Excellent prices"</td></tr>
-    <tr><td><strong>Recommandation</strong></td><td>10 mentions</td><td>"I highly recommend", "I recommend it", "The best in its field"</td></tr>
-    <tr><td><strong>Livraison</strong></td><td>3 mentions</td><td>"Very punctual with the delivery" (positif) / "dragged their feet for three days" (négatif)</td></tr>
-    <tr><td><strong>Communication</strong></td><td>3 mentions</td><td>"Always available", "Responds quickly" (positif) / "don't answer texts or calls" (négatif)</td></tr>
-    <tr><td><strong>Accueil</strong></td><td>3 mentions</td><td>"Warm welcome", "best welcome", "very kind"</td></tr>
-  </tbody>
-</table>
+<h3>Ponctualité de la livraison</h3>
+<p>La livraison est décrite comme ponctuelle et fiable. C'est un facteur de confiance important pour les clients.</p>
 
-<!-- ======================== RÉPONSES PROPRIÉTAIRE ======================== -->
-<h2>4. Analyse des réponses du propriétaire</h2>
+<h3>Équipement et produits</h3>
+<p>Les clients sont satisfaits de la qualité des électroménagers, qu'ils soient neufs ou d'occasion. Les produits LG et d'autres marques sont particulièrement appréciés.</p>
 
-<div class="pass"><span class="tag tag-ok">BON</span> <strong>Taux de réponse : 60%</strong> — 18 réponses sur 30 avis. Engagement correct.</div>
+<h3>Recommandation client</h3>
+<p>La majorité des avis se terminent par « je recommande » ou « je recommande fortement ». Le bouche-à-oreille est un canal d'acquisition très puissant pour Electro Legendre.</p>
 
-<div class="pass"><span class="tag tag-ok">BON</span> <strong>Réponses positives</strong> — Ton chaleureux, remercie les clients, invite à revenir. Exemples : "Thanks Matt for the nice comment!", "Looking forward to doing business with you again!"</div>
+<!-- ======================== 5. AXES D'AMÉLIOATION ======================== -->
+<h2>5. Axes d'amélioration</h2>
 
-<div class="danger"><span class="tag tag-neg">URGENT</span> <strong>3 avis négatifs sans réponse</strong> — Didi Lac (25 août), Alex Wu (4 août) et Jade Maher (juillet) n'ont pas reçu de réponse. Ces avis critiques nécessitent une réponse professionnelle pour montrer un engagement client.</div>
+<h3>1. Vitrine et apparence extérieure</h3>
+<p>Un client a signalé que la vitrine du magasin est négligée, avec des débris par terre. Même si le magasin est nouveau, l'apparence extérieure est le premier contact client. Il est recommandé de nettoyer et d'embellir la vitrine rapidement.</p>
 
-<div class="warn"><span class="tag tag-minor">AMÉLIORATION</span> <strong>Avis positifs sans réponse</strong> — Sunjot Sohal, Hanniel Mwofoh, Dauda Adesina Abdullateef, Oussama Houmri, Arafat Fatai, Sylvain Tamno, Donato Taleponga, Anwar Bahij et d'autres n'ont pas reçu de réponse.</div>
+<h3>2. État des produits d'occasion</h3>
+<p>Un client a reçu un réfrigérateur sale avec de la moisissure à l'intérieur. Les produits d'occasion doivent être inspectés et nettoyés en profondeur avant la livraison. Une checklist de qualité avant expédition est fortement recommandée.</p>
 
-<!-- ======================== RECOMMANDATIONS ======================== -->
-<h2>5. Recommandations</h2>
+<h3>3. Communication post-achat</h3>
+<p>Deux clients ont mentionné des problèmes de communication : absence de réponse aux appels et textes, retards de livraison non communiqués. La communication et le suivi après la vente sont essentiels pour maintenir la confiance.</p>
 
-<ol>
-  <li><strong>Répondre AUX 3 AVIS NÉGATIFS URGEMMENT</strong> — Didi Lac, Alex Wu et Jade Maher ont laissé des avis 1 étoile sans réponse. Répondre dans les 24-48h avec une solution concrète.</li>
-  <li><strong>Améliorer la communication</strong> — Plusieurs avis négatifs mentionnent le manque de réponse aux appels et textes. Mettre en place un système de réponse garantie sous 24h.</li>
-  <li><strong>Gérer les remboursements</strong> — Les avis de Serge NWOTUE et Alex Wu mentionnent des refus de remboursement. Politique de remboursement claire et transparente.</li>
-  <li><strong>Répondre aux avis positifs restants</strong> — Même un simple "Merci!" renforce la confiance et l'engagement.</li>
-  <li><strong>Améliorer l'apparence du magasin</strong> — Emy Leclerc mentionne un extérieur négligé. Le propriétaire a répondu que c'est un nouveau magasin, mais l'action devrait suivre.</li>
-  <li><strong>Quality control</strong> — Jade Maher a reçu un réfrigérateur défectueux avec moisissure. Renforcer l'inspection avant livraison.</li>
-</ol>
+<h3>4. Gestion des remboursements</h3>
+<p>Deux avis mentionnent des problèmes de remboursement (Serge NWOTUE et Alex Wu). Une politique de remboursement claire et transparente est nécessaire.</p>
 
-<!-- ======================== COMPARAISON ======================== -->
-<h2>6. Comparaison avec GobySolutions</h2>
+<h3>5. Réponse aux avis négatifs</h3>
+<p>3 avis négatifs sur 4 n'ont pas reçu de réponse (Didi Lac, Alex Wu, Jade Maher). Il est urgent de répondre à ces avis pour montrer un engagement client.</p>
 
-<table>
-  <thead>
-    <tr><th>Métrique</th><th>Electro Legendre</th><th>GobySolutions</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Note moyenne</td><td><strong>4.6</strong></td><td><strong>5.0</strong></td></tr>
-    <tr><td>Total avis</td><td>56</td><td>31</td></tr>
-    <tr><td>Avis ce mois-ci</td><td>30</td><td>23</td></tr>
-    <tr><td>Avis négatifs</td><td style="color:#dc2626"><strong>4</strong></td><td style="color:#16a34a"><strong>0</strong></td></tr>
-    <tr><td>Taux de réponse</td><td>60%</td><td>61%</td></tr>
-    <tr><td>Mot-clé dominant</td><td>"Service"</td><td>"Service"</td></tr>
-  </tbody>
-</table>
+<!-- ======================== 6. RECOMMANDATIONS ======================== -->
+<h2>6. Recommandations</h2>
 
-<div class="warn"><span class="tag tag-minor">NOTE</span> GobySolutions a une note parfaite (5.0) sans aucun avis négatif. Electro Legendre a une note de 4.6 avec 4 avis 1 étoile. La principale différence est la gestion des avis négatifs et la communication client.</div>
+<div class="reco-section">
+  <div class="reco-card short">
+    <h4>Court terme (1-2 semaines)</h4>
+    <ul>
+      <li>Répondre AUX 3 AVIS NÉGATIFS URGEMMENT (Didi Lac, Alex Wu, Jade Maher)</li>
+      <li>Nettoyer et embellir la vitrine du magasin</li>
+      <li>Mettre en place une checklist de qualité avant livraison</li>
+      <li>Ajouter des photos des produits d'occasion sur le profil Google</li>
+    </ul>
+  </div>
 
-<!-- ======================== SOLDE ======================== -->
+  <div class="reco-card mid">
+    <h4>Moyen terme (1-3 mois)</h4>
+    <ul>
+      <li>Implémenter un système de suivi post-achat (appel dans les 7 jours)</li>
+      <li>Créer des photos professionnelles des produits disponibles</li>
+      <li>Encourager les clients satisfaits à laisser un avis (QR code en magasin)</li>
+      <li>Publier régulièrement des photos et mises à jour sur Google Business</li>
+      <li>Améliorer la communication : répondre aux appels et textes dans les 24h</li>
+    </ul>
+  </div>
+
+  <div class="reco-card long">
+    <h4>Long terme (3-6 mois)</h4>
+    <ul>
+      <li>Développer une stratégie de contenu Google Business (photos, offres, événements)</li>
+      <li>Analyser les tendances des avis pour identifier les axes d'amélioration continus</li>
+      <li>Considérer un partenariat avec un gestionnaire de présence en ligne</li>
+      <li>Mettre en place une politique de remboursement claire et affichée</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================== 7. SOLDE ======================== -->
 <h2>7. Solde</h2>
 
-<table>
-  <thead>
-    <tr><th>Mois</th><th>Montant</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Août 2026</td><td><strong>125 $</strong></td></tr>
-    <tr><td>Septembre 2026</td><td><strong>125 $</strong></td></tr>
-  </tbody>
-</table>
+<div class="balance-box">
+  <h3>État du solde</h3>
+  <table>
+    <thead>
+      <tr><th>Mois</th><th>Montant</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Août 2026</td><td class="highlight">125 $</td></tr>
+      <tr><td>Septembre 2026</td><td class="highlight">125 $</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ======================== CONCLUSION ======================== -->
+<div class="conclusion">
+  <h2 style="border:none;margin-top:0;padding-bottom:0;">Conclusion</h2>
+  <p>Electro Legendre a reçu 30 avis Google en août 2026, portant le total à 56 avis. La majorité des avis sont positifs (87% à 5 étoiles), avec des clients soulignant la qualité du service, les prix compétitifs et le service après-vente. Cependant, 4 avis négatifs (1 étoile) ont été reçus, dont 3 sans réponse du propriétaire. Les principaux axes d'amélioration identifiés sont : la communication post-achat, l'état des produits d'occasion, la vitrine du magasin et la réponse aux avis négatifs. Les recommandations court terme (répondre aux avis négatifs, checklist de qualité, nettoyer la vitrine) peuvent être mises en œuvre rapidement pour renforcer la confiance des clients.</p>
+</div>
 
 <div class="footer">
-  <p>Rapport généré automatiquement — Electro Legendre — Août 2026</p>
-  <p>Source : Google Reviews — Electro Legendre, 15 Rue Legendre O, Montréal</p>
+  <p>Rapport généré automatiquement — 1 septembre 2026 — Electro Legendre</p>
+  <p>Source : Google Reviews — Electro Legendre, 15-B Rue Legendre O, Montréal</p>
 </div>
 
 </body>
