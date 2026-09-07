@@ -549,7 +549,7 @@
           <h3 class="modal-title" id="setModalTitle"></h3>
           <div class="modal-appliances" id="setModalAppliances"></div>
           <div class="modal-set-total">
-            <span class="modal-set-label">Prix Ensemble Complet</span>
+            <span class="modal-set-label" id="setModalLabel">Prix Ensemble Complet</span>
             <div class="modal-price" id="setModalPrice"></div>
           </div>
           <div class="modal-actions">
@@ -636,6 +636,49 @@
             {type:'Réfrigérateur', typeEN:'Refrigerator', brand:'LG', size:'33"', price:579, descFR:'Réfrigérateur LG 33 pouces. Grande capacité, éclairage LED, technologie de conservation avancée.', descEN:'LG 33" Refrigerator. Large capacity, LED lighting, advanced preservation technology.'},
             {type:'Cuisinière', typeEN:'Stove', brand:'LG', size:'30"', price:449, descFR:'Cuisinière LG 30 pouces large. Brûleurs performants, four convecteur, fini élégant.', descEN:'LG 30" Large Stove. High-performance burners, convection oven, elegant finish.'},
             {type:'Laveuse-Sécheuse', typeEN:'Washer-Dryer', brand:'LG', size:'27"x29"x38"', price:649, descFR:'Laveuse-sécheuse LG 27x29x38 pouces. Efficacité énergétique, cycles variés, capacité familiale.', descEN:'LG 27"x29"x38" Washer-Dryer. Energy efficient, multiple cycles, family capacity.'}
+          ]
+        }
+      ];
+
+      const duos = [
+        {
+          num: 1, price: 550,
+          mainImg: 'assets/items%20for%20sale/added_7.09.26/duo1/open-watermarked.jpg',
+          photos: [
+            'assets/items%20for%20sale/added_7.09.26/duo1/open-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo1/left-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo1/right-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo1/close-watermarked.jpg'
+          ]
+        },
+        {
+          num: 2, price: 550,
+          mainImg: 'assets/items%20for%20sale/added_7.09.26/duo2/open-watermarked.jpg',
+          photos: [
+            'assets/items%20for%20sale/added_7.09.26/duo2/open-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo2/left-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo2/right-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo2/close-watermarked.jpg'
+          ]
+        },
+        {
+          num: 3, price: 550,
+          mainImg: 'assets/items%20for%20sale/added_7.09.26/duo3/open-watermarked.jpg',
+          photos: [
+            'assets/items%20for%20sale/added_7.09.26/duo3/open-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo3/left-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo3/right-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo3/close-watermarked.jpg'
+          ]
+        },
+        {
+          num: 4, price: 550,
+          mainImg: 'assets/items%20for%20sale/added_7.09.26/duo4/open-watermarked.jpg',
+          photos: [
+            'assets/items%20for%20sale/added_7.09.26/duo4/open-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo4/left-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo4/right-watermarked.jpg',
+            'assets/items%20for%20sale/added_7.09.26/duo4/close-watermarked.jpg'
           ]
         }
       ];
@@ -843,6 +886,22 @@
             '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">'+(l==='en'?'View Details →':'Voir les détails →')+'</button></div></div>';
         });
         html+='</div></div>';
+
+        html+='<div class="catalog-section">';
+        html+='<div class="cat-header reveal"><span>🧺</span><h3>'+(l==='en'?'Washer Dryer Combos':'Laveuses-Sécheuses Combos')+'</h3><div class="line"></div></div>';
+        html+='<div class="catalog-grid">';
+        duos.forEach(function(duo){
+          var duoLabel = (l==='en'?'DUO':'DUO')+' NUMERO '+duo.num;
+          html+='<div class="product-card set-card reveal" onclick="openDuoModal('+(duo.num-1)+')">'+
+            '<div class="img-wrap"><img src="'+duo.mainImg+'" alt="'+duoLabel+'" loading="lazy" />'+
+            '<div class="set-badge">'+duoLabel+'</div></div>'+
+            '<div class="info"><h4>'+duoLabel+'</h4>'+
+            '<div class="price set-price">$'+duo.price+' <small>CAD</small></div>'+
+            '<div class="set-includes">'+(l==='en'?'No description':'Aucune description')+'</div>'+
+            '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">'+(l==='en'?'View Details →':'Voir les détails →')+'</button></div></div>';
+        });
+        html+='</div></div>';
+
         grid.innerHTML=html;
         setTimeout(function(){grid.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)})},100);
       }
@@ -856,7 +915,21 @@
       function openSetModal(setIdx){
         currentSetIdx = setIdx;
         currentPhotoIdx = 0;
+        currentType = 'set';
         renderSetModal();
+        var overlay = document.getElementById('setModal');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      var currentType = 'set';
+      var currentDuoIdx = 0;
+
+      function openDuoModal(duoIdx){
+        currentDuoIdx = duoIdx;
+        currentPhotoIdx = 0;
+        currentType = 'duo';
+        renderDuoModal();
         var overlay = document.getElementById('setModal');
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -875,6 +948,7 @@
         document.getElementById('setModalCat').textContent = setLabel;
         document.getElementById('setModalTitle').textContent = setLabel;
         document.getElementById('setModalPrice').textContent = '$'+set.setPrice+' CAD';
+        document.getElementById('setModalLabel').textContent = l==='en'?'Complete Set Price':'Prix Ensemble Complet';
 
         document.getElementById('carouselImg').src = set.photos[currentPhotoIdx];
         document.getElementById('carouselImg').alt = setLabel;
@@ -900,17 +974,42 @@
       }
 
       function carouselPrev(){
-        var set = sets[currentSetIdx];
-        currentPhotoIdx = (currentPhotoIdx - 1 + set.photos.length) % set.photos.length;
-        document.getElementById('carouselImg').src = set.photos[currentPhotoIdx];
-        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+set.photos.length;
+        var item = currentType==='set' ? sets[currentSetIdx] : duos[currentDuoIdx];
+        currentPhotoIdx = (currentPhotoIdx - 1 + item.photos.length) % item.photos.length;
+        document.getElementById('carouselImg').src = item.photos[currentPhotoIdx];
+        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+item.photos.length;
       }
 
       function carouselNext(){
-        var set = sets[currentSetIdx];
-        currentPhotoIdx = (currentPhotoIdx + 1) % set.photos.length;
-        document.getElementById('carouselImg').src = set.photos[currentPhotoIdx];
-        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+set.photos.length;
+        var item = currentType==='set' ? sets[currentSetIdx] : duos[currentDuoIdx];
+        currentPhotoIdx = (currentPhotoIdx + 1) % item.photos.length;
+        document.getElementById('carouselImg').src = item.photos[currentPhotoIdx];
+        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+item.photos.length;
+      }
+
+      function renderDuoModal(){
+        var duo = duos[currentDuoIdx];
+        var l = document.documentElement.lang;
+        var duoLabel = 'DUO NUMERO '+duo.num;
+
+        document.getElementById('setModalCat').textContent = duoLabel;
+        document.getElementById('setModalTitle').textContent = duoLabel;
+        document.getElementById('setModalPrice').textContent = '$'+duo.price+' CAD';
+
+        document.getElementById('carouselImg').src = duo.photos[currentPhotoIdx];
+        document.getElementById('carouselImg').alt = duoLabel;
+        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+duo.photos.length;
+
+        document.getElementById('setModalAppliances').innerHTML = '<div class="modal-appliance"><div class="modal-appliance-desc">'+(l==='en'?'No description':'Aucune description')+'</div></div>';
+
+        document.getElementById('setModalLabel').textContent = l==='en'?'Price':'Prix';
+
+        var waText = l==='en'
+          ? "Hello, I'm interested in DUO NUMERO "+duo.num+" ($"+duo.price+" CAD). I'd like more details."
+          : "Bonjour, je suis intéressé(e) par le DUO NUMERO "+duo.num+" ($"+duo.price+" CAD). J'aimerais plus de détails.";
+        document.getElementById('setModalWA').href = 'https://wa.me/15144312367?text=' + encodeURIComponent(waText);
+        document.getElementById('setModalEmail').href = 'mailto:optimum61@hotmail.com?subject=' + encodeURIComponent('Question about DUO NUMERO '+duo.num);
+        document.getElementById('setModalCall').href = 'tel:+15147991291';
       }
 
       document.addEventListener('keydown', e => {
