@@ -643,7 +643,7 @@
 
       const duos = [
         {
-          num: 1, price: 829,
+          num: 1, name: 'Samsung Combo', price: 829,
           mainImg: 'assets/items%20for%20sale/added_7.09.26/duo1/open-watermarked.jpg',
           photos: [
             'assets/items%20for%20sale/added_7.09.26/duo1/open-watermarked.jpg',
@@ -653,7 +653,7 @@
           ]
         },
         {
-          num: 2, price: 789,
+          num: 2, name: 'ElectroLux Combo', price: 789,
           mainImg: 'assets/items%20for%20sale/added_7.09.26/duo2/open-watermarked.jpg',
           photos: [
             'assets/items%20for%20sale/added_7.09.26/duo2/open-watermarked.jpg',
@@ -663,7 +663,7 @@
           ]
         },
         {
-          num: 3, price: 849,
+          num: 3, name: 'Samsung Combo', price: 849,
           mainImg: 'assets/items%20for%20sale/added_7.09.26/duo3/open-watermarked.jpg',
           photos: [
             'assets/items%20for%20sale/added_7.09.26/duo3/open-watermarked.jpg',
@@ -673,7 +673,7 @@
           ]
         },
         {
-          num: 4, price: 789,
+          num: 4, name: 'Samsung Combo', price: 789,
           mainImg: 'assets/items%20for%20sale/added_7.09.26/duo4/open-watermarked.jpg',
           photos: [
             'assets/items%20for%20sale/added_7.09.26/duo4/open-watermarked.jpg',
@@ -894,9 +894,9 @@
         duos.forEach(function(duo){
           var duoLabel = (l==='en'?'DUO':'DUO')+' NUMERO '+duo.num;
           html+='<div class="product-card set-card reveal" onclick="openDuoModal('+(duo.num-1)+')">'+
-            '<div class="img-wrap"><img src="'+duo.mainImg+'" alt="'+duoLabel+'" loading="lazy" />'+
-            '<div class="set-badge">'+duoLabel+'</div></div>'+
-            '<div class="info"><h4>'+duoLabel+'</h4>'+
+            '<div class="img-wrap"><img src="'+duo.mainImg+'" alt="'+duo.name+'" loading="lazy" />'+
+            '<div class="set-badge">'+duo.name+'</div></div>'+
+            '<div class="info"><h4>'+duo.name+'</h4>'+
             '<div class="price set-price">$'+duo.price+' <small>CAD</small></div>'+
             '<div class="set-includes">'+(l==='en'?'No description':'Aucune description')+'</div>'+
             '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">'+(l==='en'?'View Details →':'Voir les détails →')+'</button></div></div>';
@@ -991,7 +991,7 @@
       function renderDuoModal(){
         var duo = duos[currentDuoIdx];
         var l = document.documentElement.lang;
-        var duoLabel = 'DUO NUMERO '+duo.num;
+        var duoLabel = duo.name;
 
         document.getElementById('setModalCat').textContent = duoLabel;
         document.getElementById('setModalTitle').textContent = duoLabel;
