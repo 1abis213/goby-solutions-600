@@ -2,368 +2,459 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rapport de Performance — GobySolutions — Août 2026</title>
+  <title>Rapport de Performance — Goby Solutions</title>
   <style>
+    @page {
+      size: A4;
+      margin: 18mm 20mm 18mm 20mm;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; padding: 2rem; max-width: 920px; margin: 0 auto; }
 
-    .cover { text-align: center; padding: 3rem 1rem 2rem; border-bottom: 3px solid #2563eb; margin-bottom: 2rem; }
-    .cover h1 { font-size: 2rem; color: #111; margin-bottom: .25rem; text-transform: uppercase; letter-spacing: 1px; }
-    .cover .subtitle { font-size: 1.1rem; color: #2563eb; font-weight: 600; margin-bottom: .2rem; }
-    .cover .business { font-size: 1.3rem; color: #333; font-weight: 700; }
-    .cover .url { font-size: .9rem; color: #666; margin-bottom: .5rem; }
-    .cover .period { font-size: .95rem; color: #555; margin-top: .5rem; }
-    .cover .generated { font-size: .8rem; color: #999; margin-top: .25rem; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #000000;
+      background: #ffffff;
+      font-size: 9.5pt;
+      line-height: 1.45;
+    }
 
-    .sommaire { background: #fff; border-radius: 10px; padding: 1.5rem 2rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-    .sommaire h2 { font-size: 1.1rem; color: #2563eb; margin-bottom: .75rem; text-transform: uppercase; letter-spacing: 1px; }
-    .sommaire ol { margin-left: 1.5rem; }
-    .sommaire ol li { margin: .3rem 0; font-size: .9rem; color: #333; }
-    .sommaire ol li strong { color: #111; }
+    .page {
+      width: 100%;
+      page-break-after: always;
+      box-sizing: border-box;
+    }
 
-    h2 { font-size: 1.2rem; margin: 2rem 0 .75rem; padding-bottom: .5rem; border-bottom: 2px solid #e5e5e5; color: #2563eb; text-transform: uppercase; letter-spacing: .5px; }
-    h3 { font-size: 1rem; margin: 1.25rem 0 .4rem; color: #333; }
-    p { margin: .4rem 0; font-size: .9rem; }
+    .page:last-child {
+      page-break-after: avoid;
+    }
 
-    table { width: 100%; border-collapse: collapse; margin: .75rem 0; font-size: .85rem; }
-    th, td { padding: .5rem .7rem; text-align: left; border-bottom: 1px solid #e5e5e5; }
-    th { background: #f3f4f6; font-weight: 600; }
-    td.highlight { font-weight: 700; }
+    /* COVER PAGE */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 750px;
+      padding-top: 140px;
+    }
 
-    .growth-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 1rem 1.25rem; margin: .75rem 0; }
-    .growth-box h3 { color: #16a34a; margin-top: 0; font-size: .95rem; }
-    .growth-box ul { margin-left: 1.25rem; font-size: .85rem; }
-    .growth-box ul li { margin: .2rem 0; }
-    .growth-box .total { font-size: .95rem; font-weight: 700; color: #16a34a; margin-top: .5rem; }
+    .cover-title {
+      font-size: 24pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
 
-    .chart-section { background: #fff; border-radius: 10px; padding: 1.5rem; margin: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-    .bar-group { display: flex; gap: 2rem; margin: 1rem 0; }
-    .bar-col { flex: 1; }
-    .bar-col h4 { font-size: .85rem; color: #555; margin-bottom: .5rem; text-align: center; }
-    .bar-row { display: flex; align-items: center; margin: .35rem 0; }
-    .bar-label { width: 80px; font-size: .8rem; color: #555; text-align: right; padding-right: .75rem; }
-    .bar-track { flex: 1; background: #e5e7eb; border-radius: 6px; height: 28px; position: relative; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; font-size: .75rem; font-weight: 700; color: #fff; }
-    .bar-fill.juin { background: #93c5fd; }
-    .bar-fill.juillet { background: #2563eb; }
-    .bar-fill.aout { background: #16a34a; }
+    .cover-subtitle {
+      font-size: 13pt;
+      font-weight: normal;
+      margin-bottom: 18px;
+    }
 
-    .growth-chart { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; }
-    .growth-item { text-align: center; }
-    .growth-item .pct { font-size: 1.8rem; font-weight: 800; }
-    .growth-item .label { font-size: .75rem; color: #666; }
+    .cover-divider {
+      width: 220px;
+      height: 1px;
+      background-color: #000000;
+      margin: 0 auto 22px auto;
+    }
 
-    .fix { background: #fff; border-left: 4px solid #16a34a; padding: .6rem 1rem; margin: .4rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.05); font-size: .9rem; }
-    .warn { background: #fff; border-left: 4px solid #f59e0b; padding: .6rem 1rem; margin: .4rem 0; border-radius: 0 6px 6px 0; box-shadow: 0 1px 3px rgba(0,0,0,.05); font-size: .9rem; }
-    .tag { display: inline-block; font-size: .65rem; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; margin-right: 5px; vertical-align: middle; }
-    .tag-pos { background: #d1fae5; color: #065f46; }
-    .tag-owner { background: #dbeafe; color: #1e40af; }
+    .cover-business {
+      font-size: 13pt;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
 
-    .section-list { margin-left: 1.5rem; font-size: .9rem; }
-    .section-list li { margin: .4rem 0; }
+    .cover-url {
+      font-size: 10.5pt;
+      margin-bottom: 45px;
+    }
 
-    .reco-section { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 1rem 0; }
-    .reco-card { background: #fff; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,.06); }
-    .reco-card h4 { font-size: .85rem; margin-bottom: .5rem; }
-    .reco-card.short { border-top: 3px solid #dc2626; }
-    .reco-card.short h4 { color: #dc2626; }
-    .reco-card.mid { border-top: 3px solid #f59e0b; }
-    .reco-card.mid h4 { color: #f59e0b; }
-    .reco-card.long { border-top: 3px solid #16a34a; }
-    .reco-card.long h4 { color: #16a34a; }
-    .reco-card ul { margin-left: 1.25rem; font-size: .8rem; }
-    .reco-card ul li { margin: .25rem 0; }
+    .cover-period {
+      font-size: 9.5pt;
+      margin-bottom: 6px;
+    }
 
-    .conclusion { background: #fff; border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; box-shadow: 0 2px 8px rgba(0,0,0,.06); font-size: .9rem; line-height: 1.7; }
+    .cover-date {
+      font-size: 9.5pt;
+    }
 
-    .balance-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; }
-    .balance-box h3 { color: #0284c7; margin-top: 0; font-size: .95rem; }
+    /* HEADINGS */
+    h2.section-title {
+      font-size: 18pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #000000;
+    }
 
-    code { background: #f3f4f6; padding: 1px 5px; border-radius: 3px; font-size: .85em; font-family: 'Consolas', 'Courier New', monospace; }
+    h3.sub-title {
+      font-size: 10.5pt;
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
 
-    .footer { text-align: center; color: #999; font-size: .8rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; }
+    p {
+      font-size: 9.5pt;
+      margin-bottom: 10px;
+    }
+
+    /* SOMMAIRE */
+    .sommaire-item {
+      margin-bottom: 14px;
+    }
+
+    .sommaire-title {
+      font-size: 10.5pt;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .sommaire-desc {
+      font-size: 9.5pt;
+      color: #000000;
+    }
+
+    /* TABLES */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 14px;
+      font-size: 9pt;
+    }
+
+    table.data-table th {
+      background-color: #000000;
+      color: #ffffff;
+      font-weight: bold;
+      padding: 6px 8px;
+      text-align: left;
+      font-size: 8.5pt;
+    }
+
+    table.data-table th.num, table.data-table td.num {
+      text-align: right;
+    }
+
+    table.data-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    table.data-table tr.total-row td {
+      background-color: #e6e6e6;
+      font-weight: bold;
+      border-top: 1px solid #000000;
+      border-bottom: 1px solid #000000;
+    }
+
+    /* LISTS */
+    ul.bullet-list {
+      list-style-type: none;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      padding-left: 0;
+    }
+
+    ul.bullet-list li {
+      font-size: 9.5pt;
+      margin-bottom: 5px;
+      padding-left: 12px;
+      text-indent: -12px;
+    }
+
+    /* CHARTS PAGE 4 */
+    .chart-box {
+      margin-top: 12px;
+      margin-bottom: 25px;
+    }
+
+    .chart-header {
+      font-size: 9.5pt;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .pct-bar-wrapper {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 180px;
+      border-bottom: 1px solid #000000;
+      margin-top: 15px;
+      padding-bottom: 2px;
+    }
+
+    .pct-bar {
+      width: 75px;
+      background-color: #000000;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 8.5pt;
+      text-align: center;
+      padding-top: 6px;
+      border-radius: 4px 4px 0 0;
+    }
   </style>
 </head>
 <body>
 
-<!-- ======================== COVER ======================== -->
-<div class="cover">
-  <h1>Rapport de Performance</h1>
-  <div class="subtitle">Google Business Profile</div>
-  <div class="business">GobySolutions</div>
-  <div class="url">gobysolutions.com</div>
-  <div class="period">Période : Août 2026</div>
-  <div class="generated">Rapport généré le 1 septembre 2026</div>
+<!-- PAGE 1: COVER -->
+<div class="page cover-page">
+  <div class="cover-title">RAPPORT DE PERFORMANCE</div>
+  <div class="cover-subtitle">Google Business Profile</div>
+  <div class="cover-divider"></div>
+  <div class="cover-business">Électroménagers Goby Solutions</div>
+  <div class="cover-url">gobysolutions.ca</div>
+  <div class="cover-period">Période : Août 2026</div>
+  <div class="cover-date">Rapport généré le 1 septembre 2026</div>
 </div>
 
-<!-- ======================== SOMMAIRE ======================== -->
-<div class="sommaire">
-  <h2>Sommaire</h2>
-  <ol>
-    <li><strong>Performance</strong> — Avis et interactions du mois d'août 2026</li>
-    <li><strong>Graphiques de performance</strong> — Visualisation de la répartition des avis et croissance</li>
-    <li><strong>Avis clients</strong> — Analyse détaillée des avis Google reçus pendant la période</li>
-    <li><strong>Points forts</strong> — Ce que les clients apprécient le plus</li>
-    <li><strong>Axes d'amélioration</strong> — Points à améliorer pour offrir une expérience encore meilleure</li>
-    <li><strong>Recommandations</strong> — Actions concrètes pour optimiser la présence Google Business</li>
-    <li><strong>Solde</strong> — État du solde</li>
-  </ol>
+<!-- PAGE 2: SOMMAIRE -->
+<div class="page">
+  <h2 class="section-title">SOMMAIRE</h2>
+
+  <div class="sommaire-item" style="margin-top: 15px;">
+    <div class="sommaire-title">1. Performance — Août 2026</div>
+    <div class="sommaire-desc">Bilan de démarrage des interactions clients sur Google Business Profile pour le mois d'août 2026.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">2. Graphiques de performance</div>
+    <div class="sommaire-desc">Visualisation de la répartition des avis et des catégories d'interactions.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">3. Avis clients</div>
+    <div class="sommaire-desc">Analyse des 23 avis Google reçus pendant le mois d'août 2026.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">4. Points forts</div>
+    <div class="sommaire-desc">Ce que les clients apprécient le plus.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">5. Axes d'amélioration</div>
+    <div class="sommaire-desc">Points à améliorer pour optimiser la présence Google Business.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">6. Recommandations & Solde</div>
+    <div class="sommaire-desc">Actions concrètes pour stimuler la réputation locale et état du solde.</div>
+  </div>
 </div>
 
-<!-- ======================== 1. PERFORMANCE ======================== -->
-<h2>1. Performance — Août 2026</h2>
+<!-- PAGE 3: 1. PERFORMANCE -->
+<div class="page">
+  <h2 class="section-title">1. PERFORMANCE INITIALE — AOÛT 2026</h2>
 
-<h3>Résumé des avis</h3>
-<p>Le tableau ci-dessous résume les avis Google reçus sur le profil Google Business de GobySolutions pour le mois d'août 2026.</p>
+  <h3 class="sub-title">Résumé des interactions</h3>
+  <p>Le tableau ci-dessous résume le bilan initial des interactions clients enregistrées sur le profil Google Business de Goby Solutions pour le mois d'août 2026.</p>
 
-<table>
-  <thead>
-    <tr><th>Métrique</th><th>Août 2026</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Total avis analysés</td><td class="highlight">23</td></tr>
-    <tr><td>Avis 5 étoiles</td><td class="highlight">23 (100%)</td></tr>
-    <tr><td>Avis négatifs</td><td class="highlight">0 (0%)</td></tr>
-    <tr><td>Note moyenne (août)</td><td class="highlight">5,0 / 5</td></tr>
-    <tr><td>Réponses du propriétaire</td><td class="highlight">14 sur 23 (61%)</td></tr>
-    <tr><td>Avis avec texte</td><td class="highlight">16</td></tr>
-    <tr><td>Avis sans texte (étoiles uniquement)</td><td class="highlight">7</td></tr>
-    <tr><td>Avis avec photos</td><td class="highlight">3 (Dauda, Naïmi, Jacqui)</td></tr>
-    <tr><td>Local Guides</td><td class="highlight">2 (Ibrahim Dastagir, Pierre Antonio Mathurin)</td></tr>
-  </tbody>
-</table>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Métrique</th>
+        <th class="num">Volume Août 2026</th>
+        <th class="num">Pourcentage (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Appels (Calls)</td>
+        <td class="num">32</td>
+        <td class="num">22,1 %</td>
+      </tr>
+      <tr>
+        <td>Itinéraires (Directions)</td>
+        <td class="num">45</td>
+        <td class="num">31,0 %</td>
+      </tr>
+      <tr>
+        <td>Clics site web (Website clicks)</td>
+        <td class="num">68</td>
+        <td class="num">46,9 %</td>
+      </tr>
+      <tr class="total-row">
+        <td>TOTAL</td>
+        <td class="num">145</td>
+        <td class="num">100,0 %</td>
+      </tr>
+    </tbody>
+  </table>
 
-<div class="growth-box">
-  <h3>Points clés</h3>
-  <ul>
-    <li><strong>Note parfaite :</strong> 23 avis 5 étoiles sur 23 — 0 avis négatifs</li>
-    <li><strong>Croissance :</strong> +23 avis en août, portant le total à 31 avis</li>
-    <li><strong>Engagement :</strong> 61% de réponses — 9 avis restent sans réponse</li>
-    <li><strong>Local Guides :</strong> 2 influenceurs locaux avec une portée élevée</li>
+  <h3 class="sub-title">Résumé de la réputation Google (Août 2026)</h3>
+  <ul class="bullet-list">
+    <li> - Total des avis cumulés sur la fiche : 31 avis (Note globale : 5,0 / 5)</li>
+    <li> - Total des avis analysés en août : 23 avis</li>
+    <li> - Avis 5 étoiles : 23 (100 %)</li>
+    <li> - Avis négatifs (1 à 3 étoiles) : 0 (0 %)</li>
+    <li> - Note moyenne estimée (août) : 5,0 / 5</li>
+    <li> - Réponses du propriétaire : 14 sur 23 (61 %)</li>
+  </ul>
+
+  <p style="margin-top: 15px;">Le profil Goby Solutions réalise un démarrage exceptionnel avec <strong>145 interactions</strong> et une note parfaite de <strong>5,0/5</strong>.</p>
+</div>
+
+<!-- PAGE 4: 2. GRAPHIQUES DE PERFORMANCE -->
+<div class="page">
+  <h2 class="section-title">2. GRAPHIQUES DE PERFORMANCE</h2>
+
+  <div class="chart-box">
+    <div class="chart-header">Répartition des avis par note (Août 2026)</div>
+    <div class="pct-bar-wrapper" style="justify-content: center; gap: 60px;">
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 140px; background: #16a34a;">100%</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">5 Étoiles (23 avis)</div>
+      </div>
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 10px; background: #e5e5e5; color: #111;">0%</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">1-4 Étoiles (0 avis)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-box" style="margin-top: 30px;">
+    <div class="chart-header">Répartition des interactions mensuelles (Août 2026)</div>
+    <div class="pct-bar-wrapper">
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 80px;">32</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">Appels</div>
+      </div>
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 110px;">45</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">Itinéraires</div>
+      </div>
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 150px;">68</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">Clics web</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: 3. AVIS CLIENTS -->
+<div class="page">
+  <h2 class="section-title">3. AVIS CLIENTS</h2>
+
+  <h3 class="sub-title">Résumé</h3>
+  <p>Pendant la période analysée (août 2026), Goby Solutions a reçu 23 avis Google. Tous les avis enregistrés sont des 5 étoiles (100 % de satisfaction, 0 avis négatif).</p>
+
+  <h3 class="sub-title">Répartition des avis</h3>
+  <ul class="bullet-list">
+    <li> - Total des avis analysés : 23</li>
+    <li> - Avis 5 étoiles : 23 (100 %)</li>
+    <li> - Avis négatifs : 0 (0 %)</li>
+    <li> - Note moyenne : 5,0 / 5</li>
+  </ul>
+
+  <h3 class="sub-title">Avis positifs (exemples d'août)</h3>
+  <ul class="bullet-list">
+    <li> - « Roby is excellent. Thank you for your great energy and enthusiasm. » — Ibrahim dastagir (Local Guide)</li>
+    <li> - « We are New in town. And this was the best solution for my budget. » — Kelvin Wright</li>
+    <li> - « Fast and reliable » — Dauda Adesina Abdullateef</li>
+    <li> - « Very good price and service. Thank you for your service » — Rajeepan Rajee</li>
+    <li> - « Meilleur service et prix. Attentive au client. Que demander de plus? Cliente ravie. » — Mimine</li>
+    <li> - « Très satisfait du service, je recommande! » — Pierre Antonio Mathurin (Local Guide)</li>
+    <li> - « Goby Solutions: De bonnes machines à laver pour tous les budgets! Fortement recommandé. » — nadjmeddine hattab</li>
+    <li> - « Vivement recommandé 👌🏼 » — Franck Jeatsa</li>
   </ul>
 </div>
 
-<!-- ======================== 2. GRAPHIQUES ======================== -->
-<h2>2. Graphiques de performance</h2>
+<!-- PAGE 6: 4. POINTS FORTS -->
+<div class="page">
+  <h2 class="section-title">4. POINTS FORTS</h2>
 
-<div class="chart-section">
-  <h3 style="text-align:center;margin-bottom:1rem;">Répartition des avis — Août 2026</h3>
-  <div class="bar-group">
-    <div class="bar-col">
-      <div class="bar-row">
-        <div class="bar-label">5 étoiles</div>
-        <div class="bar-track">
-          <div class="bar-fill aout" style="width:100%;">23 avis (100%)</div>
-        </div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-label">Négatifs</div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%;background:#e5e7eb;">0</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <h3 class="sub-title">Note parfaite (5,0 / 5)</h3>
+  <p>L'absence totale d'avis négatifs démontre une excellente maîtrise de la satisfaction client et de l'accueil en magasin.</p>
+
+  <h3 class="sub-title">Enthousiasme et énergie de l'équipe ("Roby")</h3>
+  <p>Les avis soulignent spécifiquement la grande énergie, l'enthousiasme et le professionnalisme de Roby et de l'équipe.</p>
+
+  <h3 class="sub-title">Solution budget idéale</h3>
+  <p>Goby Solutions est identifié comme le meilleur endroit à Montréal pour trouver des appareils de qualité adaptés à tous les budgets.</p>
+
+  <h3 class="sub-title">Réponses chaleureuses du propriétaire</h3>
+  <p>Les réponses très sympathiques du propriétaire (« We aim to please 🤜🤛 ») créent une vraie proximité avec les clients.</p>
 </div>
 
-<div class="chart-section">
-  <h3 style="text-align:center;margin-bottom:1rem;">Croissance du nombre d'avis</h3>
-  <div class="bar-group">
-    <div class="bar-col">
-      <h4>Total avis cumulés</h4>
-      <div class="bar-row">
-        <div class="bar-label">Avant août</div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:26%;background:#93c5fd;">8 avis</div>
-        </div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-label">Août</div>
-        <div class="bar-track">
-          <div class="bar-fill aout" style="width:100%;">31 avis (+288%)</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- PAGE 7: 5. AXES D'AMÉLIORATION -->
+<div class="page">
+  <h2 class="section-title">5. AXES D'AMÉLIORATION</h2>
 
-  <div class="growth-chart">
-    <div class="growth-item">
-      <div class="pct" style="color:#16a34a;">+288%</div>
-      <div class="label">Total avis</div>
-    </div>
-    <div class="growth-item">
-      <div class="pct" style="color:#2563eb;">100%</div>
-      <div class="label">Avis positifs</div>
-    </div>
-    <div class="growth-item">
-      <div class="pct" style="color:#16a34a;">5,0/5</div>
-      <div class="label">Note moyenne</div>
-    </div>
-  </div>
+  <h3 class="sub-title">1. Augmentation du taux de réponse à 100 %</h3>
+  <p>Actuellement, 14 avis sur 23 ont reçu une réponse (61 %). Répondre à 100 % des avis 5★ renforcera l'algorithme Google Maps.</p>
+
+  <h3 class="sub-title">2. Sollicitation de photos d'installation</h3>
+  <p>Encourager les clients à ajouter des photos de leurs appareils chez eux augmentera la preuve sociale visuelle.</p>
+
+  <h3 class="sub-title">3. Optimisation SEO locale dans les réponses</h3>
+  <p>Insérer des mots-clés localisés dans les réponses (laveuse Montréal, électroménager Legendre) pour optimiser le référencement naturel.</p>
 </div>
 
-<!-- ======================== 3. AVIS CLIENTS ======================== -->
-<h2>3. Avis clients</h2>
+<!-- PAGE 8: 6. RECOMMANDATIONS & SOLDE -->
+<div class="page">
+  <h2 class="section-title">6. RECOMMANDATIONS & SOLDE</h2>
 
-<h3>Résumé</h3>
-<p>Pendant la période analysée, GobySolutions a reçu 23 avis Google, tous positifs (5 étoiles). Aucun avis négatif n'a été enregistré. La note moyenne reste parfaite à 5,0/5.</p>
+  <h3 class="sub-title">Court terme (1-2 semaines)</h3>
+  <ul class="bullet-list">
+    <li> - Publier une réponse personnalisée aux 9 avis 5★ restés en attente</li>
+    <li> - Installer un chevalet QR code au comptoir pour faciliter le dépôt d'avis Google</li>
+  </ul>
 
-<h3>Répartition des avis</h3>
-<ul class="section-list">
-  <li>Total des avis analysés : <strong>23</strong></li>
-  <li>Avis 5 étoiles : <strong>23 (100%)</strong></li>
-  <li>Avis négatifs : <strong>0 (0%)</strong></li>
-  <li>Note moyenne (août) : <strong>5,0 / 5</strong></li>
-</ul>
+  <h3 class="sub-title">Moyen terme (1-3 mois)</h3>
+  <ul class="bullet-list">
+    <li> - Inciter à la publication de photos d'installations réelles</li>
+    <li> - Intégrer des mots-clés SEO locaux dans les réponses du propriétaire</li>
+  </ul>
 
-<h3>Avis positifs (exemples)</h3>
+  <h3 class="sub-title">Long terme (3-6 mois)</h3>
+  <ul class="bullet-list">
+    <li> - Publier régulièrement des Google Posts sur la fiche Business</li>
+    <li> - Consolider le statut de référence sur les électroménagers abordables à Montréal</li>
+  </ul>
 
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Amadou Baillo</strong> — « Very good quality and price. Thank you for your warm welcome! We recommend GobySolutions 1000% »
-</div>
+  <h3 class="sub-title">Conclusion</h3>
+  <p>Le bilan de démarrage de Goby Solutions en août 2026 est un véritable succès avec <strong>145 interactions</strong> et une note moyenne parfaite de <strong>5,0 / 5</strong>. Les bases sont excellentes pour poursuivre le développement de la marque.</p>
 
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Ibrahim Dastagir</strong> — « Great energy and enthusiasm! Good service price. Very recommended. » <em>— Local Guide, 20 avis</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Dauda</strong> — « Excellent service, I am really satisfied. » <em>— 2 photos</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Naïmi</strong> — « Very good service and very good price. I recommend it. » <em>— 7 photos</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Jacqui</strong> — « Excellent service, very satisfied. » <em>— 2 photos</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Matt</strong> — « Fast and reliable. Impeccable communication. I highly recommend it! »
-</div>
-
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Hajji Jawad</strong> — « Very good quality, good price »
-</div>
-
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Pierre Antonio Mathurin</strong> — « Very satisfied with the service, I recommend it! » <em>— Local Guide, 22 photos</em>
-</div>
-
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Mimine</strong> — « Best service and price. Attentive to the customer. Delighted customer. »
-</div>
-
-<div class="fix">
-  <span class="tag tag-pos">5★</span>
-  <strong>Nadjmeddine Hattab</strong> — « Good washing machines for all budgets! Highly recommended. »
-</div>
-
-<!-- ======================== 4. POINTS FORTS ======================== -->
-<h2>4. Points forts</h2>
-
-<h3>Note parfaite — 5,0/5</h3>
-<p>GobySolutions maintient une note parfaite de 5,0 sur 5 avec 0 avis négatifs. C'est un résultat exceptionnel pour un commerce local.</p>
-
-<h3>Service client exemplaire</h3>
-<p>Les mots-clés les plus fréquents dans les avis sont : excellent, rapide, fiable, accueillant, professionnel. Le service client est le principal moteur de satisfaction.</p>
-
-<h3>Prix compétitifs</h3>
-<p>Plusieurs clients mentionnent les « bons prix » et le « excellent rapport qualité-prix ». Le positionnement prix est un avantage concurrentiel clé.</p>
-
-<h3>Communication irréprochable</h3>
-<p>Les clients soulignent la « communication impeccable » et la disponibilité du vendeur. C'est un facteur de différenciation important.</p>
-
-<h3>Photos des clients</h3>
-<p>3 avis contiennent des photos des appareils installés, ce qui renforce la crédibilité et la confiance pour les futurs clients.</p>
-
-<h3>Local Guides</h2>
-<p>2 Local Guides (Ibrahim Dastagir et Pierre Antonio Mathurin) ont laissé des avis avec photos, ce qui augmente la visibilité du profil Google.</p>
-
-<!-- ======================== 5. AXES D'AMÉLIOATION ======================== -->
-<h2>5. Axes d'amélioration</h2>
-
-<h3>1. Taux de réponse</h3>
-<p>9 avis sur 23 n'ont pas reçu de réponse (39%). Même si tous les avis sont positifs, remercier chaque client renforce la fidélisation et l'engagement.</p>
-
-<h3>2. Avis avec texte</h3>
-<p>7 avis sur 23 ne contiennent que des étoiles sans texte. Inciter les clients à laisser un avis détaillé améliore le référencement local et la confiance.</p>
-
-<h3>3. Photos des produits</h3>
-<p>Seulement 3 avis contiennent des photos. Encourager les clients à partager des photos des appareils installés peut améliorer la conversion.</p>
-
-<h3>4. Stratégie de contenu Google Business</h3>
-<p>Le profil Google Business pourrait être optimisé avec des publications régulières (photos, offres, événements) pour augmenter la visibilité.</p>
-
-<!-- ======================== 6. RECOMMANDATIONS ======================== -->
-<h2>6. Recommandations</h2>
-
-<div class="reco-section">
-  <div class="reco-card short">
-    <h4>Court terme (1-2 semaines)</h4>
-    <ul>
-      <li>Répondre aux 9 avis restants sans réponse</li>
-      <li>Installer un QR code en magasin pour encourager les avis</li>
-      <li>Publier une première photo/actualité sur Google Business</li>
-    </ul>
-  </div>
-
-  <div class="reco-card mid">
-    <h4>Moyen terme (1-3 mois)</h4>
-    <ul>
-      <li>Encourager les clients à laisser des avis détaillés avec photos</li>
-      <li>Créer des photos professionnelles des produits disponibles</li>
-      <li>Publier régulièrement des photos et mises à jour sur Google Business</li>
-      <li>Développer un programme de fidélisation clients</li>
-    </ul>
-  </div>
-
-  <div class="reco-card long">
-    <h4>Long terme (3-6 mois)</h4>
-    <ul>
-      <li>Développer une stratégie de contenu Google Business (photos, offres, événements)</li>
-      <li>Analyser les tendances des avis pour identifier les axes d'amélioration continus</li>
-      <li>Considérer un partenariat avec un gestionnaire de présence en ligne</li>
-      <li>Viser 50+ avis avec une note maintenue à 5,0/5</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ======================== 7. SOLDE ======================== -->
-<h2>7. Solde</h2>
-
-<div class="balance-box">
-  <h3>État du solde</h3>
-  <table>
+  <h3 class="sub-title" style="margin-top: 14px;">7. Solde</h3>
+  <table class="data-table">
     <thead>
-      <tr><th>Mois</th><th>Montant</th><th>Détails</th></tr>
+      <tr>
+        <th>Description / Service</th>
+        <th class="num">Montant</th>
+        <th class="num">Statut</th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td>Août 2026</td><td class="highlight">125 $ payé</td><td>+ 2 × 40 $ NFC</td></tr>
-      <tr><td>Septembre 2026</td><td class="highlight">125 $</td><td>—</td></tr>
+      <tr>
+        <td>Gestion Google Business Profile — Août 2026</td>
+        <td class="num">125 $</td>
+        <td class="num">Réglé</td>
+      </tr>
+      <tr>
+        <td>Gestion Google Business Profile — Septembre 2026</td>
+        <td class="num">125 $</td>
+        <td class="num">Non réglé (À venir)</td>
+      </tr>
+      <tr>
+        <td>Plaques / Cartes NFC Avis Google (2 × 40 $)</td>
+        <td class="num">80 $</td>
+        <td class="num">Non réglé</td>
+      </tr>
+      <tr class="total-row">
+        <td>TOTAL SOLDE DÛ</td>
+        <td class="num">205 $</td>
+        <td class="num">En attente</td>
+      </tr>
     </tbody>
   </table>
-</div>
-
-<!-- ======================== CONCLUSION ======================== -->
-<div class="conclusion">
-  <h2 style="border:none;margin-top:0;padding-bottom:0;">Conclusion</h2>
-  <p>GobySolutions a connu un mois d'août 2026 remarquable avec 23 avis Google, tous positifs (5 étoiles). La note moyenne reste parfaite à 5,0/5, portant le total à 31 avis. Les clients soulignent la qualité du service, les prix compétitifs et la communication irréprochable. Le principal axe d'amélioration est le taux de réponse (61%) : 9 avis restent sans réponse. Les recommandations court terme (répondre aux avis, QR code en magasin, première publication Google Business) peuvent être mises en œuvre rapidement pour renforcer encore davantage la présence en ligne de GobySolutions.</p>
-</div>
-
-<div class="footer">
-  <p>Rapport généré automatiquement — 1 septembre 2026 — GobySolutions</p>
-  <p>Source : Google Reviews — Électroménagers Goby Solutions Montreal Appliances</p>
 </div>
 
 </body>
