@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Rapport de Performance — Electro Legendre</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 20mm 18mm 20mm;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #000000;
+      background: #ffffff;
+      font-size: 9.5pt;
+      line-height: 1.45;
+    }
+
+    .page {
+      width: 100%;
+      page-break-after: always;
+      box-sizing: border-box;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    /* COVER PAGE */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 750px;
+      padding-top: 140px;
+    }
+
+    .cover-title {
+      font-size: 24pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .cover-subtitle {
+      font-size: 13pt;
+      font-weight: normal;
+      margin-bottom: 18px;
+    }
+
+    .cover-divider {
+      width: 220px;
+      height: 1px;
+      background-color: #000000;
+      margin: 0 auto 22px auto;
+    }
+
+    .cover-business {
+      font-size: 13pt;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .cover-url {
+      font-size: 10.5pt;
+      margin-bottom: 45px;
+    }
+
+    .cover-period {
+      font-size: 9.5pt;
+      margin-bottom: 6px;
+    }
+
+    .cover-date {
+      font-size: 9.5pt;
+    }
+
+    /* HEADINGS */
+    h2.section-title {
+      font-size: 18pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #000000;
+    }
+
+    h3.sub-title {
+      font-size: 10.5pt;
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 9.5pt;
+      margin-bottom: 10px;
+    }
+
+    /* SOMMAIRE */
+    .sommaire-item {
+      margin-bottom: 14px;
+    }
+
+    .sommaire-title {
+      font-size: 10.5pt;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    .sommaire-desc {
+      font-size: 9.5pt;
+      color: #000000;
+    }
+
+    /* TABLES */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 14px;
+      font-size: 9pt;
+    }
+
+    table.data-table th {
+      background-color: #000000;
+      color: #ffffff;
+      font-weight: bold;
+      padding: 6px 8px;
+      text-align: left;
+      font-size: 8.5pt;
+    }
+
+    table.data-table th.num, table.data-table td.num {
+      text-align: right;
+    }
+
+    table.data-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    table.data-table tr.total-row td {
+      background-color: #e6e6e6;
+      font-weight: bold;
+      border-top: 1px solid #000000;
+      border-bottom: 1px solid #000000;
+    }
+
+    /* LISTS */
+    ul.bullet-list {
+      list-style-type: none;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      padding-left: 0;
+    }
+
+    ul.bullet-list li {
+      font-size: 9.5pt;
+      margin-bottom: 5px;
+      padding-left: 12px;
+      text-indent: -12px;
+    }
+
+    /* CHARTS */
+    .chart-box {
+      margin-top: 12px;
+      margin-bottom: 25px;
+    }
+
+    .chart-header {
+      font-size: 9.5pt;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .bar-legend {
+      display: flex;
+      gap: 20px;
+      margin-top: 12px;
+      font-size: 8.5pt;
+    }
+
+    .pct-bar-wrapper {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 180px;
+      border-bottom: 1px solid #000000;
+      margin-top: 15px;
+      padding-bottom: 2px;
+    }
+
+    .pct-bar {
+      width: 75px;
+      background-color: #000000;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 8.5pt;
+      text-align: center;
+      padding-top: 6px;
+      border-radius: 4px 4px 0 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page cover-page">
+  <div class="cover-title">RAPPORT DE PERFORMANCE</div>
+  <div class="cover-subtitle">Google Business Profile</div>
+  <div class="cover-divider"></div>
+  <div class="cover-business">Electro Legendre</div>
+  <div class="cover-url">electrolegendre.ca</div>
+  <div class="cover-period">Période : Septembre 2026</div>
+  <div class="cover-date">Rapport généré le 4 octobre 2026</div>
+</div>
+
+<!-- PAGE 2: SOMMAIRE -->
+<div class="page">
+  <h2 class="section-title">SOMMAIRE</h2>
+
+  <div class="sommaire-item" style="margin-top: 15px;">
+    <div class="sommaire-title">1. Performance — Septembre 2026</div>
+    <div class="sommaire-desc">Bilan de la réputation Google : évolution du volume d'avis, de la note globale et de la qualité des avis reçus pendant le mois de septembre 2026.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">2. Graphiques de performance</div>
+    <div class="sommaire-desc">Visualisation de l'évolution des avis cumulés, de la répartition des avis du mois et de la croissance mensuelle.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">3. Avis clients</div>
+    <div class="sommaire-desc">Analyse des 8 avis Google reçus pendant le mois de septembre 2026.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">4. Points forts</div>
+    <div class="sommaire-desc">Ce que les clients apprécient le plus.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">5. Axes d'amélioration</div>
+    <div class="sommaire-desc">Points à améliorer pour offrir une expérience encore meilleure.</div>
+  </div>
+
+  <div class="sommaire-item">
+    <div class="sommaire-title">6. Recommandations & Solde</div>
+    <div class="sommaire-desc">Actions concrètes pour optimiser la présence Google Business et état du solde.</div>
+  </div>
+</div>
+
+<!-- PAGE 3: 1. PERFORMANCE -->
+<div class="page">
+  <h2 class="section-title">1. PERFORMANCE — SEPTEMBRE 2026</h2>
+
+  <h3 class="sub-title">Bilan de la réputation Google</h3>
+  <p>Le tableau ci-dessous résume l'évolution de la réputation d'Electro Legendre sur son profil Google Business entre la fin août et la fin septembre 2026.</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Métrique</th>
+        <th class="num">Août 2026</th>
+        <th class="num">Septembre 2026</th>
+        <th class="num">Évolution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Avis cumulés sur la fiche</td>
+        <td class="num">56</td>
+        <td class="num">64</td>
+        <td class="num">+8 (+14,3 %)</td>
+      </tr>
+      <tr>
+        <td>Nouveaux avis reçus</td>
+        <td class="num">30</td>
+        <td class="num">8</td>
+        <td class="num">-22 (-73,3 %)</td>
+      </tr>
+      <tr>
+        <td>Note globale</td>
+        <td class="num">4,6 / 5</td>
+        <td class="num">4,7 / 5</td>
+        <td class="num">+0,1</td>
+      </tr>
+      <tr>
+        <td>Avis 5 étoiles du mois</td>
+        <td class="num">25 (83 %)</td>
+        <td class="num">8 (100 %)</td>
+        <td class="num">+17 pts</td>
+      </tr>
+      <tr>
+        <td>Avis 1 étoile du mois</td>
+        <td class="num">5 (17 %)</td>
+        <td class="num">0 (0 %)</td>
+        <td class="num">-5</td>
+      </tr>
+      <tr>
+        <td>Avis cumulés 5★ / 1★</td>
+        <td class="num">51 / 5</td>
+        <td class="num">59 / 5</td>
+        <td class="num">+8 / 0</td>
+      </tr>
+      <tr class="total-row">
+        <td>Note moyenne du mois</td>
+        <td class="num">~3,8 / 5</td>
+        <td class="num">5,0 / 5</td>
+        <td class="num">+1,2</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title">Croissance mensuelle (Septembre vs Août 2026)</h3>
+  <ul class="bullet-list">
+    <li> - Avis cumulés : +8 (+14,3 %) — nouveau record de 64 avis sur la fiche</li>
+    <li> - Note globale : 4,6 → 4,7 (+0,1)</li>
+    <li> - Septembre : 8 avis reçus, tous 5 étoiles (100 %), aucun avis négatif</li>
+    <li> - Part des avis 5★ cumulés : 91,1 % → 92,2 % (+1,1 point)</li>
+  </ul>
+
+  <p style="margin-top: 15px;">Septembre 2026 est le <strong>premier mois sans aucun avis négatif</strong> depuis le lancement de la fiche : les 8 avis reçus sont tous des 5 étoiles, et portent la note globale à <strong>4,7 / 5</strong>.</p>
+</div>
+
+<!-- PAGE 4: 2. GRAPHIQUES DE PERFORMANCE -->
+<div class="page">
+  <h2 class="section-title">2. GRAPHIQUES DE PERFORMANCE</h2>
+
+  <div class="chart-box">
+    <div class="chart-header">Avis cumulés sur la fiche — évolution mensuelle</div>
+    <div class="pct-bar-wrapper" style="justify-content: center; gap: 80px;">
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 120px;">56</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">Fin Août 2026</div>
+      </div>
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 140px; background: #16a34a;">64</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">Fin Septembre 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-box" style="margin-top: 30px;">
+    <div class="chart-header">Répartition des avis reçus en septembre (8 avis)</div>
+    <div class="pct-bar-wrapper" style="justify-content: center; gap: 60px;">
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 140px; background: #16a34a;">100%</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">5 Étoiles (8 avis)</div>
+      </div>
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 10px; background: #e5e5e5; color: #111;">0%</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">1-4 Étoiles (0 avis)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-box" style="margin-top: 30px;">
+    <div class="chart-header">Croissance (%) — Septembre vs Août 2026</div>
+    <div class="pct-bar-wrapper">
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 130px;">+14.3%</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">Avis cumulés</div>
+      </div>
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 50px;">+2.2%</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">Note globale</div>
+      </div>
+      <div style="text-align: center;">
+        <div class="pct-bar" style="height: 40px;">+1.1 pt</div>
+        <div style="margin-top: 6px; font-size: 8.5pt; font-weight: bold;">Part des 5★</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: 3. AVIS CLIENTS -->
+<div class="page">
+  <h2 class="section-title">3. AVIS CLIENTS</h2>
+
+  <h3 class="sub-title">Résumé</h3>
+  <p>Pendant la période analysée (septembre 2026), Electro Legendre a reçu 8 avis Google. La totalité sont des avis parfaits à 5 étoiles (100 % de satisfaction) : aucun avis négatif n'a été reçu pendant tout le mois.</p>
+
+  <h3 class="sub-title">Répartition des avis</h3>
+  <ul class="bullet-list">
+    <li> - Nouveaux avis reçus en septembre : 8</li>
+    <li> - Avis 5 étoiles : 8 (100 %)</li>
+    <li> - Avis négatifs (1 à 4 étoiles) : 0 (0 %)</li>
+    <li> - Note moyenne du mois : 5,0 / 5</li>
+    <li> - Total des avis cumulés sur la fiche : 64 (Note globale : 4,7 / 5)</li>
+    <li> - Répartition cumulée : 59 avis 5★ (92,2 %) et 5 avis 1★ (7,8 %)</li>
+  </ul>
+
+  <h3 class="sub-title">Avis positifs (extraits récents)</h3>
+  <ul class="bullet-list">
+    <li> - « Great deals on quality appliances, I'm only shopping here from now on »</li>
+    <li> - « Very nice price and service is very good » — Sumit Kashyap [Répondu : « Thank you for the review Sumit »]</li>
+    <li> - « I really love the way they treated me as a costumer » — Ahmed Baakoe [Répondu : « You are welcome Ahmed! »]</li>
+    <li> - « Very good person so good for pricing. Come here to buy appliances » — Sunjot Sohal [Répondu : « Thank you Sunjot »]</li>
+    <li> - « Great service before purchase and equally after. The best in Châteauguay and Montréal » — Hanniel Mwofoh</li>
+    <li> - « Great deal 💯👍 » — Dauda Adesina Abdullateef</li>
+  </ul>
+  <p style="font-size: 8.5pt;">Note : Google affiche en mode public uniquement une sélection d'avis ; la majorité des avis de septembre se trouve derrière l'option « Voir plus d'avis » de la fiche.</p>
+
+  <h3 class="sub-title">Avis négatifs</h3>
+  <ul class="bullet-list">
+    <li> - Aucun avis négatif reçu en septembre (0 sur 8) — première fois depuis le lancement de la fiche.</li>
+    <li> - Les 5 avis 1★ historiques restent visibles sur la fiche : Emy Leclerc [Répondu], Serge NWOTUE [Répondu], Jade Maher [PAS DE RÉPONSE], Didi Lac [PAS DE RÉPONSE], ALEX WU [PAS DE RÉPONSE].</li>
+    <li> - Leur poids dans l'ensemble des avis diminue naturellement : 8,9 % (fin août) → 7,8 % (fin septembre).</li>
+  </ul>
+</div>
+
+<!-- PAGE 6: 4. POINTS FORTS -->
+<div class="page">
+  <h2 class="section-title">4. POINTS FORTS</h2>
+
+  <h3 class="sub-title">Premier mois sans aucun avis négatif</h3>
+  <p>Les 8 avis reçus en septembre sont des 5 étoiles. C'est le premier mois depuis le lancement de la fiche entièrement exempt d'avis négatifs, avec une note moyenne parfaite de 5,0 / 5 sur le mois.</p>
+
+  <h3 class="sub-title">Note globale en progression (4,6 → 4,7)</h3>
+  <p>Malgré 5 avis 1★ historiques, la note globale remonte à 4,7 / 5 grâce à la série continue d'avis parfaits. La part des avis 5★ atteint 92,2 %.</p>
+
+  <h3 class="sub-title">Prix et qualité du conseil</h3>
+  <p>Les mots-clés les plus fréquents des avis sont : prix (8 mentions), vendeur (4), service après-vente (3), livraison (3), argent (2), remboursement (2) et confiance (2). Les clients saluent les bons prix et le professionnalisme de l'équipe.</p>
+
+  <h3 class="sub-title">Service après-vente et livraison</h3>
+  <p>Le service après-vente et la livraison restent des arguments récurrents : réparation, échange, remboursement et ponctualité sont cités dans les avis du mois.</p>
+
+  <h3 class="sub-title">Réponses du propriétaire</h3>
+  <p>Les avis visibles de la fiche ont majoritairement reçu une réponse personnalisée du propriétaire (« Thank you Sunjot », « You are welcome Ahmed! »), ce qui crée une proximité appréciée et encourage de nouveaux avis.</p>
+
+  <h3 class="sub-title">Croissance du volume d'avis</h3>
+  <p>La fiche passe de 56 à 64 avis cumulés (+14,3 %), renforçant la crédibilité locale d'Electro Legendre dans les résultats de recherche et sur Google Maps.</p>
+</div>
+
+<!-- PAGE 7: 5. AXES D'AMÉLIORATION -->
+<div class="page">
+  <h2 class="section-title">5. AXES D'AMÉLIORATION</h2>
+
+  <h3 class="sub-title">1. Soutenir le rythme de collecte d'avis</h3>
+  <p>8 avis en septembre contre 30 en août : le rythme de collecte ralentit fortement. Installer un chevalet QR code au comptoir et demander systématiquement un avis après chaque livraison permettrait de maintenir la dynamique de croissance.</p>
+
+  <h3 class="sub-title">2. Réponse aux 3 avis 1★ restés sans réponse</h3>
+  <p>Trois avis négatifs historiques (Jade Maher, Didi Lac, ALEX WU) n'ont toujours pas reçu de réponse publique. Répondre à ces avis — même a posteriori — démontre au clientèle que l'entreprise prend le feedback au sérieux.</p>
+
+  <h3 class="sub-title">3. Encourager les photos dans les avis</h3>
+  <p>Les avis avec photos ont plus de poids. Inciter les clients satisfaits à joindre une photo de leur appareil livré renforcera la preuve sociale visuelle sur la fiche.</p>
+
+  <h3 class="sub-title">4. Maintenir les acquis d'août</h3>
+  <p>Les points corrigés en août (vitrine, état des produits d'occasion, communication post-achat) doivent rester suivis : un seul avis négatif suffit à effacer plusieurs semaines de satisfaction.</p>
+</div>
+
+<!-- PAGE 8: 6. RECOMMANDATIONS & SOLDE -->
+<div class="page">
+  <h2 class="section-title">6. RECOMMANDATIONS & SOLDE</h2>
+
+  <h3 class="sub-title">Court terme (1-2 semaines)</h3>
+  <ul class="bullet-list">
+    <li> - Répondre aux 3 avis 1★ restés sans réponse (Jade Maher, Didi Lac, ALEX WU)</li>
+    <li> - Installer un chevalet QR code au comptoir pour solliciter un avis après chaque vente</li>
+    <li> - Ajouter des photos des produits disponibles sur le profil Google</li>
+  </ul>
+
+  <h3 class="sub-title">Moyen terme (1-3 mois)</h3>
+  <ul class="bullet-list">
+    <li> - Mettre en place un rappel systématique de demande d'avis après livraison (SMS/courriel)</li>
+    <li> - Publier régulièrement des photos et mises à jour sur Google Business</li>
+    <li> - Insérer des mots-clés localisés dans les réponses aux avis (électroménagers Montréal, réfrigérateur occasion)</li>
+  </ul>
+
+  <h3 class="sub-title">Long terme (3-6 mois)</h3>
+  <ul class="bullet-list">
+    <li> - Développer une stratégie de contenu Google Business (photos, offres, événements)</li>
+    <li> - Viser la note globale 4,8 / 5 en poursuivant la série d'avis 5★</li>
+    <li> - Analyser mensuellement les tendances des avis pour anticiper les axes d'amélioration</li>
+  </ul>
+
+  <h3 class="sub-title">Conclusion</h3>
+  <p>Septembre 2026 marque un tournant positif pour Electro Legendre : <strong>8 nouveaux avis, 100 % à 5 étoiles, aucun avis négatif</strong>, et une note globale en hausse à <strong>4,7 / 5</strong> sur un cumul record de 64 avis (+14,3 %). La qualité perçue du service, des prix et du service après-vente est confirmée. L'enjeu principal est de relancer la collecte d'avis (8 en septembre vs 30 en août) et de répondre aux 3 derniers avis négatifs sans réponse.</p>
+
+  <h3 class="sub-title" style="margin-top: 14px;">7. Solde</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Description / Période</th>
+        <th class="num">Montant</th>
+        <th class="num">Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Gestion Google Business Profile — Août 2026</td>
+        <td class="num">125 $</td>
+        <td class="num">Non réglé</td>
+      </tr>
+      <tr>
+        <td>Gestion Google Business Profile — Septembre 2026</td>
+        <td class="num">125 $</td>
+        <td class="num">Non réglé</td>
+      </tr>
+      <tr class="total-row">
+        <td>TOTAL SOLDE DÛ</td>
+        <td class="num">250 $</td>
+        <td class="num">En attente</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
