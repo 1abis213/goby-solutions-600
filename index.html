@@ -423,12 +423,8 @@
               <div class="faq-a"><p data-i18n="faq2a">Oui, nous proposons l'installation professionnelle pour tout appareil neuf. Contactez-nous pour un devis personnalise.</p></div>
             </div>
             <div class="faq-item">
-              <button class="faq-q" onclick="toggleFAQ(this)"><span data-i18n="faq3q">Quelle est votre politique de retour ?</span><span class="arrow">▼</span></button>
-              <div class="faq-a"><p data-i18n="faq3a">Vous disposez de 30 jours pour retourner un appareil en bon etat. Les frais de retour peuvent s'appliquer. Consultez notre politique complete sur demande.</p></div>
-            </div>
-            <div class="faq-item">
               <button class="faq-q" onclick="toggleFAQ(this)"><span data-i18n="faq4q">Proposez-vous des garanties ?</span><span class="arrow">▼</span></button>
-              <div class="faq-a"><p data-i18n="faq4a">Tous nos appareils neufs incluent la garantie fabricant. Les appareils certifies pre-appartenance sont couverts par une garantie GobySolutions de 90 jours.</p></div>
+              <div class="faq-a"><p data-i18n="faq4a">Tous nos appareils neufs incluent la garantie fabricant. Les appareils certifiés boîte ouverte et usagés sont couverts par une garantie GobySolutions de 3 mois (90 jours).</p></div>
             </div>
             <div class="faq-item">
               <button class="faq-q" onclick="toggleFAQ(this)"><span data-i18n="faq5q">Puis-je payer par virement Interac ?</span><span class="arrow">▼</span></button>
@@ -538,7 +534,7 @@
         <div class="footer-links" style="display:flex;gap:1rem;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;flex-wrap:wrap;justify-content:center">
           <a href="#" onclick="return openLegal('terms')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerTerms">Conditions</a>
           <a href="#" onclick="return openLegal('privacy')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerPrivacy">Confidentialite</a>
-          <a href="#" onclick="return openLegal('returns')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerReturns">Retours & Garantie</a>
+          <a href="#" onclick="return openLegal('returns')" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'" data-i18n="footerReturns">Garantie</a>
           <span style="opacity:.3">|</span>
           <a href="https://www.facebook.com/gobysolutions" target="_blank" rel="noopener" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">Facebook</a>
           <a href="https://wa.me/15144312367" target="_blank" rel="noopener" style="transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text2)'">WhatsApp</a>
@@ -999,8 +995,7 @@
           faqLabel: 'FAQ', faqTitle: 'Questions frequentes.', faqDesc: 'Tout ce que vous devez savoir avant votre achat.',
           faq1q: 'Quels sont vos delais de livraison ?', faq1a: 'Nous livrons sous 2-5 jours ouvrés partout sur l\'ile de Montreal. Livraison et installation pour 125 $.',
           faq2q: 'Offrez-vous l\'installation ?', faq2a: 'Oui, nous proposons l\'installation professionnelle pour tout appareil neuf. Contactez-nous pour un devis personnalise.',
-          faq3q: 'Quelle est votre politique de retour ?', faq3a: 'Vous disposez de 30 jours pour retourner un appareil en bon etat. Les frais de retour peuvent s\'appliquer. Consultez notre politique complete sur demande.',
-          faq4q: 'Proposez-vous des garanties ?', faq4a: 'Tous nos appareils neufs incluent la garantie fabricant. Les appareils certifies pre-appartenance sont couverts par une garantie GobySolutions de 90 jours.',
+          faq4q: 'Proposez-vous des garanties ?', faq4a: 'Tous nos appareils neufs incluent la garantie fabricant. Les appareils certifiés boîte ouverte et usagés sont couverts par une garantie GobySolutions de 3 mois (90 jours).',
           faq5q: 'Puis-je payer par virement Interac ?', faq5a: 'Oui, nous acceptons le virement Interac, les cartes de credit et PayPal. Contactez-nous pour les details de paiement.',
           guideBack: 'Retour au site',
           guideLabel: "Guide d'achat", guideTitle: 'Comment choisir vos appareils.', guideDesc: 'Nos conseils pour faire le bon choix, piece par piece.',
@@ -1029,7 +1024,7 @@
           gFurnaceH4: '4. Budget', gFurnaceP4: '750-1000 $ pour un modele standard 80% AFUE. 1000-1500 $ pour un modele 96% AFUE. 1500-2500 $ pour le haut de gamme.',
           waPopupText: '💬 Comment pouvons-nous vous aider ?',
           noProducts: 'Aucun produit dans cette section pour le moment.',
-          footerTerms: 'Conditions', footerPrivacy: 'Confidentialite', footerReturns: 'Retours & Garantie',
+          footerTerms: 'Conditions', footerPrivacy: 'Confidentialite', footerReturns: 'Garantie',
           footerCopy: '© MMXXVI - GobySolutions Montréal',
           callPopupTitle: 'Besoin d\'aide ?',
           callPopupDesc: 'Parlez à un de nos spécialistes dès maintenant. Nous sommes là pour répondre à toutes vos questions !'
@@ -1071,8 +1066,7 @@
           faqLabel: 'FAQ', faqTitle: 'Frequently Asked Questions.', faqDesc: 'Everything you need to know before your purchase.',
           faq1q: 'What are your delivery times?', faq1a: 'We deliver within 2-5 business days across Montreal island. $125 for delivery and installation.',
           faq2q: 'Do you offer installation?', faq2a: 'Yes, we offer professional installation for all new appliances. Contact us for a custom quote.',
-          faq3q: 'What is your return policy?', faq3a: 'You have 30 days to return an appliance in good condition. Return fees may apply. See our full policy on request.',
-          faq4q: 'Do you offer warranties?', faq4a: 'All new appliances include the manufacturer warranty. Certified pre-owned appliances are covered by a 90-day GobySolutions warranty.',
+          faq4q: 'Do you offer warranties?', faq4a: 'All new appliances include the manufacturer warranty. Certified open box and pre-owned appliances are covered by a 3-month (90 days) GobySolutions warranty.',
           faq5q: 'Can I pay by Interac e-Transfer?', faq5a: 'Yes, we accept Interac e-Transfer, credit cards, and PayPal. Contact us for payment details.',
           guideBack: 'Back to site',
           guideLabel: 'Buying Guide', guideTitle: 'How to choose your appliances.', guideDesc: 'Our tips to make the right choice, piece by piece.',
@@ -1101,7 +1095,7 @@
           gFurnaceH4: '4. Budget', gFurnaceP4: '$750-1000 for a standard 80% AFUE model. $1000-1500 for a 96% AFUE model. $1500-2500 for premium variable-speed.',
           waPopupText: '💬 How can we help you?',
           noProducts: 'No products in this section yet.',
-          footerTerms: 'Terms', footerPrivacy: 'Privacy', footerReturns: 'Returns & Warranty',
+          footerTerms: 'Terms', footerPrivacy: 'Privacy', footerReturns: 'Warranty',
           footerCopy: '© MMXXVI - GobySolutions Montreal',
           callPopupTitle: 'Need help?',
           callPopupDesc: 'Talk to one of our specialists right now. We\'re here to answer all your questions!'
@@ -1441,8 +1435,8 @@
           en: '<h3>Privacy Policy</h3><p>GobySolutions is committed to protecting your personal information. This policy explains how we collect, use and protect your data.</p><h4>1. Data Collection</h4><p>We collect only the information needed to process your orders: name, address, email and phone number.</p><h4>2. Data Use</h4><p>Your information is used for order processing, delivery and customer service. We never sell your data to third parties.</p><h4>3. Security</h4><p>We use industry-standard security measures to protect your data from unauthorized access.</p><h4>4. Contact</h4><p>For any questions about your data, contact us at optimum61@hotmail.com.</p>'
         },
         returns: {
-          fr: '<h3>Politique de retours et garantie</h3><p>Nous voulons que vous soyez entierement satisfait de votre achat. Voici notre politique de retours et de garantie.</p><h4>Retours</h4><p>Vous disposez de 30 jours suivant la reception pour retourner un appareil en bon etat. L\'appareil doit etre dans son emballage d\'origine avec tous les accessoires. Des frais de restockage de 15% peuvent s\'appliquer.</p><h4>Garantie appareils neufs</h4><p>Tous nos appareils neufs sont couverts par la garantie du fabricant, d\'une duree de 1 a 5 ans selon la marque et le modele.</p><h4>Garantie appareils certifies</h4><p>Nos appareils certifies pre-appartenance incluent une garantie GobySolutions de 90 jours couvrant les defauts de fonctionnement. Extensible a 1 an sur demande.</p><h4>Livraison et installation</h4><p>En cas de probleme de livraison ou d\'installation, contactez-nous dans les 48 heures. Nous ferons tout notre possible pour resoudre la situation rapidement.</p>',
-          en: '<h3>Returns & Warranty Policy</h3><p>We want you to be fully satisfied with your purchase. Here is our returns and warranty policy.</p><h4>Returns</h4><p>You have 30 days from receipt to return an appliance in good condition. The appliance must be in its original packaging with all accessories. A 15% restocking fee may apply.</p><h4>New Appliance Warranty</h4><p>All new appliances are covered by the manufacturer\'s warranty, ranging from 1 to 5 years depending on brand and model.</p><h4>Certified Appliance Warranty</h4><p>Our certified pre-owned appliances include a 90-day GobySolutions warranty covering functional defects. Extendable to 1 year on request.</p><h4>Delivery & Installation</h4><p>If you experience any delivery or installation issues, contact us within 48 hours. We will do our best to resolve the situation quickly.</p>'
+          fr: '<h3>Politique de garantie et service</h3><p>Nous voulons que vous soyez entierement satisfait de votre achat. Tous nos appareils sont rigoureusement inspectes et testes avant livraison.</p><h4>Garantie appareils certifies & boite ouverte</h4><p>Nos appareils certifies boite ouverte et pre-appartenance incluent une garantie GobySolutions de 3 mois (90 jours) couvrant les defauts de fonctionnement. Extensible a 1 an sur demande.</p><h4>Garantie appareils neufs</h4><p>Tous nos appareils neufs sont couverts par la garantie complete du fabricant, d\'une duree de 1 a 5 ans selon la marque et le modele.</p><h4>Livraison et service apres-vente</h4><p>En cas de question ou d\'assistance necessaire apres livraison, contactez-nous directement au (514) 799-1291 ou via WhatsApp. Notre equipe repond sous 24h.</p>',
+          en: '<h3>Warranty & Service Policy</h3><p>We want you to be fully satisfied with your purchase. All our appliances are thoroughly inspected and tested before delivery.</p><h4>Certified & Open Box Warranty</h4><p>Our certified open box and pre-owned appliances include a 3-month (90 days) GobySolutions warranty covering functional defects. Extendable to 1 year on request.</p><h4>New Appliance Warranty</h4><p>All new appliances are covered by the manufacturer\'s warranty, ranging from 1 to 5 years depending on brand and model.</p><h4>Delivery & After-Sales Support</h4><p>If you have any questions or require assistance after delivery, contact us directly at (514) 799-1291 or via WhatsApp. Our team responds within 24 hours.</p>'
         }
       };
 
