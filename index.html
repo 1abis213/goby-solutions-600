@@ -130,6 +130,16 @@
       .product-card .info .price small{font-size:.7rem;color:var(--text2);font-weight:300}
       .btn-sm{padding:.45rem 1rem;font-size:.7rem}
 
+      .open-box-card .img-wrap{aspect-ratio:1/1!important;background:#141414;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+      .open-box-card .img-wrap img{width:100%!important;height:100%!important;object-fit:contain!important;aspect-ratio:1/1;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+      .open-box-card:hover .img-wrap img{transform:scale(1.03)}
+      .badge-state{position:absolute;top:12px;left:12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#0a0a0a;padding:.32rem .75rem;border-radius:8px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;z-index:2;box-shadow:0 4px 15px rgba(0,0,0,.5)}
+      .dims-pill{display:inline-flex;align-items:center;gap:.35rem;background:rgba(201,149,42,.08);border:1px solid rgba(201,149,42,.2);border-radius:6px;padding:.32rem .6rem;font-size:.72rem;color:var(--gold-light);margin:.4rem 0 .55rem;flex-wrap:wrap}
+      .open-box-desc-short{font-size:.78rem;color:var(--text2);line-height:1.55;margin-bottom:.65rem}
+      .open-box-feats{list-style:none;padding:0;margin:0 0 .75rem 0;font-size:.73rem;color:var(--text2);line-height:1.55}
+      .open-box-feats li{display:flex;align-items:flex-start;gap:.35rem;margin-bottom:.2rem}
+      .open-box-feats li::before{content:'•';color:var(--gold);font-weight:bold}
+
       .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:2rem;opacity:0;transition:opacity .3s}
       .modal-overlay.active{display:flex;opacity:1}
       .modal{background:var(--bg2);border:1px solid var(--border);border-radius:20px;max-width:900px;width:100%;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;transform:scale(.95) translateY(20px);transition:transform .4s cubic-bezier(.22,1,.36,1)}
@@ -239,6 +249,7 @@
       <nav class="nav-panel-content" id="navPanelContent">
         <button class="nav-close-btn" onclick="closeNavPanel()" aria-label="Close">✕</button>
         <a class="nav-panel-item" href="#catalog" onclick="closeNavPanel()"><span class="nav-label" data-i18n="navCatalog">Catalogue</span></a>
+        <a class="nav-panel-item" href="#openBoxSection" onclick="closeNavPanel()"><span class="nav-label" data-i18n="navOpenBox">Boîte Ouverte</span></a>
         <a class="nav-panel-item" href="#" onclick="return showGuide('overview')"><span class="nav-label" data-i18n="navGuide">Guide</span></a>
         <a class="nav-panel-item" href="#faq" onclick="closeNavPanel()"><span class="nav-label" data-i18n="navFAQ">FAQ</span></a>
         <a class="nav-panel-item" href="#about" onclick="closeNavPanel()"><span class="nav-label" data-i18n="navAbout">Maison</span></a>
@@ -684,10 +695,276 @@
         }
       ];
 
+      const openBoxItems = [
+        {
+          id: 'CGIH3047VFE',
+          model: 'CGIH3047VFE',
+          brand: 'FRIGIDAIRE GALLERY',
+          name: 'Frigidaire Gallery CGIH3047VFE 30"',
+          typeFR: 'Cuisinière à induction encastrable',
+          typeEN: 'Front Control Induction Range',
+          stateFR: 'Boîte ouverte (Comme neuf)',
+          stateEN: 'Open Box (Like New)',
+          dims: {
+            width: '29 7/8" (75.9 cm)',
+            height: '36 5/8" (93 cm)',
+            depth: '26 3/4" (29" avec poignée / 73.7 cm)',
+            widthEN: '29 7/8" (75.9 cm)',
+            heightEN: '36 5/8" (93 cm)',
+            depthEN: '26 3/4" (29" with handle / 73.7 cm)'
+          },
+          descFR: "Cuisinière à induction encastrable Frigidaire Gallery de 30 po avec friture à air Air Fry intégrée et convection véritable pour une cuisson rapide et homogène.",
+          descEN: "Frigidaire Gallery 30\" front control induction range featuring built-in Air Fry and True Convection for fast, even cooking.",
+          featuresFR: [
+            "Table de cuisson à induction 4 zones avec ébullition ultra-rapide (jusqu'à 3 600 W)",
+            "Mode friture à air chaud Air Fry intégré au four pour des mets croustillants sans préchauffage",
+            "Convection véritable True Convection à 3 éléments pour des cuissons uniformes",
+            "Capacité de 5,4 pi³ avec cycle de nettoyage vapeur Steam Clean express en 30 minutes",
+            "Fini acier inoxydable Smudge-Proof® résistant aux traces de doigts"
+          ],
+          featuresEN: [
+            "4-zone induction cooktop with rapid boiling power (up to 3,600W)",
+            "Built-in Air Fry mode in the oven delivering crispy results with no preheating needed",
+            "True Convection featuring a third heating element and fan for even baking",
+            "Spacious 5.4 cu. ft. capacity with fast 30-minute Steam Clean cycle",
+            "Smudge-Proof® fingerprint-resistant stainless steel finish"
+          ],
+          mainImg: 'assets/LIKE%20NEW/CGIH3047VFE%20FRIGIDAIRE/Untitled.jpg',
+          photos: [
+            'assets/LIKE%20NEW/CGIH3047VFE%20FRIGIDAIRE/Untitled.jpg',
+            'assets/LIKE%20NEW/CGIH3047VFE%20FRIGIDAIRE/2Untitled.jpg',
+            'assets/LIKE%20NEW/CGIH3047VFE%20FRIGIDAIRE/3Untitled.jpg',
+            'assets/LIKE%20NEW/CGIH3047VFE%20FRIGIDAIRE/4Untitled.jpg',
+            'assets/LIKE%20NEW/CGIH3047VFE%20FRIGIDAIRE/5Untitled.jpg'
+          ]
+        },
+        {
+          id: 'LSEL6337F',
+          model: 'LSEL6337F',
+          brand: 'LG',
+          name: 'LG LSEL6337F 30"',
+          typeFR: 'Cuisinière électrique intelligente encastrable',
+          typeEN: 'Smart Slide-In Electric Range',
+          stateFR: 'Boîte ouverte (Comme neuf)',
+          stateEN: 'Open Box (Like New)',
+          dims: {
+            width: '29 7/8" (75.9 cm)',
+            height: '37 1/4" (94.6 cm) (36" au comptoir)',
+            depth: '26 7/8" (29 5/16" avec poignée / 74.5 cm)',
+            widthEN: '29 7/8" (75.9 cm)',
+            heightEN: '37 1/4" (94.6 cm) (36" cooktop)',
+            depthEN: '26 7/8" (29 5/16" with handle / 74.5 cm)'
+          },
+          descFR: "Cuisinière électrique intelligente LG de 6,3 pi³ avec convection ProBake®, porte InstaView®, Air Fry et Air Sous-Vide.",
+          descEN: "LG 6.3 cu. ft. Smart Slide-In Electric Range with ProBake Convection®, InstaView® window, Air Fry, and Air Sous-Vide.",
+          featuresFR: [
+            "Convection ProBake Convection® avec élément chauffant sur la paroi arrière pour une cuisson dorée et uniforme",
+            "Fenêtre InstaView® : toquez deux fois sur la vitre teintée pour illuminer l'intérieur du four",
+            "Modes de cuisson sains intégrés Air Fry et Air Sous-Vide de haute précision",
+            "Table de cuisson à 5 éléments radiants dont zone triple UltraHeat™ de 3 600 W",
+            "Nettoyage EasyClean® en 10 minutes sans produits chimiques + Autonettoyage pyrolytique",
+            "Connectivité Wi-Fi intelligente avec l'application LG ThinQ®"
+          ],
+          featuresEN: [
+            "ProBake Convection® with rear heating element for even browning across all racks",
+            "InstaView® glass door: knock twice to illuminate inside without opening the door",
+            "Built-in Air Fry and precision Air Sous-Vide cooking modes",
+            "5-element radiant cooktop featuring a powerful 3,600W 3-in-1 UltraHeat™ element",
+            "10-minute water-based EasyClean® cycle plus standard high-heat Self-Clean",
+            "LG ThinQ® Wi-Fi smart control and remote notifications"
+          ],
+          mainImg: 'assets/LIKE%20NEW/LSEL6337F%20LG/Untitled.jpg',
+          photos: [
+            'assets/LIKE%20NEW/LSEL6337F%20LG/Untitled.jpg',
+            'assets/LIKE%20NEW/LSEL6337F%20LG/1Untitled.jpg',
+            'assets/LIKE%20NEW/LSEL6337F%20LG/2Untitled.jpg',
+            'assets/LIKE%20NEW/LSEL6337F%20LG/3Untitled.jpg'
+          ]
+        },
+        {
+          id: 'NE58F9500SS',
+          model: 'NE58F9500SS',
+          brand: 'SAMSUNG',
+          name: 'Samsung NE58F9500SS 30"',
+          typeFR: 'Cuisinière électrique encastrable',
+          typeEN: 'Slide-In Electric Range',
+          stateFR: 'Boîte ouverte (Comme neuf)',
+          stateEN: 'Open Box (Like New)',
+          dims: {
+            width: '31" (78.7 cm) (corps 29 7/8" encastrable)',
+            height: '36" à 37 1/8" ajustable (91.4 à 94.3 cm)',
+            depth: '26 5/16" (28 1/2" avec poignée / 72.4 cm)',
+            widthEN: '31" (78.7 cm) (29 7/8" slide-in body)',
+            heightEN: '36" to 37 1/8" adjustable (91.4 to 94.3 cm)',
+            depthEN: '26 5/16" (28 1/2" with handle / 72.4 cm)'
+          },
+          descFR: "Cuisinière électrique encastrable Samsung de 5,8 pi³ dotée d'une double convection à 2 ventilateurs et de commandes lumineuses Guiding Light.",
+          descEN: "Samsung 5.8 cu. ft. Slide-In Electric Range featuring Dual Convection two-fan system and intuitive Guiding Light controls.",
+          featuresFR: [
+            "Double convection Dual Convection à deux ventilateurs pour une circulation thermique accélérée et homogène",
+            "Commandes tactiles en verre Guiding Light guidant les étapes de programmation pas à pas",
+            "Sonde thermique à viande intégrée pour surveiller la cuisson à cœur sans ouvrir la porte",
+            "Surface de cuisson à 5 éléments radiants (jusqu'à 3 000 W) avec zone réchaud dédiée",
+            "Nettoyage rapide à la vapeur SteamQuick™ en 20 minutes et cycle Autonettoyage",
+            "Tiroir de rangement inférieur d'une capacité de 0,7 pi³"
+          ],
+          featuresEN: [
+            "Dual Convection two-fan system for even heat distribution and faster cooking",
+            "Guiding Light intuitive touch controls that illuminate step-by-step options",
+            "Built-in meat probe to monitor internal food temperature without opening the door",
+            "5 radiant cooktop elements with dual-ring rapid boil zones (up to 3,000W)",
+            "20-minute fast SteamQuick™ cleaning cycle alongside standard Self-Clean",
+            "Convenient 0.7 cu. ft. bottom storage drawer"
+          ],
+          mainImg: 'assets/LIKE%20NEW/NE58F9500SS%20SAMSUNG/Untitled.jpg',
+          photos: [
+            'assets/LIKE%20NEW/NE58F9500SS%20SAMSUNG/Untitled.jpg',
+            'assets/LIKE%20NEW/NE58F9500SS%20SAMSUNG/1Untitled.jpg',
+            'assets/LIKE%20NEW/NE58F9500SS%20SAMSUNG/2Untitled.jpg',
+            'assets/LIKE%20NEW/NE58F9500SS%20SAMSUNG/3Untitled.jpg',
+            'assets/LIKE%20NEW/NE58F9500SS%20SAMSUNG/4Untitled.jpg'
+          ]
+        },
+        {
+          id: 'WA45T3400AV',
+          model: 'WA45T3400AV',
+          brand: 'SAMSUNG',
+          name: 'Samsung WA45T3400AV Top Load 4.5 pi³',
+          typeFR: 'Laveuse à chargement par le haut',
+          typeEN: 'Top Load Washer',
+          stateFR: 'Boîte ouverte (Comme neuf)',
+          stateEN: 'Open Box (Like New)',
+          dims: {
+            width: '27" (68.6 cm)',
+            height: '44" (111.8 cm) (59 1/4" couvercle ouvert)',
+            depth: '29 5/16" (74.4 cm)',
+            widthEN: '27" (68.6 cm)',
+            heightEN: '44" (111.8 cm) (59 1/4" with lid open)',
+            depthEN: '29 5/16" (74.4 cm)'
+          },
+          descFR: "Laveuse à chargement par le haut Samsung de 4,5 pi³ en fini noir brossé avec jet d'eau Active WaterJet et technologie silencieuse VRT Plus™.",
+          descEN: "Samsung 4.5 cu. ft. Top Load Washer in Black Stainless Steel with built-in Active WaterJet faucet and VRT Plus™ vibration reduction.",
+          featuresFR: [
+            "Robinet d'eau intégré Active WaterJet pour prétraiter facilement les taches directement dans la cuve",
+            "Technologie VRT Plus™ réduisant activement les vibrations et le bruit durant l'essorage",
+            "Couvercle amorti Soft-Close à fermeture douce et silencieuse évitant les claquements",
+            "Tambour Diamond Drum en acier inoxydable préservant la longévité de vos textiles",
+            "Cycle d'assainissement Self Clean éliminant les résidus et bactéries sans nettoyant chimique",
+            "10 cycles de lavage préréglés et assistance technique mobile Smart Care"
+          ],
+          featuresEN: [
+            "Built-in Active WaterJet faucet to pretreat stained clothes right inside the washer",
+            "Vibration Reduction Technology+ (VRT Plus™) for whisper-quiet wash cycles",
+            "Soft-Close damper lid that closes gently, quietly, and safely without slamming",
+            "Diamond Drum stainless steel interior engineered to protect fabrics from snagging",
+            "Self Clean cycle keeps drum fresh and clean without harsh chemicals",
+            "10 preset washing cycles and Smart Care smartphone diagnostic support"
+          ],
+          mainImg: 'assets/LIKE%20NEW/WA45T3400AV%20SAMSUNG%20TOP%20LOAD/Untitled.jpg',
+          photos: [
+            'assets/LIKE%20NEW/WA45T3400AV%20SAMSUNG%20TOP%20LOAD/Untitled.jpg',
+            'assets/LIKE%20NEW/WA45T3400AV%20SAMSUNG%20TOP%20LOAD/1Untitled.jpg',
+            'assets/LIKE%20NEW/WA45T3400AV%20SAMSUNG%20TOP%20LOAD/2Untitled.jpg',
+            'assets/LIKE%20NEW/WA45T3400AV%20SAMSUNG%20TOP%20LOAD/3Untitled.jpg',
+            'assets/LIKE%20NEW/WA45T3400AV%20SAMSUNG%20TOP%20LOAD/4Untitled.jpg'
+          ]
+        },
+        {
+          id: 'WF53BB88900AT',
+          model: 'WF53BB88900AT',
+          brand: 'SAMSUNG BESPOKE',
+          name: 'Samsung Bespoke WF53BB88900AT 5.3 pi³',
+          typeFR: 'Laveuse frontale ultra-capacité Bespoke',
+          typeEN: 'Bespoke Ultra Capacity Front Load Washer',
+          stateFR: 'Boîte ouverte (Comme neuf)',
+          stateEN: 'Open Box (Like New)',
+          dims: {
+            width: '27" (68.6 cm)',
+            height: '38 3/4" (98.3 cm)',
+            depth: '34 1/2" (87.4 cm)',
+            widthEN: '27" (68.6 cm)',
+            heightEN: '38 3/4" (98.3 cm)',
+            depthEN: '34 1/2" (87.4 cm)'
+          },
+          descFR: "Laveuse frontale ultra-capacité Samsung Bespoke de 5,3 pi³ avec détection intelligente AI OptiWash™ et distributeur automatique Auto Dispense.",
+          descEN: "Samsung Bespoke 5.3 cu. ft. Ultra Capacity Front Load Washer featuring AI OptiWash™ and Auto Dispense system.",
+          featuresFR: [
+            "Intelligence artificielle AI OptiWash™ évaluant la saleté et dosant eau et détergent en continu",
+            "Distributeur automatique Auto Dispense stockant et dosant la lessive pour jusqu'à 32 brassées",
+            "Cycle express Super Speed Wash nettoyant une brassée complète en seulement 28 minutes",
+            "Molette AI Smart Dial personnalisant et simplifiant l'accès à vos cycles favoris",
+            "Cycle vapeur désinfectant Steam Wash éliminant taches tenaces et 99 % des allergènes",
+            "Connectivité Wi-Fi SmartThings et moteur Digital Inverter ultrasilencieux certifié ENERGY STAR®"
+          ],
+          featuresEN: [
+            "AI OptiWash™ intelligent sensors detect soil level and optimize wash cycle in real time",
+            "Auto Dispense system holds and automatically dispenses up to 32 loads of detergent",
+            "Super Speed Wash completes a full cycle in just 28 minutes without compromising clean",
+            "AI Smart Dial learns your laundry habits and simplifies cycle recommendations",
+            "Steam Wash deeply penetrates fabrics to tackle stubborn stains and allergens",
+            "SmartThings Wi-Fi connectivity and whisper-quiet Digital Inverter motor (ENERGY STAR®)"
+          ],
+          mainImg: 'assets/LIKE%20NEW/WF53BB88900AT%20SAMSUNG/Untitled.jpg',
+          photos: [
+            'assets/LIKE%20NEW/WF53BB88900AT%20SAMSUNG/Untitled.jpg',
+            'assets/LIKE%20NEW/WF53BB88900AT%20SAMSUNG/1Untitled.jpg',
+            'assets/LIKE%20NEW/WF53BB88900AT%20SAMSUNG/2Untitled.jpg',
+            'assets/LIKE%20NEW/WF53BB88900AT%20SAMSUNG/3Untitled.jpg',
+            'assets/LIKE%20NEW/WF53BB88900AT%20SAMSUNG/4Untitled.jpg',
+            'assets/LIKE%20NEW/WF53BB88900AT%20SAMSUNG/5Untitled.jpg'
+          ]
+        },
+        {
+          id: 'WM6998HBA',
+          model: 'WM6998HBA',
+          brand: 'LG WASHCOMBO™',
+          name: 'LG WashCombo™ WM6998HBA All-in-One 5.0 pi³',
+          typeFR: 'Laveuse-sécheuse tout-en-un à thermopompe sans conduit',
+          typeEN: 'Ventless All-in-One Washer-Dryer Combo with Heat Pump',
+          stateFR: 'Boîte ouverte (Comme neuf)',
+          stateEN: 'Open Box (Like New)',
+          dims: {
+            width: '27" (68.6 cm)',
+            height: '39" (99.1 cm)',
+            depth: '33 1/8" (84.1 cm) (environ 55" porte ouverte)',
+            widthEN: '27" (68.6 cm)',
+            heightEN: '39" (99.1 cm)',
+            depthEN: '33 1/8" (84.1 cm) (~55" door open)'
+          },
+          descFR: "Combiné laveuse-sécheuse sans conduit tout-en-un LG WashCombo™ de 5,0 pi³ lavant et séchant une brassée complète en moins de 2 heures sur prise 120 V standard.",
+          descEN: "LG WashCombo™ 5.0 cu. ft. ventless smart all-in-one washer and dryer combo with inverter heat pump that washes and dries in under 2 hours on a 120V outlet.",
+          featuresFR: [
+            "Lave et sèche sans interruption en moins de 2 heures sans aucun transfert de vêtements requis",
+            "Conception sans conduit d'évacuation (Ventless) avec thermopompe Inverter HeatPump™ écoénergétique (-60 % d'énergie)",
+            "Branchement standard 120 V ne nécessitant aucun circuit spécial 240 V",
+            "Distributeur automatique ezDispense® stockant détergent et assouplissant pour plusieurs brassées",
+            "Moteur Inverter Direct Drive avec IA AI DD® adaptant la vitesse et les mouvements aux tissus",
+            "Jets puissants TurboWash® 360°, filtre à charpie simplifié ezLintFilter et Wi-Fi LG ThinQ®"
+          ],
+          featuresEN: [
+            "Washes and dries a full load in under 2 hours in one continuous cycle without manual transfer",
+            "Ventless design with Inverter HeatPump™ technology using up to 60% less energy",
+            "Standard 120V plug-in power (no 240V circuit or external exhaust duct needed)",
+            "ezDispense® automatic reservoir dispenses optimal detergent and softener for multiple loads",
+            "AI DD® technology automatically adapts wash motions based on fabric weight and softness",
+            "TurboWash® 360° deep-cleaning jets, ezLintFilter easy-clean trap, and LG ThinQ® Wi-Fi"
+          ],
+          mainImg: 'assets/LIKE%20NEW/WM6998HBA%20LG%20ALL%20IN%20ONE/Untitled.jpg',
+          photos: [
+            'assets/LIKE%20NEW/WM6998HBA%20LG%20ALL%20IN%20ONE/Untitled.jpg',
+            'assets/LIKE%20NEW/WM6998HBA%20LG%20ALL%20IN%20ONE/1Untitled.jpg',
+            'assets/LIKE%20NEW/WM6998HBA%20LG%20ALL%20IN%20ONE/2Untitled.jpg',
+            'assets/LIKE%20NEW/WM6998HBA%20LG%20ALL%20IN%20ONE/3Untitled.jpg',
+            'assets/LIKE%20NEW/WM6998HBA%20LG%20ALL%20IN%20ONE/4Untitled.jpg',
+            'assets/LIKE%20NEW/WM6998HBA%20LG%20ALL%20IN%20ONE/5Untitled.jpg'
+          ]
+        }
+      ];
+
       const lang = {
         fr: {
           pageTitle: 'GobySolutions - Électroménagers de Prestige | Montréal',
-          navCatalog: 'Catalogue', navGuide: 'Guide', navFAQ: 'FAQ', navAbout: 'Maison', navContact: 'Contact',
+          navCatalog: 'Catalogue', navOpenBox: 'Boîte Ouverte & Usagé', navGuide: 'Guide', navFAQ: 'FAQ', navAbout: 'Maison', navContact: 'Contact',
           headerWA: 'WhatsApp',
           heroTag: '✦ Électroménagers de Prestige',
           heroLine1: "L'art de", heroLine2: 'bien équiper', heroLine3: 'votre maison.',
@@ -699,6 +976,7 @@
           catalogTitle1: 'Des appareils', catalogTitle2: 'pour toute la maison.',
           catalogDesc: 'Cliquez sur un produit pour voir les détails, le prix, et nous contacter directement.',
           sectionOpenBox: 'Boîte Ouverte', sectionUsed: 'Usagé',
+          sectionOpenBoxTitle: 'Électroménagers Boîte Ouverte / Usagé',
           subCombos: 'Combos', subWasherDryer: 'Laveuses-sécheuses', subFridges: 'Réfrigérateurs', subFurnaces: 'Fournaises',
           viewDetails: 'Voir les détails →',
           aboutLabel: 'Notre Maison', aboutTitle: 'Où la qualité rencontre la confiance.',
@@ -758,7 +1036,7 @@
         },
         en: {
           pageTitle: 'GobySolutions - Premium Appliances | Montreal',
-          navCatalog: 'Catalog', navGuide: 'Guide', navFAQ: 'FAQ', navAbout: 'About', navContact: 'Contact',
+          navCatalog: 'Catalog', navOpenBox: 'Open Box & Used', navGuide: 'Guide', navFAQ: 'FAQ', navAbout: 'About', navContact: 'Contact',
           headerWA: 'WhatsApp',
           heroTag: '✦ Premium Appliances',
           heroLine1: 'The art of', heroLine2: 'equipping', heroLine3: 'your home.',
@@ -770,6 +1048,7 @@
           catalogTitle1: 'Appliances', catalogTitle2: 'for every room.',
           catalogDesc: 'Click a product to view details, pricing, and contact options.',
           sectionOpenBox: 'Open Box', sectionUsed: 'Used',
+          sectionOpenBoxTitle: 'Open Box / Used Appliances',
           subCombos: 'Combos', subWasherDryer: 'Washer & Dryer', subFridges: 'Refrigerators', subFurnaces: 'Furnaces',
           viewDetails: 'View Details →',
           aboutLabel: 'Our House', aboutTitle: 'Where quality meets trust.',
@@ -845,6 +1124,12 @@
           b.classList.toggle('active', b.dataset.lang === l);
         });
         document.documentElement.lang = l;
+        renderCatalog();
+        if(document.getElementById('setModal').classList.contains('active')){
+          if(currentType === 'set') renderSetModal();
+          else if(currentType === 'duo') renderDuoModal();
+          else if(currentType === 'openBox') renderOpenBoxModal();
+        }
       }
 
       const observer = new IntersectionObserver(entries => {
@@ -903,6 +1188,39 @@
         });
         html+='</div></div>';
 
+        html+='<div class="catalog-section" id="openBoxSection">';
+        html+='<div class="cat-header reveal"><span>📦</span><h3>'+(l==='en'?'Open Box / Used Appliances':'Électroménagers Boîte Ouverte / Usagé')+'</h3><div class="line"></div></div>';
+        html+='<div class="catalog-grid">';
+        openBoxItems.forEach(function(item, idx){
+          var badgeLabel = l==='en' ? 'OPEN BOX' : 'BOÎTE OUVERTE';
+          var typeLabel = l==='en' ? item.typeEN : item.typeFR;
+          var desc = l==='en' ? item.descEN : item.descFR;
+          var state = l==='en' ? item.stateEN : item.stateFR;
+          var dims = item.dims;
+          var dimsSummary = (l==='en' ? 'W: ' : 'L: ') + (l==='en'?dims.widthEN:dims.width) + ' | ' + (l==='en' ? 'H: ' : 'H: ') + (l==='en'?dims.heightEN:dims.height) + ' | ' + (l==='en' ? 'D: ' : 'P: ') + (l==='en'?dims.depthEN:dims.depth);
+          var feats = l==='en' ? item.featuresEN : item.featuresFR;
+
+          var featsList = '';
+          feats.slice(0, 3).forEach(function(f){
+            featsList += '<li><span>'+f+'</span></li>';
+          });
+
+          html+='<div class="product-card open-box-card reveal" onclick="openOpenBoxModal('+idx+')">'+
+            '<div class="img-wrap"><img src="'+item.mainImg+'" alt="'+item.name+'" loading="lazy" />'+
+            '<div class="badge-state">'+badgeLabel+'</div></div>'+
+            '<div class="info">'+
+            '<div class="cat-tag">'+item.brand+' • '+typeLabel+'</div>'+
+            '<h4>'+item.name+'</h4>'+
+            '<div class="dims-pill"><span>📐 '+dimsSummary+'</span></div>'+
+            '<div style="font-size:.72rem;color:var(--gold-light);font-weight:600;margin-bottom:.45rem">'+(l==='en'?'Condition: ':'État : ')+state+'</div>'+
+            '<p class="open-box-desc-short">'+desc+'</p>'+
+            '<ul class="open-box-feats">'+featsList+'</ul>'+
+            '<div class="price" style="font-size:1.15rem;margin:.4rem 0 .75rem">'+(l==='en'?'Contact for Price':'Prix sur demande')+' <small>• '+(l==='en'?'Like New':'Comme neuf')+'</small></div>'+
+            '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">'+(l==='en'?'View Details →':'Voir les détails →')+'</button>'+
+            '</div></div>';
+        });
+        html+='</div></div>';
+
         grid.innerHTML=html;
         setTimeout(function(){grid.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)})},100);
       }
@@ -925,12 +1243,23 @@
 
       var currentType = 'set';
       var currentDuoIdx = 0;
+      var currentOpenBoxIdx = 0;
 
       function openDuoModal(duoIdx){
         currentDuoIdx = duoIdx;
         currentPhotoIdx = 0;
         currentType = 'duo';
         renderDuoModal();
+        var overlay = document.getElementById('setModal');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function openOpenBoxModal(idx){
+        currentOpenBoxIdx = idx;
+        currentPhotoIdx = 0;
+        currentType = 'openBox';
+        renderOpenBoxModal();
         var overlay = document.getElementById('setModal');
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -975,14 +1304,14 @@
       }
 
       function carouselPrev(){
-        var item = currentType==='set' ? sets[currentSetIdx] : duos[currentDuoIdx];
+        var item = currentType==='set' ? sets[currentSetIdx] : (currentType==='duo' ? duos[currentDuoIdx] : openBoxItems[currentOpenBoxIdx]);
         currentPhotoIdx = (currentPhotoIdx - 1 + item.photos.length) % item.photos.length;
         document.getElementById('carouselImg').src = item.photos[currentPhotoIdx];
         document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+item.photos.length;
       }
 
       function carouselNext(){
-        var item = currentType==='set' ? sets[currentSetIdx] : duos[currentDuoIdx];
+        var item = currentType==='set' ? sets[currentSetIdx] : (currentType==='duo' ? duos[currentDuoIdx] : openBoxItems[currentOpenBoxIdx]);
         currentPhotoIdx = (currentPhotoIdx + 1) % item.photos.length;
         document.getElementById('carouselImg').src = item.photos[currentPhotoIdx];
         document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+item.photos.length;
@@ -1010,6 +1339,58 @@
           : "Bonjour, je suis intéressé(e) par le DUO NUMERO "+duo.num+" ($"+duo.price+" CAD). J'aimerais plus de détails.";
         document.getElementById('setModalWA').href = 'https://wa.me/15144312367?text=' + encodeURIComponent(waText);
         document.getElementById('setModalEmail').href = 'mailto:optimum61@hotmail.com?subject=' + encodeURIComponent('Question about DUO NUMERO '+duo.num);
+        document.getElementById('setModalCall').href = 'tel:+15147991291';
+      }
+
+      function renderOpenBoxModal(){
+        var item = openBoxItems[currentOpenBoxIdx];
+        var l = document.documentElement.lang;
+        var itemLabel = item.name;
+
+        document.getElementById('setModalCat').textContent = (l==='en' ? 'OPEN BOX • ' : 'BOÎTE OUVERTE • ') + (l==='en' ? item.typeEN : item.typeFR);
+        document.getElementById('setModalTitle').textContent = item.name;
+        document.getElementById('setModalPrice').textContent = l==='en' ? 'Contact for Price' : 'Prix sur demande';
+        document.getElementById('setModalLabel').textContent = l==='en' ? 'Availability & Pricing' : 'Disponibilité & Tarification';
+
+        document.getElementById('carouselImg').src = item.photos[currentPhotoIdx];
+        document.getElementById('carouselImg').alt = itemLabel;
+        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+item.photos.length;
+
+        var feats = l==='en' ? item.featuresEN : item.featuresFR;
+        var featsHtml = '<ul style="list-style:none;padding:0;margin:0">';
+        feats.forEach(function(f){
+          featsHtml += '<li style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.45rem;font-size:.8rem;color:var(--text2);line-height:1.6"><span style="color:var(--gold);font-weight:bold">•</span><span>'+f+'</span></li>';
+        });
+        featsHtml += '</ul>';
+
+        var dims = item.dims;
+        var dimsHtml = '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.1rem;margin-bottom:1.25rem">'+
+          '<div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);font-weight:600;margin-bottom:.65rem">📐 '+(l==='en'?'Dimensions & Condition':'Dimensions & État')+'</div>'+
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;font-size:.8rem">'+
+            '<div><span style="color:var(--text2)">'+(l==='en'?'Width (Largeur): ':'Largeur : ')+'</span><strong style="color:#fff">'+(l==='en'?dims.widthEN:dims.width)+'</strong></div>'+
+            '<div><span style="color:var(--text2)">'+(l==='en'?'Height (Hauteur): ':'Hauteur : ')+'</span><strong style="color:#fff">'+(l==='en'?dims.heightEN:dims.height)+'</strong></div>'+
+            '<div><span style="color:var(--text2)">'+(l==='en'?'Depth (Profondeur): ':'Profondeur : ')+'</span><strong style="color:#fff">'+(l==='en'?dims.depthEN:dims.depth)+'</strong></div>'+
+            '<div><span style="color:var(--text2)">'+(l==='en'?'Condition: ':'État : ')+'</span><strong style="color:var(--gold-light)">'+(l==='en'?item.stateEN:item.stateFR)+'</strong></div>'+
+          '</div>'+
+        '</div>';
+
+        var descText = l==='en' ? item.descEN : item.descFR;
+        var descHtml = '<div style="margin-bottom:1.25rem">'+
+          '<p style="font-size:.88rem;color:#fff;line-height:1.6;font-weight:400">'+descText+'</p>'+
+        '</div>';
+
+        var featsSection = '<div>'+
+          '<div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);font-weight:600;margin-bottom:.65rem">✨ '+(l==='en'?'Authentic Features':'Caractéristiques vérifiées')+'</div>'+
+          featsHtml+
+        '</div>';
+
+        document.getElementById('setModalAppliances').innerHTML = descHtml + dimsHtml + featsSection;
+
+        var waText = l==='en'
+          ? "Hello, I am interested in the Open Box model "+item.name+". I would like more details and pricing."
+          : "Bonjour, je suis intéressé(e) par le modèle en boîte ouverte "+item.name+". J'aimerais avoir plus de détails et le prix.";
+        document.getElementById('setModalWA').href = 'https://wa.me/15144312367?text=' + encodeURIComponent(waText);
+        document.getElementById('setModalEmail').href = 'mailto:optimum61@hotmail.com?subject=' + encodeURIComponent('Question about Open Box '+item.name);
         document.getElementById('setModalCall').href = 'tel:+15147991291';
       }
 
