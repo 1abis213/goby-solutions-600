@@ -957,6 +957,8 @@
         }
       ];
 
+      const fridgeItems = [];
+
       const lang = {
         fr: {
           pageTitle: 'GobySolutions - Électroménagers de Prestige | Montréal',
@@ -1122,6 +1124,7 @@
         if(document.getElementById('setModal').classList.contains('active')){
           if(currentType === 'set') renderSetModal();
           else if(currentType === 'duo') renderDuoModal();
+          else if(currentType === 'fridge') renderFridgeModal();
           else if(currentType === 'openBox') renderOpenBoxModal();
         }
       }
@@ -1215,6 +1218,41 @@
         });
         html+='</div></div>';
 
+        if(fridgeItems.length){
+          html+='<div class="catalog-section" id="fridgesSection">';
+          html+='<div class="cat-header reveal"><span>🧊</span><h3>'+(l==='en'?'Refrigerators':'Réfrigérateurs')+'</h3><div class="line"></div></div>';
+          html+='<div class="catalog-grid">';
+          fridgeItems.forEach(function(item, idx){
+            var badgeLabel = l==='en' ? 'USED' : 'USAGÉ';
+            var typeLabel = l==='en' ? item.typeEN : item.typeFR;
+            var desc = l==='en' ? item.descEN : item.descFR;
+            var state = l==='en' ? item.stateEN : item.stateFR;
+            var dims = item.dims;
+            var dimsSummary = (l==='en' ? 'W: ' : 'L: ') + (l==='en'?dims.widthEN:dims.width) + ' | ' + (l==='en' ? 'H: ' : 'H: ') + (l==='en'?dims.heightEN:dims.height) + ' | ' + (l==='en' ? 'D: ' : 'P: ') + (l==='en'?dims.depthEN:dims.depth);
+            var feats = l==='en' ? item.featuresEN : item.featuresFR;
+
+            var featsList = '';
+            feats.slice(0, 3).forEach(function(f){
+              featsList += '<li><span>'+f+'</span></li>';
+            });
+
+            html+='<div class="product-card open-box-card reveal" onclick="openFridgeModal('+idx+')">'+
+              '<div class="img-wrap"><img src="'+item.mainImg+'" alt="'+item.name+'" loading="lazy" />'+
+              '<div class="badge-state">'+badgeLabel+'</div></div>'+
+              '<div class="info">'+
+              '<div class="cat-tag">'+item.brand+' • '+typeLabel+'</div>'+
+              '<h4>'+item.name+'</h4>'+
+              '<div class="dims-pill"><span>📐 '+dimsSummary+'</span></div>'+
+              '<div style="font-size:.72rem;color:var(--gold-light);font-weight:600;margin-bottom:.45rem">'+(l==='en'?'Condition: ':'État : ')+state+'</div>'+
+              '<p class="open-box-desc-short">'+desc+'</p>'+
+              '<ul class="open-box-feats">'+featsList+'</ul>'+
+              '<div class="price" style="font-size:1.15rem;margin:.4rem 0 .75rem">'+(l==='en'?'Contact for Price':'Prix sur demande')+' <small>• '+(l==='en'?'Used':'Usagé')+'</small></div>'+
+              '<button class="btn btn-gold btn-sm" data-i18n="viewDetails">'+(l==='en'?'View Details →':'Voir les détails →')+'</button>'+
+              '</div></div>';
+          });
+          html+='</div></div>';
+        }
+
         grid.innerHTML=html;
         setTimeout(function(){grid.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)})},100);
       }
@@ -1238,6 +1276,7 @@
       var currentType = 'set';
       var currentDuoIdx = 0;
       var currentOpenBoxIdx = 0;
+      var currentFridgeIdx = 0;
 
       function openDuoModal(duoIdx){
         currentDuoIdx = duoIdx;
@@ -1254,6 +1293,16 @@
         currentPhotoIdx = 0;
         currentType = 'openBox';
         renderOpenBoxModal();
+        var overlay = document.getElementById('setModal');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function openFridgeModal(idx){
+        currentFridgeIdx = idx;
+        currentPhotoIdx = 0;
+        currentType = 'fridge';
+        renderFridgeModal();
         var overlay = document.getElementById('setModal');
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -1298,14 +1347,14 @@
       }
 
       function carouselPrev(){
-        var item = currentType==='set' ? sets[currentSetIdx] : (currentType==='duo' ? duos[currentDuoIdx] : openBoxItems[currentOpenBoxIdx]);
+        var item = currentType==='set' ? sets[currentSetIdx] : (currentType==='duo' ? duos[currentDuoIdx] : (currentType==='fridge' ? fridgeItems[currentFridgeIdx] : openBoxItems[currentOpenBoxIdx]));
         currentPhotoIdx = (currentPhotoIdx - 1 + item.photos.length) % item.photos.length;
         document.getElementById('carouselImg').src = item.photos[currentPhotoIdx];
         document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+item.photos.length;
       }
 
       function carouselNext(){
-        var item = currentType==='set' ? sets[currentSetIdx] : (currentType==='duo' ? duos[currentDuoIdx] : openBoxItems[currentOpenBoxIdx]);
+        var item = currentType==='set' ? sets[currentSetIdx] : (currentType==='duo' ? duos[currentDuoIdx] : (currentType==='fridge' ? fridgeItems[currentFridgeIdx] : openBoxItems[currentOpenBoxIdx]));
         currentPhotoIdx = (currentPhotoIdx + 1) % item.photos.length;
         document.getElementById('carouselImg').src = item.photos[currentPhotoIdx];
         document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+item.photos.length;
@@ -1385,6 +1434,58 @@
           : "Bonjour, je suis intéressé(e) par le modèle en boîte ouverte "+item.name+". J'aimerais avoir plus de détails et le prix.";
         document.getElementById('setModalWA').href = 'https://wa.me/15144312367?text=' + encodeURIComponent(waText);
         document.getElementById('setModalEmail').href = 'mailto:optimum61@hotmail.com?subject=' + encodeURIComponent('Question about Open Box '+item.name);
+        document.getElementById('setModalCall').href = 'tel:+15147991291';
+      }
+
+      function renderFridgeModal(){
+        var item = fridgeItems[currentFridgeIdx];
+        var l = document.documentElement.lang;
+        var itemLabel = item.name;
+
+        document.getElementById('setModalCat').textContent = (l==='en' ? 'USED • ' : 'USAGÉ • ') + (l==='en' ? item.typeEN : item.typeFR);
+        document.getElementById('setModalTitle').textContent = item.name;
+        document.getElementById('setModalPrice').textContent = l==='en' ? 'Contact for Price' : 'Prix sur demande';
+        document.getElementById('setModalLabel').textContent = l==='en' ? 'Availability & Pricing' : 'Disponibilité & Tarification';
+
+        document.getElementById('carouselImg').src = item.photos[currentPhotoIdx];
+        document.getElementById('carouselImg').alt = itemLabel;
+        document.getElementById('carouselCounter').textContent = (currentPhotoIdx+1)+' / '+item.photos.length;
+
+        var feats = l==='en' ? item.featuresEN : item.featuresFR;
+        var featsHtml = '<ul style="list-style:none;padding:0;margin:0">';
+        feats.forEach(function(f){
+          featsHtml += '<li style="display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.45rem;font-size:.8rem;color:var(--text2);line-height:1.6"><span style="color:var(--gold);font-weight:bold">•</span><span>'+f+'</span></li>';
+        });
+        featsHtml += '</ul>';
+
+        var dims = item.dims;
+        var dimsHtml = '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.1rem;margin-bottom:1.25rem">'+
+          '<div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);font-weight:600;margin-bottom:.65rem">📐 '+(l==='en'?'Dimensions & Condition':'Dimensions & État')+'</div>'+
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;font-size:.8rem">'+
+            '<div><span style="color:var(--text2)">'+(l==='en'?'Width (Largeur): ':'Largeur : ')+'</span><strong style="color:#fff">'+(l==='en'?dims.widthEN:dims.width)+'</strong></div>'+
+            '<div><span style="color:var(--text2)">'+(l==='en'?'Height (Hauteur): ':'Hauteur : ')+'</span><strong style="color:#fff">'+(l==='en'?dims.heightEN:dims.height)+'</strong></div>'+
+            '<div><span style="color:var(--text2)">'+(l==='en'?'Depth (Profondeur): ':'Profondeur : ')+'</span><strong style="color:#fff">'+(l==='en'?dims.depthEN:dims.depth)+'</strong></div>'+
+            '<div><span style="color:var(--text2)">'+(l==='en'?'Condition: ':'État : ')+'</span><strong style="color:var(--gold-light)">'+(l==='en'?item.stateEN:item.stateFR)+'</strong></div>'+
+          '</div>'+
+        '</div>';
+
+        var descText = l==='en' ? item.descEN : item.descFR;
+        var descHtml = '<div style="margin-bottom:1.25rem">'+
+          '<p style="font-size:.88rem;color:#fff;line-height:1.6;font-weight:400">'+descText+'</p>'+
+        '</div>';
+
+        var featsSection = '<div>'+
+          '<div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);font-weight:600;margin-bottom:.65rem">✨ '+(l==='en'?'Authentic Features':'Caractéristiques vérifiées')+'</div>'+
+          featsHtml+
+        '</div>';
+
+        document.getElementById('setModalAppliances').innerHTML = descHtml + dimsHtml + featsSection;
+
+        var waText = l==='en'
+          ? "Hello, I am interested in the used refrigerator "+item.name+". I would like more details and pricing."
+          : "Bonjour, je suis intéressé(e) par le réfrigérateur usagé "+item.name+". J'aimerais avoir plus de détails et le prix.";
+        document.getElementById('setModalWA').href = 'https://wa.me/15144312367?text=' + encodeURIComponent(waText);
+        document.getElementById('setModalEmail').href = 'mailto:optimum61@hotmail.com?subject=' + encodeURIComponent('Question about used refrigerator '+item.name);
         document.getElementById('setModalCall').href = 'tel:+15147991291';
       }
 
